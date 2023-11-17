@@ -62,6 +62,7 @@ def comment_detail(request, article_pk, comment_pk):
             serializer.save()
             return Response(serializer.data)
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def comment_create(request, article_pk):
@@ -70,6 +71,7 @@ def comment_create(request, article_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(article=article, user=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

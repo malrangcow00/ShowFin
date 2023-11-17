@@ -1,0 +1,1346 @@
+[
+{
+    "model": "products.depositoptions",
+    "pk": 1,
+    "fields": {
+        "product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.02,
+        "intr_rate2": 4.02,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 2,
+    "fields": {
+        "product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.05,
+        "intr_rate2": 4.05,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 3,
+    "fields": {
+        "product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.43,
+        "intr_rate2": 3.43,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 4,
+    "fields": {
+        "product": 1,
+        "fin_prdt_cd": "WR0001B",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.43,
+        "intr_rate2": 3.43,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 5,
+    "fields": {
+        "product": 2,
+        "fin_prdt_cd": "00320342",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.0,
+        "intr_rate2": 4.2,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 6,
+    "fields": {
+        "product": 2,
+        "fin_prdt_cd": "00320342",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.05,
+        "intr_rate2": 4.35,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 7,
+    "fields": {
+        "product": 3,
+        "fin_prdt_cd": "10511008000996000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.86,
+        "intr_rate2": 3.51,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 8,
+    "fields": {
+        "product": 3,
+        "fin_prdt_cd": "10511008000996000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.6,
+        "intr_rate2": 4.25,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 9,
+    "fields": {
+        "product": 3,
+        "fin_prdt_cd": "10511008000996000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.62,
+        "intr_rate2": 4.27,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 10,
+    "fields": {
+        "product": 3,
+        "fin_prdt_cd": "10511008000996000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.64,
+        "intr_rate2": 4.29,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 11,
+    "fields": {
+        "product": 4,
+        "fin_prdt_cd": "10511008001004000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.42,
+        "intr_rate2": 2.87,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 12,
+    "fields": {
+        "product": 4,
+        "fin_prdt_cd": "10511008001004000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.16,
+        "intr_rate2": 3.61,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 13,
+    "fields": {
+        "product": 4,
+        "fin_prdt_cd": "10511008001004000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.18,
+        "intr_rate2": 3.63,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 14,
+    "fields": {
+        "product": 4,
+        "fin_prdt_cd": "10511008001004000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.2,
+        "intr_rate2": 3.65,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 15,
+    "fields": {
+        "product": 5,
+        "fin_prdt_cd": "10511008001166004",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.8,
+        "intr_rate2": 4.25,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 16,
+    "fields": {
+        "product": 6,
+        "fin_prdt_cd": "10511008001278000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.8,
+        "intr_rate2": 4.05,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 17,
+    "fields": {
+        "product": 6,
+        "fin_prdt_cd": "10511008001278000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.95,
+        "intr_rate2": 4.2,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 18,
+    "fields": {
+        "product": 6,
+        "fin_prdt_cd": "10511008001278000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.2,
+        "intr_rate2": 3.45,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 19,
+    "fields": {
+        "product": 6,
+        "fin_prdt_cd": "10511008001278000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.2,
+        "intr_rate2": 3.45,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 20,
+    "fields": {
+        "product": 7,
+        "fin_prdt_cd": "01030500510002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.55,
+        "intr_rate2": 3.65,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 21,
+    "fields": {
+        "product": 7,
+        "fin_prdt_cd": "01030500510002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.75,
+        "intr_rate2": 3.65,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 22,
+    "fields": {
+        "product": 7,
+        "fin_prdt_cd": "01030500510002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.8,
+        "intr_rate2": 2.8,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 23,
+    "fields": {
+        "product": 7,
+        "fin_prdt_cd": "01030500510002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.85,
+        "intr_rate2": 2.85,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 24,
+    "fields": {
+        "product": 8,
+        "fin_prdt_cd": "01030500560002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.6,
+        "intr_rate2": 4.0,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 25,
+    "fields": {
+        "product": 8,
+        "fin_prdt_cd": "01030500560002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.6,
+        "intr_rate2": 4.0,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 26,
+    "fields": {
+        "product": 8,
+        "fin_prdt_cd": "01030500560002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.25,
+        "intr_rate2": 3.65,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 27,
+    "fields": {
+        "product": 8,
+        "fin_prdt_cd": "01030500560002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.95,
+        "intr_rate2": 3.35,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 28,
+    "fields": {
+        "product": 9,
+        "fin_prdt_cd": "01030500600002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.6,
+        "intr_rate2": 4.0,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 29,
+    "fields": {
+        "product": 9,
+        "fin_prdt_cd": "01030500600002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.6,
+        "intr_rate2": 4.0,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 30,
+    "fields": {
+        "product": 10,
+        "fin_prdt_cd": "TD11300027000",
+        "intr_rate_type_nm": "복리",
+        "intr_rate": 3.76,
+        "intr_rate2": 3.96,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 31,
+    "fields": {
+        "product": 10,
+        "fin_prdt_cd": "TD11300027000",
+        "intr_rate_type_nm": "복리",
+        "intr_rate": 3.92,
+        "intr_rate2": 4.12,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 32,
+    "fields": {
+        "product": 10,
+        "fin_prdt_cd": "TD11300027000",
+        "intr_rate_type_nm": "복리",
+        "intr_rate": 3.97,
+        "intr_rate2": 4.17,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 33,
+    "fields": {
+        "product": 11,
+        "fin_prdt_cd": "TD11300031000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.65,
+        "intr_rate2": 3.75,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 34,
+    "fields": {
+        "product": 11,
+        "fin_prdt_cd": "TD11300031000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.66,
+        "intr_rate2": 3.86,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 35,
+    "fields": {
+        "product": 11,
+        "fin_prdt_cd": "TD11300031000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.82,
+        "intr_rate2": 4.02,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 36,
+    "fields": {
+        "product": 11,
+        "fin_prdt_cd": "TD11300031000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.87,
+        "intr_rate2": 4.07,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 37,
+    "fields": {
+        "product": 12,
+        "fin_prdt_cd": "TD11300035000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.56,
+        "intr_rate2": 4.16,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 38,
+    "fields": {
+        "product": 13,
+        "fin_prdt_cd": "TD11300036000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.5,
+        "intr_rate2": 3.5,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 39,
+    "fields": {
+        "product": 13,
+        "fin_prdt_cd": "TD11300036000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.6,
+        "intr_rate2": 3.6,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 40,
+    "fields": {
+        "product": 14,
+        "fin_prdt_cd": "200000301",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.85,
+        "intr_rate2": 2.95,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 41,
+    "fields": {
+        "product": 14,
+        "fin_prdt_cd": "200000301",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.05,
+        "intr_rate2": 3.15,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 42,
+    "fields": {
+        "product": 14,
+        "fin_prdt_cd": "200000301",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.15,
+        "intr_rate2": 3.25,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 43,
+    "fields": {
+        "product": 14,
+        "fin_prdt_cd": "200000301",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.25,
+        "intr_rate2": 3.35,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 44,
+    "fields": {
+        "product": 15,
+        "fin_prdt_cd": "200000303",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.0,
+        "intr_rate2": 3.9,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 45,
+    "fields": {
+        "product": 15,
+        "fin_prdt_cd": "200000303",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.1,
+        "intr_rate2": 4.1,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 46,
+    "fields": {
+        "product": 15,
+        "fin_prdt_cd": "200000303",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.0,
+        "intr_rate2": 3.5,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 47,
+    "fields": {
+        "product": 15,
+        "fin_prdt_cd": "200000303",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.0,
+        "intr_rate2": 3.5,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 48,
+    "fields": {
+        "product": 16,
+        "fin_prdt_cd": "10-01-20-024-0046-0000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.9,
+        "intr_rate2": 3.9,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 49,
+    "fields": {
+        "product": 16,
+        "fin_prdt_cd": "10-01-20-024-0046-0000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.1,
+        "intr_rate2": 4.1,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 50,
+    "fields": {
+        "product": 17,
+        "fin_prdt_cd": "10-01-20-024-0059-0000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.07,
+        "intr_rate2": 4.37,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 51,
+    "fields": {
+        "product": 17,
+        "fin_prdt_cd": "10-01-20-024-0059-0000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": -1.0,
+        "intr_rate2": 4.27,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 52,
+    "fields": {
+        "product": 17,
+        "fin_prdt_cd": "10-01-20-024-0059-0000",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": -1.0,
+        "intr_rate2": 4.37,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 53,
+    "fields": {
+        "product": 18,
+        "fin_prdt_cd": "21001115",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.9,
+        "intr_rate2": 3.4,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 54,
+    "fields": {
+        "product": 18,
+        "fin_prdt_cd": "21001115",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.25,
+        "intr_rate2": 3.75,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 55,
+    "fields": {
+        "product": 18,
+        "fin_prdt_cd": "21001115",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.05,
+        "intr_rate2": 3.55,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 56,
+    "fields": {
+        "product": 19,
+        "fin_prdt_cd": "21001203",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.15,
+        "intr_rate2": 3.45,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 57,
+    "fields": {
+        "product": 19,
+        "fin_prdt_cd": "21001203",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.5,
+        "intr_rate2": 3.8,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 58,
+    "fields": {
+        "product": 19,
+        "fin_prdt_cd": "21001203",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.55,
+        "intr_rate2": 3.85,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 59,
+    "fields": {
+        "product": 20,
+        "fin_prdt_cd": "01211310121",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.45,
+        "intr_rate2": 3.65,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 60,
+    "fields": {
+        "product": 20,
+        "fin_prdt_cd": "01211310121",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.5,
+        "intr_rate2": 3.7,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 61,
+    "fields": {
+        "product": 20,
+        "fin_prdt_cd": "01211310121",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.6,
+        "intr_rate2": 3.8,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 62,
+    "fields": {
+        "product": 21,
+        "fin_prdt_cd": "01211310127",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.1,
+        "intr_rate2": 3.4,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 63,
+    "fields": {
+        "product": 21,
+        "fin_prdt_cd": "01211310127",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.25,
+        "intr_rate2": 3.55,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 64,
+    "fields": {
+        "product": 22,
+        "fin_prdt_cd": "01211310130",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.87,
+        "intr_rate2": 3.87,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 65,
+    "fields": {
+        "product": 22,
+        "fin_prdt_cd": "01211310130",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.89,
+        "intr_rate2": 3.89,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 66,
+    "fields": {
+        "product": 22,
+        "fin_prdt_cd": "01211310130",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.86,
+        "intr_rate2": 3.86,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 67,
+    "fields": {
+        "product": 22,
+        "fin_prdt_cd": "01211310130",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.87,
+        "intr_rate2": 3.87,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 68,
+    "fields": {
+        "product": 23,
+        "fin_prdt_cd": "05100",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.7,
+        "intr_rate2": 2.7,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 69,
+    "fields": {
+        "product": 23,
+        "fin_prdt_cd": "05100",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.7,
+        "intr_rate2": 2.7,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 70,
+    "fields": {
+        "product": 23,
+        "fin_prdt_cd": "05100",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.7,
+        "intr_rate2": 2.7,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 71,
+    "fields": {
+        "product": 23,
+        "fin_prdt_cd": "05100",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.7,
+        "intr_rate2": 2.7,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 72,
+    "fields": {
+        "product": 24,
+        "fin_prdt_cd": "06492",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.7,
+        "intr_rate2": 3.7,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 73,
+    "fields": {
+        "product": 24,
+        "fin_prdt_cd": "06492",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.9,
+        "intr_rate2": 3.9,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 74,
+    "fields": {
+        "product": 24,
+        "fin_prdt_cd": "06492",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.3,
+        "intr_rate2": 3.3,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 75,
+    "fields": {
+        "product": 24,
+        "fin_prdt_cd": "06492",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.3,
+        "intr_rate2": 3.3,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 76,
+    "fields": {
+        "product": 25,
+        "fin_prdt_cd": "010300100335",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.3,
+        "intr_rate2": 4.0,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 77,
+    "fields": {
+        "product": 25,
+        "fin_prdt_cd": "010300100335",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.6,
+        "intr_rate2": 3.95,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 78,
+    "fields": {
+        "product": 25,
+        "fin_prdt_cd": "010300100335",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.7,
+        "intr_rate2": 3.1,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 79,
+    "fields": {
+        "product": 25,
+        "fin_prdt_cd": "010300100335",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.8,
+        "intr_rate2": 3.02,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 80,
+    "fields": {
+        "product": 26,
+        "fin_prdt_cd": "200-0135-12",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.75,
+        "intr_rate2": 4.05,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 81,
+    "fields": {
+        "product": 26,
+        "fin_prdt_cd": "200-0135-12",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.9,
+        "intr_rate2": 4.05,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 82,
+    "fields": {
+        "product": 26,
+        "fin_prdt_cd": "200-0135-12",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.95,
+        "intr_rate2": 3.45,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 83,
+    "fields": {
+        "product": 26,
+        "fin_prdt_cd": "200-0135-12",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.0,
+        "intr_rate2": 3.45,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 84,
+    "fields": {
+        "product": 27,
+        "fin_prdt_cd": "10-003-1225-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.95,
+        "intr_rate2": 4.05,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 85,
+    "fields": {
+        "product": 27,
+        "fin_prdt_cd": "10-003-1225-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.85,
+        "intr_rate2": 3.95,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 86,
+    "fields": {
+        "product": 28,
+        "fin_prdt_cd": "10-003-1381-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.1,
+        "intr_rate2": 3.5,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 87,
+    "fields": {
+        "product": 28,
+        "fin_prdt_cd": "10-003-1381-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.15,
+        "intr_rate2": 3.55,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 88,
+    "fields": {
+        "product": 28,
+        "fin_prdt_cd": "10-003-1381-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.4,
+        "intr_rate2": 3.8,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 89,
+    "fields": {
+        "product": 29,
+        "fin_prdt_cd": "10-003-1384-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.05,
+        "intr_rate2": 4.05,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 90,
+    "fields": {
+        "product": 29,
+        "fin_prdt_cd": "10-003-1384-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.95,
+        "intr_rate2": 4.05,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 91,
+    "fields": {
+        "product": 29,
+        "fin_prdt_cd": "10-003-1384-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.3,
+        "intr_rate2": 3.3,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 92,
+    "fields": {
+        "product": 29,
+        "fin_prdt_cd": "10-003-1384-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.4,
+        "intr_rate2": 3.4,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 93,
+    "fields": {
+        "product": 30,
+        "fin_prdt_cd": "10-003-1387-0001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.1,
+        "intr_rate2": 3.8,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 94,
+    "fields": {
+        "product": 31,
+        "fin_prdt_cd": "4",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.3,
+        "intr_rate2": 4.05,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 95,
+    "fields": {
+        "product": 31,
+        "fin_prdt_cd": "4",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.6,
+        "intr_rate2": 4.05,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 96,
+    "fields": {
+        "product": 31,
+        "fin_prdt_cd": "4",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.7,
+        "intr_rate2": 3.25,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 97,
+    "fields": {
+        "product": 31,
+        "fin_prdt_cd": "4",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.8,
+        "intr_rate2": 3.25,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 98,
+    "fields": {
+        "product": 32,
+        "fin_prdt_cd": "01013000110000000001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.0,
+        "intr_rate2": 4.0,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 99,
+    "fields": {
+        "product": 32,
+        "fin_prdt_cd": "01013000110000000001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.0,
+        "intr_rate2": 4.0,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 100,
+    "fields": {
+        "product": 32,
+        "fin_prdt_cd": "01013000110000000001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.4,
+        "intr_rate2": 3.4,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 101,
+    "fields": {
+        "product": 32,
+        "fin_prdt_cd": "01013000110000000001",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.4,
+        "intr_rate2": 3.4,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 102,
+    "fields": {
+        "product": 33,
+        "fin_prdt_cd": "10120110400011",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.0,
+        "intr_rate2": 3.4,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 103,
+    "fields": {
+        "product": 34,
+        "fin_prdt_cd": "10120114300011",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.65,
+        "intr_rate2": 4.0,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 104,
+    "fields": {
+        "product": 34,
+        "fin_prdt_cd": "10120114300011",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.75,
+        "intr_rate2": 4.1,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 105,
+    "fields": {
+        "product": 35,
+        "fin_prdt_cd": "10120114700011",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.2,
+        "intr_rate2": 4.2,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 106,
+    "fields": {
+        "product": 35,
+        "fin_prdt_cd": "10120114700011",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.3,
+        "intr_rate2": 4.3,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 107,
+    "fields": {
+        "product": 36,
+        "fin_prdt_cd": "10120116100011",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 2.97,
+        "intr_rate2": 4.02,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 108,
+    "fields": {
+        "product": 37,
+        "fin_prdt_cd": "10-01-20-388-0002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.9,
+        "intr_rate2": 3.9,
+        "save_trm": 6
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 109,
+    "fields": {
+        "product": 37,
+        "fin_prdt_cd": "10-01-20-388-0002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.0,
+        "intr_rate2": 4.0,
+        "save_trm": 12
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 110,
+    "fields": {
+        "product": 37,
+        "fin_prdt_cd": "10-01-20-388-0002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.0,
+        "intr_rate2": 4.0,
+        "save_trm": 24
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 111,
+    "fields": {
+        "product": 37,
+        "fin_prdt_cd": "10-01-20-388-0002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 4.0,
+        "intr_rate2": 4.0,
+        "save_trm": 36
+    }
+},
+{
+    "model": "products.depositoptions",
+    "pk": 112,
+    "fields": {
+        "product": 38,
+        "fin_prdt_cd": "1001202000002",
+        "intr_rate_type_nm": "단리",
+        "intr_rate": 3.5,
+        "intr_rate2": 3.5,
+        "save_trm": 6
+    }
+}
+]

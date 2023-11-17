@@ -7,7 +7,7 @@
 #     nickname = models.CharField(max_length=255, blank=True, null=True)
 #     email = models.EmailField(max_length=254, blank=True, null=True)
 #     age = models.IntegerField(blank=True, null=True)
-#     money = models.IntegerField(blank=True, null=True)
+#     wealth = models.IntegerField(blank=True, null=True)
 #     salary = models.IntegerField(blank=True, null=True)
 #     # 가입한 상품 목록 리스트를 ,로 구분된 문자열로 저장함
 #     financial_products = models.TextField(blank=True, null=True)
@@ -37,7 +37,7 @@ def random_name():
 DP_URL = 'http://finlife.fss.or.kr/finlifeapi/depositProductsSearch.json'
 SP_URL = 'http://finlife.fss.or.kr/finlifeapi/savingProductsSearch.json'
 
-API_KEY = '<API_KEY>'
+API_KEY = 'f5e5273d3415b407b8b70072028c8174'
 
 financial_products = []
 
@@ -62,7 +62,7 @@ baseList = response.get('result').get('baseList')   # 상품 목록
 for product in baseList:
     financial_products.append(product['fin_prdt_cd'])
 
-dict_keys = ['username', 'gender', 'financial_products', 'age', 'money', 'salary']
+dict_keys = ['username', 'gender', 'financial_products', 'age', 'wealth', 'salary']
 
 # json 파일 만들기
 import json
@@ -84,7 +84,7 @@ while i < N:
 
     
 # 저장 위치는 프로젝트 구조에 맞게 수정합니다.
-save_dir = '../backend/accounts/fixtures/accounts/user_data.json'
+save_dir = '../day_2/user.json'
 with open(save_dir, 'w', encoding="utf-8") as f:
     f.write('[')
     
@@ -97,7 +97,7 @@ with open(save_dir, 'w', encoding="utf-8") as f:
             # 랜덤한 0~5개의 상품을 가입하도록 삽입됨
             'financial_products': ','.join([random.choice(financial_products) for _ in range(random.randint(0, 5))]), # 금융 상품 리스트
             'age': random.randint(1, 100),  # 나이
-            'money': random.randrange(0, 100000000, 100000),    # 현재 가진 금액
+            'wealth': random.randrange(0, 100000000, 100000),    # 현재 가진 금액
             'salary': random.randrange(0, 1500000000, 1000000), # 연봉
             'password': "1234",
             'nickname': None,

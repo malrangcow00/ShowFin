@@ -12,19 +12,20 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('article', 'user')
     
-    def get_liked_by(self, obj):
+    def get_liked_by_user(self, obj):
         request = self.context.get('request')
         if request and request.user.is_authenticated:
             return obj.liked_by.filter(id=request.user.id).exists()
         return False
 
 class ArticleListSerializer(serializers.ModelSerializer):
+    comment_set = CommentSerializer(many=True, read_only=True)
     comment_count = serializers.IntegerField(source='comment_set.count', read_only=True)
     username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = Article
-        fields = ('id', 'category', 'title', 'username', 'comment_count')
+        fields = '__all__'
 
 
 class ArticleSerializer(serializers.ModelSerializer):

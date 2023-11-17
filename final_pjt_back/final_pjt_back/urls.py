@@ -24,5 +24,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     # path('accounts/signup/', include('dj_rest_auth.registration.urls')),
     path('api/articles/', include('articles.urls')),
-    # path('api/products/', include('products.urls')),
+    path('api/products/', include('products.urls')),
 ]

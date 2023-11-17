@@ -79,7 +79,9 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
 
 
     def get_cleaned_data(self):
-        data_obj = super().get_cleaned_data()
+        data_obj = {}
+        # data_obj = super().get_cleaned_data()
+        # data_obj['username'] = self.validated_data.get('username', '')
         data_obj['age'] = self.validated_data.get('age', '')
         data_obj['nickname'] = self.validated_data.get('nickname', '')
         data_obj['salary'] = self.validated_data.get('salary', '')
@@ -90,7 +92,7 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
 
     def update(self, instance, validated_data): 
         instance = super().update(instance, validated_data)
-        # instance.username = validated_data.get('username', None)
+        # instance.username = validated_data.get('username', '')
         instance.age = validated_data.get('age', '')
         instance.nickname = validated_data.get('nickname', '')
         instance.salary = validated_data.get('salary', '')

@@ -15,6 +15,26 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# 내 PC 파일 안에 저장된 API_KEY 변수를 가져옴
+import environ
+import os
+
+# env 객체 생성
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+API_KEY = env('API_KEY')
+BASE_URL = env('BASE_URL')
+DEPOSIT = env('DEPOSIT')
+SAVINGS = env('SAVINGS')
+BANK_TYPE = env('BANK_TYPE')
+PAGE_NO = env('PAGE_NO')
+COMPANY = env('COMPANY')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
