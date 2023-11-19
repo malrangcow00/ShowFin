@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from dj_rest_auth.views import LoginView, UserDetailsView
 from dj_rest_auth.registration.views import RegisterView
-from .serializer import CustomLoginSerializer, CustomRegisterSerializer, CustomUserDetailsSerializer, UserSerializer
+from .serializers import CustomLoginSerializer, CustomRegisterSerializer, CustomUserDetailsSerializer, UserSerializer
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
@@ -28,6 +28,9 @@ def user_info(request):
     serializer = UserSerializer(user)
     return Response(serializer.data)
 
+
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 class CustomUserDetailsView(UserDetailsView):
     serializer_class = CustomUserDetailsSerializer
     
@@ -38,6 +41,7 @@ class CustomUserDetailsView(UserDetailsView):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
+    
 
     def perform_update(self, serializer):
         serializer.save()

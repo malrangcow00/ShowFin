@@ -43,6 +43,23 @@ def article_detail(request, article_pk):
             serializer.save()
             return Response(serializer.data)
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def article_like(request, article_pk):
+    article = Article.objects.get(pk=article_pk)
+    user = request.user
+
+    if article.liked_by.filter(id=user.id).exists():
+        article.liked_by.remove(user)
+        article.like_count -= 1
+        article.save()
+        return Response({'message': '게시글 좋아요 취소!'}, status=status.HTTP_200_OK)
+
+    article.liked_by.add(user)
+    article.like_count += 1
+    article.save()
+    return Response({'message': '게시글 좋아요 성공!'}, status=status.HTTP_200_OK)
+
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def comment_detail(request, article_pk, comment_pk):
