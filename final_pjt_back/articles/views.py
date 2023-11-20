@@ -13,7 +13,7 @@ from .models import Article, Comment
 @permission_classes([IsAuthenticated])
 def article_list(request):
     if request.method == 'GET':
-        articles = Article.objects.all()
+        articles = Article.objects.all().order_by('-pk')
         serializer = ArticleListSerializer(articles, many=True)
         return Response(serializer.data)
 

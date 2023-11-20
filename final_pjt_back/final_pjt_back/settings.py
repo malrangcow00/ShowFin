@@ -87,6 +87,7 @@ REST_FRAMEWORK = {
     # permission
     'DEFAULT_PERMISSION_CLASSES': [
     #       토큰을 가진 회원가입한사람 = 권한 O 
+    #       인증되지 않은 사용자에 대한 권한은 거부하고 그렇지 않은 경우 권한을 허용
     #     'rest_framework.permissions.IsAuthenticated', 
     #       무제한 엑세스 허용
         'rest_framework.permissions.AllowAny',
@@ -136,6 +137,10 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
     'http://localhost:5173',
+    'http://127.0.0.1:5174',
+    'http://localhost:5174',
+    'http://127.0.0.1:5175',
+    'http://localhost:5175',
 ]
 
 ROOT_URLCONF = 'final_pjt_back.urls'

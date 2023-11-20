@@ -254,7 +254,8 @@ def get_banks(request):
         'pageNo' : PAGE_NO,
     }
 
-    response = requests.get(URL, params=params).json()
+    response = requests.get(URL, params=params).encoding = 'utf-8'
+    response = response.json()
 
     data = {
         'company_name': [],
