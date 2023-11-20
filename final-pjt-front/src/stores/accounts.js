@@ -7,6 +7,7 @@ export const useAccountStore = defineStore(
   "account",
   () => {
     const logInUser = ref("");
+    const userInfo = ref(null);
     const API_URL = import.meta.env.VITE_API_URL;
     // const API_URL = "http://127.0.0.1:8000";
     const token = ref(null);
@@ -39,8 +40,9 @@ export const useAccountStore = defineStore(
       })
         .then((res) => {
           console.log(res);
-          // const password = password1;
-          // logIn({ username, password });
+          const password = password1;
+          alert("회원가입이 완료되었습니다.");
+          logIn({ username, password });
         })
         .catch((err) => {
           console.log(err);
@@ -63,6 +65,7 @@ export const useAccountStore = defineStore(
           console.log(res.data);
           token.value = res.data.key;
           logInUser.value = payload.username;
+          alert("로그인 되었습니다.");
           router.push({ name: "MainView" });
         })
         .catch((err) => {
@@ -89,6 +92,7 @@ export const useAccountStore = defineStore(
         .then((res) => {
           token.value = null;
           logInUser.value = "";
+          alert("로그아웃 되었습니다.");
           router.push({ name: "MainView" });
         })
         .catch((err) => {
@@ -100,11 +104,13 @@ export const useAccountStore = defineStore(
     const getAccountInfo = function () {
       axios({
         method: "GET",
-        url: `${API_URL}/accounts/user_info/`,
+        url: `${API_URL}/accounts/user_detail/`,
         headers: { Authorization: `Token ${token.value}` },
       })
         .then((res) => {
           console.log(res.data);
+          userInfo.value = res.data;
+          router.push({ name: "AccountDetailView" });
         })
         .catch((err) => {
           console.log(err);
@@ -112,14 +118,25 @@ export const useAccountStore = defineStore(
     };
 
     // 회원정보 수정
-    const updateAccountInfo = function () {
+    const updateAccountInfo = function (payload) {
+      const { nickname, email, age, wealth, salary } = payload;
       axios({
         method: "PUT",
         url: `${API_URL}/accounts/user_detail/`,
+        data: {
+          nickname,
+          email,
+          age,
+          wealth,
+          salary,
+        },
         headers: { Authorization: `Token ${token.value}` },
       })
         .then((res) => {
           console.log(res.data);
+          userInfo.value = res.data;
+          alert("회원정보가 수정되었습니다.");
+          getAccountInfo();
         })
         .catch((err) => {
           console.log(err);
@@ -127,29 +144,42 @@ export const useAccountStore = defineStore(
     };
 
     // 비밀번호 변경
-    const changePassword = function () {
+    const changePassword = function (payload) {
+      const { old_password, new_password } = payload;
       axios({
         method: "POST",
-        url: `${API_URL}/accounts/changepassword/`,
+        url: `${API_URL}/accounts/change_password/`,
+        data: {
+          old_password,
+          new_password,
+        },
         headers: { Authorization: `Token ${token.value}` },
       })
         .then((res) => {
           console.log(res.data);
+          alert(res.data.message);
+          router.push({ name: "AccountDetailView" });
         })
         .catch((err) => {
-          console.log(err);
+          alert(err.data.message);
         });
     };
 
     // 회원탈퇴
-    const deleteAccount = function () {
+    const deleteAccount = function (payload) {
+      const { password } = payload;
       axios({
-        method: "DELETE",
-        url: `${API_URL}/accounts/`,
+        method: "POST",
+        url: `${API_URL}/accounts/user_delete/`,
+        data: {
+          password,
+        },
         headers: { Authorization: `Token ${token.value}` },
       })
         .then((res) => {
           console.log(res.data);
+          token.value = null;
+          router.push({ name: "MainView" });
         })
         .catch((err) => {
           console.log(err);
@@ -167,6 +197,7 @@ export const useAccountStore = defineStore(
       changePassword,
       deleteAccount,
       logInUser,
+      userInfo,
     };
   },
   { persist: true }

@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MainView from "@/views/MainView.vue";
-import ArticleView from "@/views/ArticleView.vue";
-import SignUpView from "@/views/SignUpView.vue";
-import LogInView from "@/views/LogInView.vue";
-import ExchangerView from "@/views/ExchangerView.vue";
+import ArticleView from "@/views/articles/ArticleView.vue";
+import SignUpView from "@/views/accounts/SignUpView.vue";
+import LogInView from "@/views/accounts/LogInView.vue";
+import AccountDetailView from "@/views/accounts/AccountDetailView.vue";
+import AccountUpdateView from "@/views/accounts/AccountUpdateView.vue";
+import AccountChangePasswordView from "@/views/accounts/AccountChangePasswordView.vue";
+import AccountDeleteView from "@/views/accounts/AccountDeleteView.vue";
 import SearchBankView from "@/views/SearchBankView.vue";
 import ExchangeView from "@/views/ExchangeView.vue";
 
@@ -41,9 +44,29 @@ const router = createRouter({
       component: LogInView,
     },
     {
+      path: "/accounts/detail",
+      name: "AccountDetailView",
+      component: AccountDetailView,
+    },
+    {
+      path: "/accounts/update",
+      name: "AccountUpdateView",
+      component: AccountUpdateView,
+    },
+    {
+      path: "/accounts/password",
+      name: "AccountChangePasswordView",
+      component: AccountChangePasswordView,
+    },
+    {
+      path: "/accounts/delete",
+      name: "AccountDeleteView",
+      component: AccountDeleteView,
+    },
+    {
       path: "/exchange",
-      name: "exchanger",
-      component: ExchangerView,
+      name: "exchange",
+      component: ExchangeView,
     },
     {
       path: "/searchBank",

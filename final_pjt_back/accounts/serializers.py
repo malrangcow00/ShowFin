@@ -84,10 +84,10 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
         data_obj = {}
         # data_obj = super().get_cleaned_data()
         data_obj['username'] = self.validated_data.get('username', '')
-        data_obj['age'] = self.validated_data.get('age', None)
+        data_obj['age'] = self.validated_data.get('age', '')
         data_obj['nickname'] = self.validated_data.get('nickname', '')
-        data_obj['salary'] = self.validated_data.get('salary', None)
-        data_obj['wealth'] = self.validated_data.get('wealth', None)
+        data_obj['salary'] = self.validated_data.get('salary', '')
+        data_obj['wealth'] = self.validated_data.get('wealth', '')
         data_obj['financial_products'] = self.validated_data.get('financial_products', '')
         return data_obj
     
@@ -95,10 +95,10 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
     def update(self, instance, validated_data): 
         instance = super().update(instance, validated_data)
         # instance.username = validated_data.get('username', '')
-        instance.age = validated_data.get('age', None)
+        instance.age = validated_data.get('age', '')
         instance.nickname = validated_data.get('nickname', '')
-        instance.salary = validated_data.get('salary', None)
-        instance.wealth = validated_data.get('wealth', None)
+        instance.salary = validated_data.get('salary', '')
+        instance.wealth = validated_data.get('wealth', '')
         instance.financial_products = validated_data.get('financial_products', '')
         instance.save()
         return instance
@@ -107,10 +107,10 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
     def save(self):
         # self.validated_data.pop('username', None)
         user = super().save()
-        user.age = self.validated_data.get('age', None)
+        user.age = self.validated_data.get('age', '')
         user.nickname = self.validated_data.get('nickname', '')
-        user.salary = self.validated_data.get('salary', None)
-        user.wealth = self.validated_data.get('wealth', None)
+        user.salary = self.validated_data.get('salary', '')
+        user.wealth = self.validated_data.get('wealth', '')
         user.financial_products = self.validated_data.get('financial_products', '')
         user.save()
         return user

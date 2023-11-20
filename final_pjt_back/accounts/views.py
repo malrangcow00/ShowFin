@@ -76,11 +76,11 @@ def change_password(request):
             if new_password:
                 user.set_password(new_password)
                 user.save()
-                return Response({'success' : f'{user}님의 비밀번호 변경완료 !'}, status=status.HTTP_200_OK)
+                return Response({'message' : f'{user}님의 비밀번호 변경완료 !'}, status=status.HTTP_200_OK)
             else:
-                return Response({'error': '새로운 비밀번호를 확인해주세요!'}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({'message': '새로운 비밀번호를 확인해주세요!'}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({'error': '이전 비밀번호를 확인해주세요!'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': '이전 비밀번호를 확인해주세요!'}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
 
