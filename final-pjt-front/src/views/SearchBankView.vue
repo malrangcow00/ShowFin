@@ -2,16 +2,16 @@
     <div>
         <h1>Search Bank</h1>
         <label class="select">
-            <select name="city" id="city" @click="selectCity" :key="city" required>
+            <select name="city" id="city" @change="selectDistrict" required>
             </select><span>　</span>
         </label>
         <label class="select">
-            <select name="district" id="district" @click="selectDistrict" required>
+            <select name="district" id="district" required>
             </select><span>　</span>
         </label>
-        <label calss="select">
-        <select name="bank" id="bank" @click="selectBank" required>
-        </select><span>　</span>
+        <label class="select">
+            <select name="bank" id="bank" required>
+            </select><span>　</span>
         </label>
         <button @click="searchBanks">Search</button>
     </div>
@@ -25,32 +25,52 @@ import axios from 'axios';
 
 const city_data = 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=*00000000'
 
-const selectCity = () => {
-    axios({
-        //request
-        method: "get",
-        url: city_data,
-        responseType: "json",
-    })
-        .then(function (response) {
-            const selectCity = document.getElementById('city');
-            // option 초기화
-            selectCity.options.length = 0; // 선택값을 변경할 수 없는 문제가 발생 ...
-            // option을 초기화 하는 다른 방법
-            // while (selectCity.options.length > 0) {
-            //     selectCity.remove(0);
-            // }
-            for (let i = 0; i < response.data.regcodes.length; i++) {
-                const option = document.createElement('option');
-                option.value = response.data.regcodes[i].code;
-                option.text = response.data.regcodes[i].name;
-                selectCity.add(option);
+axios({
+    //request
+    method: "get",
+    url: city_data,
+    responseType: "json",
+})
+    .then(function (response) {
+        const selectCity = document.getElementById('city');
+        for (let i = 0; i < response.data.regcodes.length; i++) {
+            if (i === 0) {
+                const defaultSelectedCityCode = document.getElementById('city').value;
+                const defaultUrl = district_data.replace('{tmpcode}', defaultSelectedCityCode.substr(0, 2));
+
+                axios({
+                    //request
+                    method: "get",
+                    url: defaultUrl,
+                    responseType: "json",
+                })
+                    .then(function (response) {
+                        const selectDistrict = document.getElementById('district');
+                        for (let i = 1; i < response.data.regcodes.length; i++) {
+                            const option = document.createElement('option');
+                            // 중복 제거
+                            if (response.data.regcodes[i].name.split(' ')[1] === response.data.regcodes[i - 1].name.split(' ')[1]) {
+                                continue;
+                            } else {
+                                option.value = response.data.regcodes[i].code;
+                            }
+                            option.text = response.data.regcodes[i].name.split(' ')[1];
+                            selectDistrict.add(option);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
+            const option = document.createElement('option');
+            option.value = response.data.regcodes[i].code;
+            option.text = response.data.regcodes[i].name;
+            selectCity.add(option);
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
 
 
 const district_data = 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern={tmpcode}*00000';
@@ -59,9 +79,7 @@ const selectDistrict = () => {
     // select city에서 선택한 option의 city.code값 호출
     const selectedCityCode = document.getElementById('city').value;
     const url = district_data.replace('{tmpcode}', selectedCityCode.substr(0, 2));
-    console.log(url); // district를 검색하는데 사용 ....
 
-    //
     axios({
         //request
         method: "get",
@@ -70,8 +88,14 @@ const selectDistrict = () => {
     })
         .then(function (response) {
             const selectDistrict = document.getElementById('district');
-            // option 초기화
+            // option 초기화 방법 1
             selectDistrict.options.length = 0;
+            // option 초기화 방법 2
+            // while (selectDistrict.options.length > 0) {
+            //     selectDistrict.remove(0);
+            // }
+            // option 초기화 방법 3
+            // selectDistrict.innerHTML = '';
             for (let i = 1; i < response.data.regcodes.length; i++) {
                 const option = document.createElement('option');
                 // 중복 제거
@@ -89,27 +113,25 @@ const selectDistrict = () => {
         });
 }
 
-const selectBank = () => {
-    // http://127.0.0.1:8000/api/products/get_banks/에서 bank 목록를 호출
-    axios({
-        //request
-        method: "get",
-        url: 'http://127.0.0.1:8000/api/products/get_banks/',
+// http://127.0.0.1:8000/api/products/get_banks/에서 bank 목록를 호출
+axios({
+    //request
+    method: "get",
+    url: 'http://127.0.0.1:8000/api/products/get_banks/',
+})
+    .then(function (response) {
+        const selectBank = document.getElementById('bank');
+        selectBank.options.length = 0;
+        // console.log(response.data.company_name);
+        for (let i = 0; i < response.data.company_name.length; i++) {
+            const option = document.createElement('option');
+            option.text = response.data.company_name[i];
+            selectBank.add(option);
+        }
     })
-        .then(function (response) {
-            const selectBank = document.getElementById('bank');
-            selectBank.options.length = 0;
-            console.log(response.data.company_name);
-            for (let i = 0; i < response.data.company_name.length; i++) {
-                const option = document.createElement('option');
-                option.text = response.data.company_name[i];
-                selectBank.add(option);
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-};
+    .catch(function (error) {
+        console.log(error);
+    });
 
 const searchBanks = () => {
     // select city에서 선택한 option의 city.name값 호출
@@ -124,6 +146,8 @@ const searchBanks = () => {
     const selectedBankName = document.getElementById('bank').options[document.getElementById('bank').selectedIndex].text;
     // 로컬스토리지에 저장
     localStorage.setItem('bank', selectedBankName);
+    const keyword = `${localStorage.getItem('city')} ${localStorage.getItem('district')} ${localStorage.getItem('bank')}`;
+    initMap(keyword);
 };
 
 const mapId = 'map';
@@ -132,7 +156,7 @@ let map = null;
 
 const keyword = `${localStorage.getItem('city')} ${localStorage.getItem('district')} ${localStorage.getItem('bank')}`;
 
-const initMap = () => {
+const initMap = (keyword) => {
     // Map container
     const mapContainer = document.getElementById(mapId);
 

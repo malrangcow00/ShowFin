@@ -64,6 +64,7 @@ API 받아와서 ..
 ### 한국수출입은행 환율정보 API (환율 계산기)
 - https://www.koreaexim.go.kr/ir/HPHKIR020M01?apino=2&viewtype=C&searchselect=&searchword=
 - exchange_API_URL = '9tvmZZArSdQ9sEmu0hZG0wnAU40eZthD'
+- https://www.koreaexim.go.kr/site/program/financial/exchangeJSON?authkey=9tvmZZArSdQ9sEmu0hZG0wnAU40eZthD&data=AP01
 
 ### 카카오맵 API
 - https://apis.map.kakao.com/
