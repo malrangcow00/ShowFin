@@ -2,11 +2,17 @@
     <div>
         <h1>Search Bank</h1>
         <label class="select">
-            <select name="city" id="city" @click="selectCity" :key="city" required>
+            <select name="city" id="city" v-model="selectedCityCode" @click="cityselect" required>
+                <option v-for="city in cities" :value="city.code" :key="city.name">
+                    {{ city.name }}
+                </option>
             </select><span>　</span>
         </label>
         <label class="select">
-            <select name="district" id="district" @click="selectDistrict" required>
+            <select name="district" id="district" @click="districtselect" required>
+                <option v-for="district in computedDistricts" :value="district" :key="district">
+                    {{ district }}
+                </option>
             </select><span>　</span>
         </label>
         <!--<select name="bank" id="bank" required>-->
@@ -25,7 +31,12 @@ import axios from 'axios';
 
 const city_data = 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=*00000000'
 
-const selectCity = () => {
+const cities = ref([]);
+const selectedCityCode = ref(null);
+// const districts = ref([]);
+
+
+const cityselect = () => {
     axios({
         //request
         method: "get",
@@ -33,13 +44,7 @@ const selectCity = () => {
         responseType: "json",
     })
         .then(function (response) {
-            const selectCity = document.getElementById('city');
-            for (let i = 0; i < response.data.regcodes.length; i++) {
-                const option = document.createElement('option');
-                option.value = response.data.regcodes[i].code;
-                option.text = response.data.regcodes[i].name;
-                selectCity.add(option);
-            }
+            cities.value = response.data.regcodes;
         })
         .catch(function (error) {
             console.log(error);
@@ -49,51 +54,37 @@ const selectCity = () => {
 
 const district_data = 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern={tmpcode}*00000';
 
-const selectDistrict = () => {
-    // select city에서 선택한 option의 city.code값 호출
-    const selectedCityCode = document.getElementById('city').value;
-    const url = district_data.replace('{tmpcode}', selectedCityCode.substr(0, 2));
-    console.log(url); // district를 검색하는데 사용 ....
+const computedDistricts = computed(() => {
+    const districtsArray = [];
 
-    //
-    axios({
-        //request
-        method: "get",
-        url: url,
-        responseType: "json",
-    })
-        .then(function (response) {
-            const selectDistrict = document.getElementById('district');
-            // option 초기화
-            selectDistrict.options.length = 0;
-            for (let i = 1; i < response.data.regcodes.length; i++) {
-                const option = document.createElement('option');
-                // 중복 제거
-                if (response.data.regcodes[i].name.split(' ')[1] === response.data.regcodes[i - 1].name.split(' ')[1]) {
-                    continue;
-                } else {
-                    option.value = response.data.regcodes[i].code;
-                }
-                option.text = response.data.regcodes[i].name.split(' ')[1];
-                selectDistrict.add(option);
-            }
+    if (selectedCityCode.value) {
+        const url = district_data.replace('{tmpcode}', selectedCityCode.value.substr(0, 2));
+
+        axios({
+            method: 'get',
+            url: url,
+            responseType: 'json',
         })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
+            .then(function (response) {
+                for (let i = 1; i < response.data.regcodes.length; i++) {
+                    const tmp = response.data.regcodes[i].name.split(' ')[1];
+                    if (!districtsArray.includes(tmp)) {
+                        districtsArray.push(tmp);
+                    }
+                }
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+    }
 
-
+    return districtsArray;
+});
 
 const searchBanks = () => {
-    // select city에서 선택한 option의 city.name값 호출
-    const selectedCityName = document.getElementById('city').options[document.getElementById('city').selectedIndex].text;
-    // 로컬스토리지에 저장
-    localStorage.setItem('city', selectedCityName);
-    // select city에서 선택한 option의 city.name값 호출
-    const selectedDistrictName = document.getElementById('district').options[document.getElementById('district').selectedIndex].text;
-    // 로컬스토리지에 저장
-    localStorage.setItem('district', selectedDistrictName);
+    const keyword = `${selectedCityCode.value} ${computedDistricts.value.join('-')}`;
+    console.log(keyword);
+    // Use the keyword for further processing or searching
 };
 
 const mapId = 'map';
