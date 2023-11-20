@@ -34,6 +34,7 @@ SAVINGS = env('SAVINGS')
 BANK_TYPE = env('BANK_TYPE')
 PAGE_NO = env('PAGE_NO')
 COMPANY = env('COMPANY')
+EXCHANGE_API_KEY = env('EXCHANGE_API_KEY')
 
 
 # Quick-start development settings - unsuitable for production

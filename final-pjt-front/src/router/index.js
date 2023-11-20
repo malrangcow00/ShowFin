@@ -3,6 +3,7 @@ import MainView from "@/views/MainView.vue";
 import ArticleView from "@/views/ArticleView.vue";
 import SignUpView from "@/views/SignUpView.vue";
 import LogInView from "@/views/LogInView.vue";
+import ExchangerView from "@/views/ExchangerView.vue";
 import SearchBankView from "@/views/SearchBankView.vue";
 
 const router = createRouter({
@@ -37,6 +38,11 @@ const router = createRouter({
       path: "/accounts/login",
       name: "LogInView",
       component: LogInView,
+    },
+    {
+      path: "/exchange",
+      name: "exchanger",
+      component: ExchangerView,
     },
     {
       path: "/searchBank",
