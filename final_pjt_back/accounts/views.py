@@ -51,7 +51,7 @@ class CustomUserDetailsView(UserDetailsView):
 def user_delete(request):
     user = request.user
     # Vue에서 보낸 비밀번호
-    password = request.data.get('password1', '')
+    password = request.data.get('password', '')
 
     if user.is_authenticated:
         # 저장된 비밀번호와 입력된 비밀번호 일치 여부 확인
