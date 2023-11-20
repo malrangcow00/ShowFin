@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'accounts',
     'articles',
     'products',
-    'exchange_infos',
     # DRF
     'rest_framework',
     'rest_framework.authtoken',
