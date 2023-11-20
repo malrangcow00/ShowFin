@@ -1,14 +1,19 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
-</script>
-
 <template>
-    <RouterLink :to="{ name: 'main' }">Main</RouterLink> |
+  <header>
+    <RouterLink :to="{ name: 'MainView' }">Main</RouterLink> |
+    <RouterLink :to="{ name: 'ArticleView' }">Articles</RouterLink> |
+    <RouterLink :to="{ name: 'SignUpView' }">SignUp</RouterLink> |
+    <RouterLink :to="{ name: 'LogInView' }">LogIn</RouterLink> |
     <RouterLink :to="{ name: 'searchBank' }">SearchBank</RouterLink> |
-    <RouterView />
+  </header>
+  <RouterView />
 </template>
 
-<style scoped>
+<script setup>
+import { RouterLink, RouterView } from "vue-router";
+import { useAccountStore } from "@/stores/accounts.js";
 
-</style>
+const store = useAccountStore();
+</script>
+
+<style scoped></style>

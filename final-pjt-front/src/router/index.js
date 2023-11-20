@@ -1,21 +1,49 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import MainView from '@/views/MainView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import MainView from "@/views/MainView.vue";
+import ArticleView from "@/views/ArticleView.vue";
+import SignUpView from "@/views/SignUpView.vue";
+import LogInView from "@/views/LogInView.vue";
 import SearchBankView from "@/views/SearchBankView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'main',
-      component: MainView
+      path: "/",
+      name: "MainView",
+      component: MainView,
     },
     {
-      path: '/searchBank',
-      name: 'searchBank',
-      component: SearchBankView
+      path: "/articles",
+      name: "ArticleView",
+      component: ArticleView,
     },
-  ]
-})
+    // {
+    //   path: "/articles/:id",
+    //   name: "DetailView",
+    //   component: DetailView,
+    // },
+    // {
+    //   path: "/articles/create",
+    //   name: "CreateView",
+    //   component: CreateView,
+    // },
+    {
+      path: "/accounts/signup",
+      name: "SignUpView",
+      component: SignUpView,
+    },
+    {
+      path: "/accounts/login",
+      name: "LogInView",
+      component: LogInView,
+    },
+    {
+      path: "/searchBank",
+      name: "searchBank",
+      component: SearchBankView,
+    },
+  ],
+});
 
-export default router
+export default router;
