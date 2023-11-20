@@ -5,7 +5,7 @@
     <RouterLink :to="{ name: 'SignUpView' }">SignUp</RouterLink> |
     <RouterLink :to="{ name: 'LogInView' }">LogIn</RouterLink> |
     <RouterLink :to="{ name: 'searchBank' }">SearchBank</RouterLink> |
-    <RouterLink :to="{ name: 'exchanger' }">Exchanger</RouterLink> |
+    <RouterLink :to="{ name: 'exchange' }">Exchange</RouterLink> |
   </header>
     <RouterView />
 </template>

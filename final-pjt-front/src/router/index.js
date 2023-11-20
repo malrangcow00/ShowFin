@@ -4,6 +4,7 @@ import ArticleView from "@/views/ArticleView.vue";
 import SignUpView from "@/views/SignUpView.vue";
 import LogInView from "@/views/LogInView.vue";
 import SearchBankView from "@/views/SearchBankView.vue";
+import ExchangeView from "@/views/ExchangeView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,6 +43,11 @@ const router = createRouter({
       path: "/searchBank",
       name: "searchBank",
       component: SearchBankView,
+    },
+    {
+      path: "/exchange",
+      name: "exchange",
+      component: ExchangeView,
     },
   ],
 });

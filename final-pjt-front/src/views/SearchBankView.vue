@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { onMounted } from 'vue';
 import axios from 'axios';
 
 const city_data = 'https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes?regcode_pattern=*00000000'
@@ -121,7 +121,6 @@ axios({
 })
     .then(function (response) {
         const selectBank = document.getElementById('bank');
-        selectBank.options.length = 0;
         // console.log(response.data.company_name);
         for (let i = 0; i < response.data.company_name.length; i++) {
             const option = document.createElement('option');
@@ -173,8 +172,11 @@ const initMap = (keyword) => {
     infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
     // Perform the place search
-    // searchPlace('서울특별시 강남구 신한은행');
-    searchPlace(keyword);
+    if (keyword) {
+        searchPlace(keyword);
+    } else {
+        searchPlace('서울특별시 종로구 우리은행');
+    }
 };
 
 const searchPlace = (keyword) => {

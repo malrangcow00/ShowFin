@@ -34,6 +34,10 @@ SAVINGS = env('SAVINGS')
 BANK_TYPE = env('BANK_TYPE')
 PAGE_NO = env('PAGE_NO')
 COMPANY = env('COMPANY')
+EXCHANGE_BASE_URL = env('EXCHANGE_BASE_URL')
+EXCHANGE = env('EXCHANGE')
+EXCHANGE_API_KEY = env('EXCHANGE_API_KEY')
+EXCHANGE_DATA = env('EXCHANGE_DATA')
 
 
 # Quick-start development settings - unsuitable for production
@@ -55,6 +59,7 @@ INSTALLED_APPS = [
     'accounts',
     'articles',
     'products',
+    'exchange_infos',
     # DRF
     'rest_framework',
     'rest_framework.authtoken',

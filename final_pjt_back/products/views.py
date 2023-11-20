@@ -10,55 +10,6 @@ from .serializers import DepositProductsSerializer, DepositOptionsSerializer, Sa
 
 # Create your views here.
 
-# def save_db(response, type):
-#     # 상품 목록 저장
-#     # deposit_products = response.get("result").get("baseList")
-#     # deposit_products_serializer = DepositProductsSerializer(data=deposit_products, many=True)
-#     # if deposit_products_serializer.is_valid(raise_exception=True):
-#     #     deposit_products_serializer.save()
-#     for product_type in response.get("result").get("baseList"):
-#         # print(product_type)
-
-#         save_data = {
-#             'fin_prdt_cd': product_type.get('fin_prdt_cd'),
-#             'kor_co_nm': product_type.get('kor_co_nm'),
-#             'fin_prdt_nm': product_type.get('fin_prdt_nm'),
-#             'etc_note': product_type.get('etc_note'),
-#             'join_deny': product_type.get('join_deny'),
-#             'join_member': product_type.get('join_member'),
-#             'join_way': product_type.get('join_way'),
-#             'spcl_cnd': product_type.get('spcl_cnd'),
-#         }
-    
-#         # 저장하기 위해 데이터를 포장
-#         serializer = type[2](data=save_data)
-#         if serializer.is_valid(raise_exception=True):
-#             serializer.save()
-
-
-#     # 옵션 목록 저장
-#     for option in response.get("result").get("optionList"):
-#         # print(deposit)
-#         save_data = {
-#             'fin_prdt_cd': option.get('fin_prdt_cd'),
-#             'intr_rate_type_nm': option.get('intr_rate_type_nm'),
-#             'intr_rate': option.get('intr_rate'),
-#             'intr_rate2': option.get('intr_rate2'),
-#             'save_trm': option.get('save_trm'),
-#         }
-    
-#         # 저장하기 위해 데이터를 포장
-#         product = type[1].objects.get(fin_prdt_cd=save_data.get('fin_prdt_cd'))
-#         serializer = type[3](data=save_data, partial=True)
-        
-#         for key in save_data:
-#             if not save_data[key]:
-#                 save_data[key] = -1
-
-#         if serializer.is_valid(raise_exception=True):
-#             #product
-#             serializer.save(product=product)
-
 
 API_KEY = settings.API_KEY
 BASE_URL = settings.BASE_URL
@@ -249,13 +200,14 @@ def savings_top_rate(request):
 def get_banks(request):
     URL = BASE_URL + COMPANY
     params = {
-        'auth' : API_KEY,
-        'topFinGrpNo' : BANK_TYPE,
-        'pageNo' : PAGE_NO,
+        'auth': API_KEY,
+        'topFinGrpNo': BANK_TYPE,
+        'pageNo': PAGE_NO,
     }
 
-    response = requests.get(URL, params=params).encoding = 'utf-8'
-    response = response.json()
+    # response = requests.get(URL, params=params).encoding = 'utf-8'
+    response = requests.get(URL, params=params).json()
+    # response = response.json()
 
     data = {
         'company_name': [],

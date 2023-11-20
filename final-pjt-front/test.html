@@ -1,20 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <title>Kakao 지도 시작하기</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
-<body>
-<div id="map" style="width:500px;height:400px;"></div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fbdd32eecea9ea022e10dec2254581c7"></script>
-<script>
-    var container = document.getElementById('map');
-    var options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 3
-    };
 
-    var map = new kakao.maps.Map(container, options);
+<body>
+
+
+<div>
+    <input type="number" id="input1">
+    <select id="currency1">
+        <!-- 환율 종류를 옵션으로 넣을 수 있음 -->
+    </select>
+</div>
+<div>
+    <input type="number" id="input2">
+    <select id="currency2">
+        <!-- 환율 종류를 옵션으로 넣을 수 있음 -->
+    </select>
+</div>
+
+
+
+<script>
+
+
+    // 입력 상자와 select 요소 가져오기
+    const input1 = document.getElementById('input1');
+    const input2 = document.getElementById('input2');
+    const currency1 = document.getElementById('currency1');
+    const currency2 = document.getElementById('currency2');
+
+    // 각 입력 상자에 대한 이전 값을 저장할 변수 생성
+    let prevInput1Value = input1.value;
+    let prevInput2Value = input2.value;
+
+    // input 이벤트 리스너 등록
+    input1.addEventListener('input', updateInput1);
+    input2.addEventListener('input', updateInput2);
+    currency1.addEventListener('change', updateInput1);
+    currency2.addEventListener('change', updateInput2);
+
+    // input1 값 업데이트 함수
+    function updateInput1() {
+        const val1 = parseFloat(input1.value);
+        const cur1 = currency1.value;
+
+        const exchangeRate = 1.5; // 임의의 환율 값 예시
+        const calculated1to2 = val1 * exchangeRate;
+
+        if (!isNaN(calculated1to2) && input1.value !== prevInput1Value) {
+            prevInput1Value = input1.value;
+            input2.value = calculated1to2.toFixed(2); // 결과를 소수점 2자리까지 표시
+        }
+    }
+
+    // input2 값 업데이트 함수
+    function updateInput2() {
+        const val2 = parseFloat(input2.value);
+        const cur2 = currency2.value;
+
+        const exchangeRate = 1.5; // 임의의 환율 값 예시
+        const calculated2to1 = val2 / exchangeRate;
+
+        if (!isNaN(calculated2to1) && input2.value !== prevInput2Value) {
+            prevInput2Value = input2.value;
+            input1.value = calculated2to1.toFixed(2); // 결과를 소수점 2자리까지 표시
+        }
+    }
+
+
+
+
 </script>
 </body>
 </html>
