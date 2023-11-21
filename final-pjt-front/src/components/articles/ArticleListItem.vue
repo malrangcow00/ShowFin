@@ -4,8 +4,8 @@
     <p>작성자 : {{ article.username }}</p>
     <p>글 분류 : {{ article.category }}</p>
     <p>제목 : {{ article.title }}</p>
-    <p>내용 : {{ article.content }}</p>
-    <RouterLink :to="{ name: 'DetailView', params: { id: article.id } }"
+    <!-- <p>내용 : {{ article.content }}</p> -->
+    <RouterLink :to="{ name: 'ArticleDetail', params: { id: article.id } }"
       ><p>{{ article.title }}</p></RouterLink
     >
     <hr />
