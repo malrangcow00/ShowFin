@@ -7,6 +7,7 @@
     </div>
     <p v-else>로그인 하세요~~~ ㅎㅎ</p>
     <RouterLink :to="{ name: 'MainView' }">Main</RouterLink> |
+    <RouterLink :to="{ name: 'DepositsView' }">Products</RouterLink> |
     <RouterLink :to="{ name: 'ArticleView' }">Articles</RouterLink> |
     <RouterLink :to="{ name: 'SignUpView' }">SignUp</RouterLink> |
     <RouterLink :to="{ name: 'LogInView' }">LogIn</RouterLink> |

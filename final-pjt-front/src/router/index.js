@@ -1,8 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MainView from "@/views/MainView.vue";
+// Product
+// import ProductsView from "@/views/products/ProductsView.vue";
+import DepositList from "@/components/products/DepositList.vue";
+import SavingList from "@/components/products/SavingList.vue";
 // Article
 import ArticleView from "@/views/articles/ArticleView.vue";
 import ArticleDetail from "@/components/articles/ArticleDetail.vue";
+import ArticleCreate from "@/components/articles/ArticleCreate.vue";
 // Account
 import SignUpView from "@/views/accounts/SignUpView.vue";
 import LogInView from "@/views/accounts/LogInView.vue";
@@ -22,6 +27,18 @@ const router = createRouter({
       name: "MainView",
       component: MainView,
     },
+      // Product
+    {
+      path: "/products/deposits",
+      name: "DepositsView",
+      component: DepositList,
+    },
+    {
+      path: "/products/savings",
+      name: "SavingsView",
+      component: SavingList,
+    },
+      // Article
     {
       path: "/articles",
       name: "ArticleView",

@@ -3,14 +3,17 @@
         <h1>Search Bank</h1>
         <label class="select">
             <select name="city" id="city" @change="selectDistrict" required>
+                <option value="" selected disabled hidden>서울특별시</option>
             </select><span>　</span>
         </label>
         <label class="select">
             <select name="district" id="district" required>
+                <option value="" selected disabled hidden>종로구</option>
             </select><span>　</span>
         </label>
         <label class="select">
             <select name="bank" id="bank" required>
+                <option value="" selected disabled hidden>우리은행</option>
             </select><span>　</span>
         </label>
         <button @click="searchBanks">Search</button>

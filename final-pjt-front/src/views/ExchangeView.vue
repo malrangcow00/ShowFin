@@ -1,93 +1,100 @@
 <template>
     <div>
-        <select v-model="fromCurrency" @change="calculateExchange">
-            <!-- 환율 정보에서 가져온 통화 목록 -->
-            <option v-for="currency in currencies" :key="currency.code" :value="currency.code">
-                {{ currency.name }}
-            </option>
-        </select>
+        <h1>환율 계산기</h1>
 
-        <input type="number" v-model="fromAmount" @input="calculateExchange">
+        <div>
+            <label class="select">
+                <select name="currency1" id="currency1" @change="calculateExchange1" required>
+                    <option value="" selected disabled hidden>USD</option>
+                </select><span>　</span>
+            </label>
 
-        <select v-model="toCurrency" @change="calculateExchange">
-            <!-- 환율 정보에서 가져온 통화 목록 -->
-            <option v-for="currency in currencies" :key="currency.code" :value="currency.code">
-                {{ currency.name }}
-            </option>
-        </select>
+            <input type="number" @input="calculateExchange1" v-model="value1">
+        </div>
 
-        <input type="number" v-model="toAmount" @input="calculateExchange">
+        <div>
+            <label class="select">
+                <select name="currency2" id="currency2" @change="calculateExchange2" required>
+                    <option value="" selected disabled hidden>KRW</option>
+                </select><span>　</span>
+            </label>
+
+            <input type="number" @input="calculateExchange2" v-model="value2">
+        </div>
+
     </div>
 </template>
 
-<script>
+<script setup>
 import axios from 'axios';
+import { ref } from 'vue';
 
-export default {
-    data() {
-        return {
-            currencies: [], // 환율 정보를 담을 배열
-            fromCurrency: '', // 변환하고자 하는 통화 코드
-            toCurrency: '', // 변환될 통화 코드
-            fromAmount: 0, // 변환하고자 하는 금액
-            toAmount: 0 // 변환된 금액
-        };
-    },
-    created() {
-        // 환율 정보를 가져오는 API 엔드포인트
-        const apiUrl = 'http://127.0.0.1:8000/api/exchange_info/'; // API 엔드포인트
+const exchange_info = {};
 
-        // Axios를 사용하여 환율 정보 가져오기
-        axios.get(apiUrl)
-            .then(response => {
-                this.currencies = response.data; // API로부터 받은 환율 정보를 배열에 저장
-                this.fromCurrency = this.currencies[0].code; // 기본으로 첫 번째 통화를 선택
-                this.toCurrency = this.currencies[1].code; // 기본으로 두 번째 통화를 선택
-                this.calculateExchange(); // 초기 변환율 계산
-            })
-            .catch(error => {
-                console.error('Error fetching currency data:', error);
-            });
-    },
-    // axios({
-    //           //request
-    //           method: "get",
-    //           url: 'http://127.0.0.1:8000/api/exchange_info/',
-    //       })
-    // .then(function (response) {
-    //     console.log(response.data);
-    //     // console.log(response.data[0].cur_unit);
-    //     // const selectCurrency1 = document.getElementById('currency1');
-    //     // const selectCurrency2 = document.getElementById('currency2');
-    //     for (let i = response.data.length-1; i >= 0; i--) {
-    //         const option1 = document.createElement('option');
-    //         option1.value = response.data[i].cur_unit;
-    //         option1.text = response.data[i].cur_unit;
-    //         currency1.add(option1);
-    //         const option2 = document.createElement('option');
-    //         option2.value = response.data[i].cur_unit;
-    //         option2.text = response.data[i].cur_unit;
-    //         currency2.add(option2);
-    //     }
-    // })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
-    methods: {
-        calculateExchange() {
-            // 변환하고자 하는 금액과 환율을 기반으로 계산
-            const fromRate = this.getExchangeRate(this.fromCurrency);
-            const toRate = this.getExchangeRate(this.toCurrency);
 
-            this.toAmount = (this.fromAmount * toRate) / fromRate || 0;
-        },
-        getExchangeRate(currencyCode) {
-            // 선택한 통화 코드에 해당하는 환율 정보 반환
-            const currency = this.currencies.find(currency => currency.code === currencyCode);
-            return currency ? currency.rate : 1; // 기본값으로 1 설정
+// 환율 정보를 가져오는 API 엔드포인트
+const django_exchange_url = 'http://127.0.0.1:8000/api/exchange_info/';
+
+// Axios를 사용하여 환율 정보 가져오기
+axios({
+    method: "get",
+    url: django_exchange_url,
+    responseType: "json",
+})
+    .then(function (response) {
+        const currency1 = document.getElementById('currency1');
+        const currency2 = document.getElementById('currency2');
+        // console.log(response.data)
+        for (let i = response.data.length-1; i >= 0; i--) {
+            exchange_info[response.data[i].cur_unit] = response.data[i].deal_bas_r;
+            const option1 = document.createElement('option');
+            const option2 = document.createElement('option');
+            option1.value = response.data[i].cur_unit;
+            option2.value = response.data[i].cur_unit;
+            option1.text = response.data[i].cur_unit;
+            option2.text = response.data[i].cur_unit;
+            currency1.add(option1);
+            currency2.add(option2);
         }
-    }
-};
+        console.log(exchange_info)
+        value2.value = Number(exchange_info['USD'].replace(',', ''));
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+
+const value1 = ref(1);
+const value2 = ref();
+
+const getExchangeRate = () => {
+    const currency1 = document.getElementById('currency1');
+    const currency2 = document.getElementById('currency2');
+    console.log(currency1.value)
+    console.log(exchange_info[currency1.value])
+    const rate = Number(exchange_info[currency1.value].replace(',', '')) / Number(exchange_info[currency2.value].replace(',', ''));
+    console.log(rate)
+    return rate;
+}
+
+const calculateExchange1 = () => {
+    const currency1 = document.getElementById('currency1');
+    const currency2 = document.getElementById('currency2');
+    const rate = getExchangeRate(currency1, currency2);
+    const input1 = document.getElementById('input1');
+    const input2 = document.getElementById('input2');
+    input2 = input1 * rate;
+}
+
+const calculateExchange2 = () => {
+    const currency1 = document.getElementById('currency1');
+    const currency2 = document.getElementById('currency2');
+    const rate = getExchangeRate(currency1, currency2);
+    const input2 = document.getElementById('input2');
+    const input1 = document.getElementById('input1');
+    input1 = input2 / rate;
+
+}
 
 
 </script>
