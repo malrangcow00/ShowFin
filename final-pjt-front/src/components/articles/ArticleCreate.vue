@@ -5,10 +5,15 @@
       <label for="title">제목 : </label>
       <input type="text" id="title" v-model.trim="title" /><br />
       <label for="content">내용 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea
+      <textarea
+        id="content"
+        cols="30"
+        rows="10"
+        v-model.trim="content"
+      ></textarea
       ><br />
       <label for="category">카테고리</label>
-      <select id="category" v-model="category">
+      <select id="category" v-model.trim="category">
         <option value="예금">예금</option>
         <option value="적금">적금</option>
         <option value="기타">기타</option></select
@@ -32,13 +37,13 @@ const content = ref(null);
 const category = ref(null);
 
 const createArticle = function () {
-  if (!title) {
+  if (!title.value) {
     alert("제목을 입력해주세요");
     return;
-  } else if (!content) {
+  } else if (!content.value) {
     alert("내용을 입력해주세요");
     return;
-  } else if (!category) {
+  } else if (!category.value) {
     alert("카테고리를 지정해주세요");
   }
 
@@ -51,7 +56,7 @@ const createArticle = function () {
       category: category.value,
     },
     headers: {
-      Authorization: `Token ${store.token.value}`,
+      Authorization: `Token ${store.token}`,
     },
   })
     .then((res) => {

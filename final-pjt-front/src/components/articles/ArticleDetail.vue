@@ -8,18 +8,19 @@
         <p>제목: {{ article?.title }}</p>
         <p>{{ article?.category }}</p>
         <p>내용: {{ article?.content }}</p>
-        <p>댓글 수 : {{ article.comment_count }}</p>
-        <p>좋아요 수 : {{ article.like_count }}</p>
+        <p>댓글 수 : {{ article?.comment_count }}</p>
+        <p>좋아요 수 : {{ article?.like_count }}</p>
         <button @click="toggleLike(article)">
           {{ article?.liked_by_user ? "좋아요 취소" : "좋아요" }}
         </button>
-        <div>
-          <button @click="!isUpdate">수정</button>
+        <div v-if="store.logInUser === article?.username">
+          <button @click="updateState">수정</button>
           <button @click="deleteArticle">삭제</button>
         </div>
         <CommentCreate :articleId="article.id" />
         <CommentList
           v-if="article && article.comment_set"
+          @create-comment="createComment"
           :comments="article.comment_set"
         />
       </div>
@@ -70,33 +71,47 @@ import CommentList from "@/components/articles/CommentList.vue";
 const store = useAccountStore();
 const route = useRoute();
 const router = useRouter();
-const article = ref(null);
 const isUpdate = ref(false);
+const article = ref(null);
+
+// 업데이트 상태 변경
+const updateState = function () {
+  isUpdate.value = !isUpdate.value;
+};
 
 // 게시글 상세 조회
 onMounted(() => {
   axios({
-    method: "get",
-    url: `${store.API_URL}/api/v1/articles/${route.params.id}/`,
+    method: "GET",
+    url: `${store.API_URL}/api/articles/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
   })
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       article.value = res.data;
+      // console.log(article.value);
     })
     .catch((err) => {
       console.log(err);
     });
+
+  // 게시글 좋아요 상태 조회
 });
 
 // 게시글 수정
 const updateArticle = function () {
   axios({
     method: "PUT",
-    url: `${store.API_URL}/api/v1/articles/${route.params.id}/`,
+    url: `${store.API_URL}/api/articles/${route.params.id}/`,
     data: {
-      title: article.title,
-      content: article.content,
-      category: article.category,
+      title: article.value.title,
+      content: article.value.content,
+      category: article.value.category,
+    },
+    headers: {
+      Authorization: `Token ${store.token}`,
     },
   })
     .then((res) => {
@@ -112,7 +127,10 @@ const updateArticle = function () {
 const deleteArticle = function () {
   axios({
     method: "DELETE",
-    url: `${store.API_URL}/api/v1/articles/${route.params.id}/`,
+    url: `${store.API_URL}/api/articles/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
   })
     .then((res) => {
       console.log(res);
@@ -124,28 +142,47 @@ const deleteArticle = function () {
     });
 };
 
+// 댓글 생성
+const createComment = function () {
+  axios({
+    method: "GET",
+    url: `${store.API_URL}/api/articles/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  })
+    .then((res) => {
+      // console.log(res);
+      article.value = res.data;
+      // console.log(article.value);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 // 게시글 좋아요 요청
 const toggleLike = function (article) {
+  console.log(article);
   const articleId = route.params.id;
   axios({
     method: "POST",
-    url: `${accountStore.API_URL}/api/articles/${articleId}/like/`,
+    url: `${store.API_URL}/api/articles/${articleId}/like/`,
     headers: {
-      Authorization: `Token ${accountStore.token}`,
+      Authorization: `Token ${store.token}`,
     },
   })
     .then((res) => {
       if (res.data.message === "게시글 좋아요 성공!") {
-        article.liked_by_user = true; // 좋아요 상태로 업데이트
-        alert("이 댓글을 좋아합니다.");
+        alert("이 게시글을 좋아합니다.");
       } else if (res.data.message === "게시글 좋아요 취소!") {
-        article.liked_by_user = false; // 좋아요 취소 상태로 업데이트
-        alert("이 댓글의 좋아요를 취소하였습니다.");
+        alert("이 게시글의 좋아요를 취소하였습니다.");
       }
       // 비동기 처리...
       // window.location.reload();
       console.log(res.data.message);
       article.like_count = res.data.like_count;
+      article.liked_by_user = res.data.liked;
     })
     .catch((err) => {
       console.error(err);
