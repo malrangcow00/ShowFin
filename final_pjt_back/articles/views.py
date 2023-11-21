@@ -10,7 +10,6 @@ from .models import Article, Comment
 
 
 @api_view(['GET', 'POST'])
-@permission_classes([IsAuthenticated])
 def article_list(request):
     if request.method == 'GET':
         articles = Article.objects.all().order_by('-pk')
@@ -25,6 +24,7 @@ def article_list(request):
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([IsAuthenticated])
 def article_detail(request, article_pk):
     article = Article.objects.get(pk=article_pk)
 
@@ -62,6 +62,7 @@ def article_like(request, article_pk):
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([IsAuthenticated])
 def comment_detail(request, article_pk, comment_pk):
     article = Article.objects.get(pk=article_pk)
     comment = article.comment_set.get(pk=comment_pk)
