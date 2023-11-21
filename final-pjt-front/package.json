@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mdi/font": "^7.3.67",
     "axios": "^1.6.2",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.0",

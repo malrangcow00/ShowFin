@@ -26,17 +26,25 @@
               <v-col cols="12" md="6">
                 <v-text-field
                   v-model.trim="password1"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required, rules.min]"
+                  :type="show1 ? 'text' : 'password'"
                   label="비빌번호"
-                  type="password"
                   hint="비밀번호를 입력해주세요."
+                  counter
+                  @click:append="show1 = !show1"
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="6">
                 <v-text-field
                   v-model.trim="password2"
-                  label="비밀번호 확인"
-                  type="password"
+                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required, rules.min]"
+                  :type="show2 ? 'text' : 'password'"
+                  label="비빌번호"
                   hint="비밀번호를 한번 더 입력해주세요."
+                  counter
+                  @click:append="show2 = !show2"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -92,6 +100,13 @@ const email = ref(null);
 const age = ref(null);
 const wealth = ref(null);
 const salary = ref(null);
+const show1 = ref(false);
+const show2 = ref(false);
+
+const rules = {
+  required: (input) => !!input || "필수 항목입니다.",
+  min: (input) => (input && input.length >= 8) || "최소 8자 이상 입력하세요.",
+};
 
 const signUp = function () {
   const payload = {
