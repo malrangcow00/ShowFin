@@ -92,6 +92,7 @@ export const useAccountStore = defineStore(
         .then((res) => {
           token.value = null;
           logInUser.value = "";
+          userInfo.value = null;
           alert("로그아웃 되었습니다.");
           router.push({ name: "MainView" });
         })
@@ -187,6 +188,7 @@ export const useAccountStore = defineStore(
     };
 
     return {
+      API_URL,
       token,
       signUp,
       logIn,

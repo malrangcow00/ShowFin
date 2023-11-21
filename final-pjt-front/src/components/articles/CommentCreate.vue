@@ -11,16 +11,20 @@
 </template>
 
 <script setup>
+import axios from "axios";
 import { useAccountStore } from "@/stores/accounts.js";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 
-defineProps({
+// import { useRouter } from "vue-router";
+
+const props = defineProps({
   articleId: Number,
 });
 
+const emit = defineEmits(["createComment"]);
+
 const store = useAccountStore();
-const router = useRouter();
+// const router = useRouter();
 const content = ref("");
 
 const createComment = function () {
@@ -29,14 +33,17 @@ const createComment = function () {
   }
   axios({
     method: "POST",
-    url: `${store.API_URL}/api/v1/articles/${articleId.value}/comments/`,
+    url: `${store.API_URL}/api/articles/${props.articleId}/comments/`,
     data: {
       content: content.value,
+    },
+    headers: {
+      Authorization: `Token ${store.token}`,
     },
   })
     .then((res) => {
       console.log(res);
-      router.push({ name: "ArticleDetail", params: { id: route.params.id } });
+      emit("createComment");
     })
     .catch((err) => {
       console.log(err);

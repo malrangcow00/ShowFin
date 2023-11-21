@@ -1,29 +1,32 @@
 <template>
-  <div v-if="!isUpdate">
+  <div v-if="props.comment">
     <h5>댓글</h5>
-    <div v-if="comment">
+    <div v-if="!isUpdate">
       <div>
-        <p>작성자: {{ comment.username }}</p>
-        <p>내용: {{ comment.content }}</p>
-        <p>좋아요 수: {{ comment.like_count }}</p>
+        <p>작성자: {{ props.comment.username }}</p>
+        <p>내용: {{ props.comment.content }}</p>
+        <p>좋아요 수: {{ props.comment.like_count }}</p>
       </div>
-      <button @click="toggleLike(comment)">
-        {{ comment.liked_by_user ? "좋아요 취소" : "좋아요" }}
+      <button @click="toggleLike(props.comment)">
+        {{ props.comment.liked_by_user ? "좋아요 취소" : "좋아요" }}
       </button>
-      <button @click="!isUpdate">수정</button>
-      <button @click="deleteComment">삭제</button>
+      <div v-if="store.logInUser === props.comment.username">
+        <button @click="updateState">수정</button>
+        <button @click="deleteComment">삭제</button>
+      </div>
     </div>
     <div v-else>
       <form @submit.prevent="updateComment">
         <label for="username">작성자 : </label>
         <input
-          v-model="comment.username"
+          v-model="props.comment.username"
           type="text"
           id="username"
           disabled
         /><br />
         <label for="content">내용 : </label>
-        <textarea v-model="comment.content" id="content"></textarea><br />
+        <textarea v-model="props.comment.content" id="content"></textarea><br />
+        <button type="submit">수정 완료</button>
       </form>
     </div>
   </div>
@@ -33,23 +36,35 @@
 import { useArticleStore } from "@/stores/articles.js";
 import { useAccountStore } from "@/stores/accounts.js";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import axios from "axios";
 
-defineProps({
+const props = defineProps({
   comment: Object,
 });
 
 const isUpdate = ref(false);
-const articleId = comment.article;
-const commentId = comment.id;
+const store = useAccountStore();
+const router = useRouter();
+const articleId = props.comment.article;
+const commentId = props.comment.id;
+
+// 업데이트 상태 변경
+const updateState = function () {
+  isUpdate.value = !isUpdate.value;
+};
 
 // 댓글 수정
 const updateComment = function () {
+  // console.log(props.comment);
   axios({
     method: "PUT",
-    url: `${store.API_URL}/api/v1/articles/${articleId}/comments/${commentId}/`,
+    url: `${store.API_URL}/api/articles/${articleId}/comments/${commentId}/`,
     data: {
-      content: comment.content,
+      content: props.comment.content,
+    },
+    headers: {
+      Authorization: `Token ${store.token}`,
     },
   })
     .then((res) => {
@@ -65,7 +80,10 @@ const updateComment = function () {
 const deleteComment = function () {
   axios({
     method: "DELETE",
-    url: `${store.API_URL}/api/v1/articles/${articleId}/comments/${commentId}/`,
+    url: `${store.API_URL}/api/articles/${articleId}/comments/${commentId}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
   })
     .then((res) => {
       console.log(res);
@@ -100,6 +118,7 @@ const toggleLike = function (comment) {
       // window.location.reload();
       console.log(res.data.message);
       comment.like_count = res.data.like_count;
+      comment.liked_by_user = res.data.liked;
     })
     .catch((err) => {
       console.error(err);
