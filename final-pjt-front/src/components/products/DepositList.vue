@@ -19,8 +19,9 @@ import { useProductStore } from "@/stores/products";
 import DepositListItem from "@/components/products/DepositListItem.vue";
 
 const store = useProductStore();
-const deposits = store.getDepositList()
-console.log(deposits)
+
+
+
 </script>
 
 <style scoped>

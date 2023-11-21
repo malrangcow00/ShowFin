@@ -1,31 +1,24 @@
 <template>
     <div>
+        <!--금융상품 번호 : {{ saving.id }}-->
         <div>
-            {{ saving.dcls_month  }}
+            금융회사 명 : {{ saving.kor_co_nm }}
         </div>
         <div>
-            {{ saving.fin_prdt_cd }}
+            금융상품 명 : {{ saving.fin_prdt_nm }}
         </div>
         <div>
-            {{ saving.kor_co_nm }}
+            기타 유의사항 : {{ saving.etc_note }}
         </div>
         <div>
-            {{ saving.fin_prdt_nm }}
+            <p>가입제한 : {{ saving.join_deny }}</p>
+            <p>(1: 제한없음, 2:서민전용, 3:일부제한)</p>
         </div>
         <div>
-            {{ saving.etc_note }}
+            가입대상 : {{ saving.join_member }}
         </div>
         <div>
-            {{ saving.join_deny }}
-        </div>
-        <div>
-            {{ saving.join_member }}
-        </div>
-        <div>
-            {{ saving.join_way }}
-        </div>
-        <div>
-            {{ saving.spcl_cnd }}
+            우대조건 : {{ saving.spcl_cnd }}
         </div>
     </div>
     <hr>

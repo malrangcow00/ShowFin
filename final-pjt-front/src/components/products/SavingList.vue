@@ -17,10 +17,11 @@
 import {RouterLink, RouterView} from "vue-router";
 import { useProductStore } from "@/stores/products";
 import SavingListItem from "@/components/products/SavingListItem.vue";
+// saving.id에 해당하는 options에서 intr_rate와 intr_rate2를 가져오도록 ...
+// http://127.0.0.1:8000/api/products/deposit_product_options/'금융상품 코드'/
+
 
 const store = useProductStore();
-const savings = store.getSavingList()
-console.log(savings)
 </script>
 
 <style scoped>

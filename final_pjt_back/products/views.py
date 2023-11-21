@@ -41,23 +41,24 @@ def save_products(request):
     for option in response.get("result").get("optionList"):
         save_data = {
             'fin_prdt_cd': option.get('fin_prdt_cd'),
+            'intr_rate_type': option.get('intr_rate_type'),
             'intr_rate_type_nm': option.get('intr_rate_type_nm'),
+            'save_trm': option.get('save_trm'),
             'intr_rate': option.get('intr_rate'),
             'intr_rate2': option.get('intr_rate2'),
-            'save_trm': option.get('save_trm'),
         }
-    
+
         # 저장하기 위해 데이터를 포장
         product = DepositProducts.objects.get(fin_prdt_cd=save_data.get('fin_prdt_cd'))
         serializer = DepositOptionsSerializer(data=save_data, partial=True)
-        
+
         for key in save_data:
             if not save_data[key]:
                 save_data[key] = -1
 
         if serializer.is_valid(raise_exception=True):
             serializer.save(product=product)
-    
+
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # 적금 상품 저장 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -72,16 +73,17 @@ def save_products(request):
     for option in response.get("result").get("optionList"):
         save_data = {
             'fin_prdt_cd': option.get('fin_prdt_cd'),
+            'intr_rate_type': option.get('intr_rate_type'),
             'intr_rate_type_nm': option.get('intr_rate_type_nm'),
+            'save_trm': option.get('save_trm'),
             'intr_rate': option.get('intr_rate'),
             'intr_rate2': option.get('intr_rate2'),
-            'save_trm': option.get('save_trm'),
         }
-    
+
         # 저장하기 위해 데이터를 포장
         product = SavingProducts.objects.get(fin_prdt_cd=save_data.get('fin_prdt_cd'))
         serializer = SavingOptionsSerializer(data=save_data, partial=True)
-        
+
         for key in save_data:
             if not save_data[key]:
                 save_data[key] = -1
@@ -162,10 +164,10 @@ def deposit_top_rate(request):
 
         product_serializer = DepositProductsSerializer(filter_product)
         option_serializer = DepositOptionsSerializer(filter_option)
-        
+
         data["deposit_product"].append(product_serializer.data)
         data["options"].append(option_serializer.data)
-    
+
     return Response(data)
 
 
@@ -189,10 +191,10 @@ def savings_top_rate(request):
 
         product_serializer = SavingProductsSerializer(filter_product)
         option_serializer = SavingOptionsSerializer(filter_option)
-        
+
         data["savings_product"].append(product_serializer.data)
         data["options"].append(option_serializer.data)
-    
+
     return Response(data)
 
 
