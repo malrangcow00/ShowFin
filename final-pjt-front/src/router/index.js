@@ -8,6 +8,7 @@ import SavingList from "@/components/products/SavingList.vue";
 import ArticleView from "@/views/articles/ArticleView.vue";
 import ArticleDetail from "@/components/articles/ArticleDetail.vue";
 import ArticleCreate from "@/components/articles/ArticleCreate.vue";
+// import CommentCreate from "@/components/articles/CommentCreate.vue";
 // Account
 import SignUpView from "@/views/accounts/SignUpView.vue";
 import LogInView from "@/views/accounts/LogInView.vue";
@@ -54,6 +55,11 @@ const router = createRouter({
       name: "ArticleCreate",
       component: ArticleCreate,
     },
+    // {
+    //   path: "/articles/comments/create",
+    //   name: "CommentCreate",
+    //   component: CommentCreate,
+    // },
     {
       path: "/accounts/signup",
       name: "SignUpView",

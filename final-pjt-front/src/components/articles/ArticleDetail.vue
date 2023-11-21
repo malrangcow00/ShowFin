@@ -1,40 +1,79 @@
 <template>
-  <div v-if="article">
+  <div>
     <h2>상세 정보</h2>
-    <div>
-      <p>글 번호: {{ article?.id }}</p>
-      <p>작성자: {{ article?.user }}</p>
-      <p>제목: {{ article?.title }}</p>
-      <p>{{ article?.category }}</p>
-      <p>내용: {{ article?.content }}</p>
-      <p>댓글 수 : {{ article.comment_count }}</p>
-      <p>좋아요 수 : {{ article.like_count }}</p>
-      <button @click="toggleLike(article)">
-        {{ article?.liked_by_user ? "좋아요 취소" : "좋아요" }}
-      </button>
-      <div>
-        <button @click="updateArticle">수정</button>
-        <button @click="deleteArticle">삭제</button>
+    <div v-if="!isUpdate">
+      <div v-if="article">
+        <p>글 번호: {{ article?.id }}</p>
+        <p>작성자: {{ article?.username }}</p>
+        <p>제목: {{ article?.title }}</p>
+        <p>{{ article?.category }}</p>
+        <p>내용: {{ article?.content }}</p>
+        <p>댓글 수 : {{ article.comment_count }}</p>
+        <p>좋아요 수 : {{ article.like_count }}</p>
+        <button @click="toggleLike(article)">
+          {{ article?.liked_by_user ? "좋아요 취소" : "좋아요" }}
+        </button>
+        <div>
+          <button @click="!isUpdate">수정</button>
+          <button @click="deleteArticle">삭제</button>
+        </div>
+        <CommentCreate :articleId="article.id" />
+        <CommentList
+          v-if="article && article.comment_set"
+          :comments="article.comment_set"
+        />
       </div>
-      <CommentCreate />
-      <CommentList v-if="article && article.comment_set" />
+    </div>
+    <div v-else>
+      <form @submit.prevent="updateArticle">
+        <label for="id">글 번호 : </label>
+        <input v-model="article.id" type="text" id="id" disabled /><br />
+        <label for="username">작성자 : </label>
+        <textarea v-model="article.username" id="username" disabled></textarea
+        ><br />
+        <label for="title">제목 : </label>
+        <input
+          v-model="article.title"
+          type="text"
+          id="title"
+          placeholder="제목"
+        /><br />
+        <label for="content">내용 : </label>
+        <textarea
+          v-model="article.content"
+          id="content"
+          placeholder="내용"
+        ></textarea
+        ><br />
+        <label for="category">카테고리:</label>
+        <select v-model="article.category" id="category" placeholder="카테고리">
+          <option value="예금">예금</option>
+          <option value="적금">적금</option>
+          <option value="기타">기타</option>
+        </select>
+        <br />
+        <button type="submit">수정 완료</button>
+      </form>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useArticleStore } from "@/stores/articles.js";
+import { useAccountStore } from "@/stores/accounts.js";
 import axios from "axios";
 import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { ref } from "vue";
 import CommentCreate from "@/components/articles/CommentCreate.vue";
 import CommentList from "@/components/articles/CommentList.vue";
 
-const store = useArticleStore();
+const store = useAccountStore();
 const route = useRoute();
-const article = ref({});
+const router = useRouter();
+const article = ref(null);
+const isUpdate = ref(false);
 
+// 게시글 상세 조회
 onMounted(() => {
   axios({
     method: "get",
@@ -49,16 +88,45 @@ onMounted(() => {
     });
 });
 
-defineProps({
-  comment: Object,
-});
+// 게시글 수정
+const updateArticle = function () {
+  axios({
+    method: "PUT",
+    url: `${store.API_URL}/api/v1/articles/${route.params.id}/`,
+    data: {
+      title: article.title,
+      content: article.content,
+      category: article.category,
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      isUpdate.value = false;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-const accountStore = useAccountStore();
-const articleStore = useArticleStore();
+// 게시글 삭제
+const deleteArticle = function () {
+  axios({
+    method: "DELETE",
+    url: `${store.API_URL}/api/v1/articles/${route.params.id}/`,
+  })
+    .then((res) => {
+      console.log(res);
+      alert("게시글이 삭제되었습니다.");
+      router.push({ name: "ArticleView" });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-const toggleLike = function (comment) {
-  const articleId = comment.article;
-
+// 게시글 좋아요 요청
+const toggleLike = function (article) {
+  const articleId = route.params.id;
   axios({
     method: "POST",
     url: `${accountStore.API_URL}/api/articles/${articleId}/like/`,

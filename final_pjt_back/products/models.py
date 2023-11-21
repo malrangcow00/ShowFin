@@ -11,6 +11,7 @@ class DepositProducts(models.Model):
     join_member = models.TextField()                # 가입 대상
     join_way = models.TextField()                   # 가입 방법
     spcl_cnd = models.TextField()                   # 우대 조건
+    dcls_month = models.TextField()                 # 공시 제출월[YYYYMM]
 
     def __str__(self):
         return self.fin_prdt_nm
@@ -34,6 +35,7 @@ class SavingProducts(models.Model):
     join_member = models.TextField()                # 가입 대상
     join_way = models.TextField()                   # 가입 방법
     spcl_cnd = models.TextField()                   # 우대 조건
+    dcls_month = models.TextField()                 # 공시 제출월[YYYYMM]
 
     def __str__(self):
         return self.fin_prdt_nm

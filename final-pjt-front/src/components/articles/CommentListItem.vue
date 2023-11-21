@@ -1,15 +1,31 @@
 <template>
-  <div>
+  <div v-if="!isUpdate">
     <h5>댓글</h5>
-
-    <div>
-      <p>작성자: {{ comment.username }}</p>
-      <p>내용: {{ comment.content }}</p>
-      <p>좋아요 수: {{ comment.like_count }}</p>
+    <div v-if="comment">
+      <div>
+        <p>작성자: {{ comment.username }}</p>
+        <p>내용: {{ comment.content }}</p>
+        <p>좋아요 수: {{ comment.like_count }}</p>
+      </div>
+      <button @click="toggleLike(comment)">
+        {{ comment.liked_by_user ? "좋아요 취소" : "좋아요" }}
+      </button>
+      <button @click="!isUpdate">수정</button>
+      <button @click="deleteComment">삭제</button>
     </div>
-    <button @click="toggleLike(comment)">
-      {{ comment.liked_by_user ? "좋아요 취소" : "좋아요" }}
-    </button>
+    <div v-else>
+      <form @submit.prevent="updateComment">
+        <label for="username">작성자 : </label>
+        <input
+          v-model="comment.username"
+          type="text"
+          id="username"
+          disabled
+        /><br />
+        <label for="content">내용 : </label>
+        <textarea v-model="comment.content" id="content"></textarea><br />
+      </form>
+    </div>
   </div>
 </template>
 
@@ -23,13 +39,48 @@ defineProps({
   comment: Object,
 });
 
+const isUpdate = ref(false);
+const articleId = comment.article;
+const commentId = comment.id;
+
+// 댓글 수정
+const updateComment = function () {
+  axios({
+    method: "PUT",
+    url: `${store.API_URL}/api/v1/articles/${articleId}/comments/${commentId}/`,
+    data: {
+      content: comment.content,
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      isUpdate.value = false;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// 댓글 삭제
+const deleteComment = function () {
+  axios({
+    method: "DELETE",
+    url: `${store.API_URL}/api/v1/articles/${articleId}/comments/${commentId}/`,
+  })
+    .then((res) => {
+      console.log(res);
+      alert("댓글이 삭제되었습니다.");
+      router.push({ name: "ArticleView" });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 const accountStore = useAccountStore();
 const articleStore = useArticleStore();
 
 const toggleLike = function (comment) {
-  const articleId = comment.article;
-  const commentId = comment.id;
-
   axios({
     method: "POST",
     url: `${accountStore.API_URL}/api/articles/${articleId}/comments/${commentId}/like/`,

@@ -10,7 +10,7 @@ export const useArticleStore = defineStore(
     const API_URL = import.meta.env.VITE_API_URL;
     // DRF 에 ArticleList 조회 요청
     // login을 하면 전체 게시글을 조회할 수 있다.
-    const getArticleList = function () {
+    const getArticleList = function (token) {
       axios({
         method: "GET",
         url: `${API_URL}/api/articles/`,
