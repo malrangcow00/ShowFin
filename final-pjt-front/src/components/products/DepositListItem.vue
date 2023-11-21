@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            {{ deposit.id }}
+            {{ deposit.dcls_month  }}
         </div>
         <div>
             {{ deposit.fin_prdt_cd }}
