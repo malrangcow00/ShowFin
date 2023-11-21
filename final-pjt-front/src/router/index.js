@@ -28,7 +28,7 @@ const router = createRouter({
       name: "MainView",
       component: MainView,
     },
-      // Product
+    // Product
     {
       path: "/products/deposits",
       name: "DepositsView",
@@ -39,7 +39,7 @@ const router = createRouter({
       name: "SavingsView",
       component: SavingList,
     },
-      // Article
+    // Article
     {
       path: "/articles",
       name: "ArticleView",

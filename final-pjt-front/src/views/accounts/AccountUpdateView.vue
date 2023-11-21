@@ -44,7 +44,7 @@
 <script setup>
 import { useAccountStore } from "@/stores/accounts.js";
 import { ref } from "vue";
-import router from "../../router";
+import router from "@/router";
 
 const store = useAccountStore();
 

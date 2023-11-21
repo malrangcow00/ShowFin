@@ -67,8 +67,7 @@ def comment_detail(request, article_pk, comment_pk):
     article = Article.objects.get(pk=article_pk)
     comment = article.comment_set.get(pk=comment_pk)
     if request.method == 'GET':
-        comments = article.comment_set.all()
-        serializer = CommentSerializer(comments)
+        serializer = CommentSerializer(comment)
         return Response(serializer.data)
 
     elif request.method == 'DELETE':

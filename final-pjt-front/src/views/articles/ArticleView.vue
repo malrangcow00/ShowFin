@@ -1,9 +1,21 @@
 <template>
-  <div>
-    <h1>커뮤니티 게시판이에요~</h1>
-    <RouterLink :to="{ name: 'ArticleCreate' }">게시글 생성</RouterLink>
-    <ArticleList />
-  </div>
+  <v-container>
+    <v-row align="center" justify="space-between">
+      <v-col-3>
+        <v-heading class="text-h4">커뮤니티 게시판</v-heading>
+      </v-col-3>
+      <v-col-2>
+        <v-btn :to="{ name: 'ArticleCreate' }">게시글 생성</v-btn>
+      </v-col-2>
+    </v-row>
+  </v-container>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12">
+        <ArticleList />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>
@@ -11,7 +23,6 @@ import { onMounted } from "vue";
 import { useArticleStore } from "@/stores/articles.js";
 import { useAccountStore } from "@/stores/accounts.js";
 import ArticleList from "@/components/articles/ArticleList.vue";
-import { RouterLink } from "vue-router";
 
 const articleStore = useArticleStore();
 
@@ -21,4 +32,6 @@ onMounted(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Add your styles here if needed */
+</style>
