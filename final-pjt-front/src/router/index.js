@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from "vue-router";
+import TestView from "@/views/TestView.vue";
 import MainView from "@/views/MainView.vue";
 // Product
 // import ProductsView from "@/views/products/ProductsView.vue";
 import DepositList from "@/components/products/DepositList.vue";
 import SavingList from "@/components/products/SavingList.vue";
+import DepositOptions from "@/components/products/DepositOptions.vue";
+import SavingOptions from "@/components/products/SavingOptions.vue";
 // Article
 import ArticleView from "@/views/articles/ArticleView.vue";
 import ArticleDetail from "@/components/articles/ArticleDetail.vue";
@@ -24,6 +27,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: "/test",
+      name: "TestView",
+      component: TestView,
+    },
+    {
       path: "/",
       name: "MainView",
       component: MainView,
@@ -38,6 +46,16 @@ const router = createRouter({
       path: "/products/savings",
       name: "SavingsView",
       component: SavingList,
+    },
+    {
+      path: "/products/deposits/:fin_prdt_cd",
+      name: "DepositOptions",
+      component: DepositOptions,
+    },
+    {
+      path: "/products/savings/:fin_prdt_cd",
+      name: "SavingOptions",
+      component: SavingOptions,
     },
       // Article
     {

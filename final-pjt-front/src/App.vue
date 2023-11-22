@@ -6,6 +6,7 @@
       <button @click.prevent="store.getAccountInfo">회원 정보 조회</button>
     </div>
     <p v-else>로그인 하세요~~~ ㅎㅎ</p>
+    <RouterLink :to="{ name: 'TestView' }">Test</RouterLink> |
     <RouterLink :to="{ name: 'MainView' }">Main</RouterLink> |
     <RouterLink :to="{ name: 'DepositsView' }">Products</RouterLink> |
     <RouterLink :to="{ name: 'ArticleView' }">Articles</RouterLink> |

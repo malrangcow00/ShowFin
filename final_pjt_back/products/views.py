@@ -14,7 +14,7 @@ from .serializers import DepositProductsSerializer, DepositOptionsSerializer, Sa
 API_KEY = settings.API_KEY
 BASE_URL = settings.BASE_URL
 DEPOSIT = settings.DEPOSIT
-SAVINGS = settings.SAVINGS
+SAVING = settings.SAVING
 COMPANY = settings.COMPANY
 BANK_TYPE = settings.BANK_TYPE
 PAGE_NO = settings.PAGE_NO
@@ -40,6 +40,8 @@ def save_products(request):
         # 옵션 목록 저장
     for option in response.get("result").get("optionList"):
         save_data = {
+            'dcls_month': option.get('dcls_month'),
+            'fin_co_no': option.get('fin_co_no'),
             'fin_prdt_cd': option.get('fin_prdt_cd'),
             'intr_rate_type': option.get('intr_rate_type'),
             'intr_rate_type_nm': option.get('intr_rate_type_nm'),
@@ -62,19 +64,23 @@ def save_products(request):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # 적금 상품 저장 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    URL = BASE_URL + SAVINGS
+    URL = BASE_URL + SAVING
     response = requests.get(URL, params=params).json()
 
-    savings_products = response.get("result").get("baseList")
-    savings_products_serializer = SavingProductsSerializer(data=savings_products, many=True)
-    if savings_products_serializer.is_valid(raise_exception=True):
-        savings_products_serializer.save()
+    saving_products = response.get("result").get("baseList")
+    saving_products_serializer = SavingProductsSerializer(data=saving_products, many=True)
+    if saving_products_serializer.is_valid(raise_exception=True):
+        saving_products_serializer.save()
 
     for option in response.get("result").get("optionList"):
         save_data = {
+            'dcls_month': option.get('dcls_month'),
+            'fin_co_no': option.get('fin_co_no'),
             'fin_prdt_cd': option.get('fin_prdt_cd'),
             'intr_rate_type': option.get('intr_rate_type'),
             'intr_rate_type_nm': option.get('intr_rate_type_nm'),
+            'rsrv_type': option.get('rsrv_type'),
+            'rsrv_type_nm': option.get('rsrv_type_nm'),
             'save_trm': option.get('save_trm'),
             'intr_rate': option.get('intr_rate'),
             'intr_rate2': option.get('intr_rate2'),
@@ -94,7 +100,7 @@ def save_products(request):
 
     # 저장완료 메세지
     # return JsonResponse({ 'message' : 'GOOD'})
-    return Response({ 'message' : 'OKAY'})
+    return Response({ 'message' : 'Successfully Saved!' })
 
 
 @api_view(['GET', 'POST'])
@@ -115,7 +121,7 @@ def deposit_products(request):
 
 
 @api_view(['GET', 'POST'])
-def savings_products(request):
+def saving_products(request):
     if request.method == 'GET':
         products = SavingProducts.objects.all()
         serializer = SavingProductsSerializer(products, many=True)
@@ -132,14 +138,14 @@ def savings_products(request):
 
 
 @api_view(['GET'])
-def deposit_product_options(request, fin_prdt_cd):
+def deposit_options(request, fin_prdt_cd):
     options = DepositOptions.objects.filter(fin_prdt_cd=fin_prdt_cd)
     serializer = DepositOptionsSerializer(options, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def savings_product_options(request, fin_prdt_cd):
+def saving_options(request, fin_prdt_cd):
     options = SavingOptions.objects.filter(fin_prdt_cd=fin_prdt_cd)
     serializer = SavingOptionsSerializer(options, many=True)
     return Response(serializer.data)
@@ -173,7 +179,7 @@ def deposit_top_rate(request):
 
 
 @api_view(['GET'])
-def savings_top_rate(request):
+def saving_top_rate(request):
     rate = 0
     options = SavingOptions.objects.all()
     for option in options:
@@ -183,7 +189,7 @@ def savings_top_rate(request):
     filter_options = SavingOptions.objects.filter(intr_rate2=rate)
     # print(filter_options)
     data = {
-        "savings_product": [],
+        "saving_product": [],
         "options": []
     }
     for filter_option in filter_options:
@@ -192,7 +198,7 @@ def savings_top_rate(request):
         product_serializer = SavingProductsSerializer(filter_product)
         option_serializer = SavingOptionsSerializer(filter_option)
 
-        data["savings_product"].append(product_serializer.data)
+        data["saving_product"].append(product_serializer.data)
         data["options"].append(option_serializer.data)
 
     return Response(data)
