@@ -1,22 +1,31 @@
 <template>
-  <div>
-    <h3>댓글 목록</h3>
-    <div v-if="comments && comments.length > 0">
-      <CommentListItem
-        v-for="comment in comments"
-        :key="comment.id"
-        :comment="comment"
-      />
-    </div>
-  </div>
+  <v-row justify="center">
+    <v-col max-width="100%">
+      <v-card class="pa-8">
+        <v-card-title>
+          <h3 class="text-h5 font-weight-bold">댓글 목록</h3>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-row v-if="comments && comments.length > 0">
+          <CommentListItem
+            v-for="comment in comments"
+            :key="comment.id"
+            :comment="comment"
+          />
+        </v-row>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script setup>
 import CommentListItem from "@/components/articles/CommentListItem.vue";
 
-defineProps({
-  comments: Object,
+const props = defineProps({
+  comments: Array,
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Add any additional styling if needed */
+</style>

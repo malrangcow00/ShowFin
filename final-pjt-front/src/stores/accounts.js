@@ -68,8 +68,9 @@ export const useAccountStore = defineStore(
           alert("로그인 되었습니다.");
           router.push({ name: "MainView" });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+          router.push({ name: "LogInView" });
         });
     };
 
@@ -92,6 +93,7 @@ export const useAccountStore = defineStore(
         .then((res) => {
           token.value = null;
           logInUser.value = "";
+          userInfo.value = null;
           alert("로그아웃 되었습니다.");
           router.push({ name: "MainView" });
         })
@@ -187,6 +189,7 @@ export const useAccountStore = defineStore(
     };
 
     return {
+      API_URL,
       token,
       signUp,
       logIn,

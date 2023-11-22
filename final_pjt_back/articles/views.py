@@ -53,12 +53,12 @@ def article_like(request, article_pk):
         article.liked_by.remove(user)
         article.like_count -= 1
         article.save()
-        return Response({'message': '게시글 좋아요 취소!'}, status=status.HTTP_200_OK)
+        return Response({'message': '게시글 좋아요 취소!', 'liked' : False, 'like_count' :  article.like_count}, status=status.HTTP_200_OK)
 
     article.liked_by.add(user)
     article.like_count += 1
     article.save()
-    return Response({'message': '게시글 좋아요 성공!'}, status=status.HTTP_200_OK)
+    return Response({'message': '게시글 좋아요 성공!', 'liked' : True, 'like_count' :  article.like_count}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
@@ -102,10 +102,10 @@ def comment_like(request, article_pk, comment_pk):
         comment.liked_by.remove(user)
         comment.like_count -= 1
         comment.save()
-        return Response({'message': '댓글 좋아요 취소!'}, status=status.HTTP_200_OK)
+        return Response({'message': '댓글 좋아요 취소!', 'liked' : False, 'like_count' :  comment.like_count}, status=status.HTTP_200_OK)
 
     comment.liked_by.add(user)
     comment.like_count += 1
     comment.save()
 
-    return Response({'message': '댓글 좋아요 성공!'}, status=status.HTTP_200_OK)
+    return Response({'message': '댓글 좋아요 성공!', 'liked' : True, 'like_count' :  comment.like_count}, status=status.HTTP_200_OK)
