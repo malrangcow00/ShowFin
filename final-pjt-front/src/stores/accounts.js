@@ -6,11 +6,84 @@ import { useRouter } from "vue-router";
 export const useAccountStore = defineStore(
   "account",
   () => {
-    const logInUser = ref("");
-    const userInfo = ref(null);
+    // 스토어 인스턴스 - - - - - - - - - - - - - - - - - - - - - - - - - - -
     const API_URL = import.meta.env.VITE_API_URL;
-    // const API_URL = "http://127.0.0.1:8000";
+
+    const bankList = ref([]);
+    const deposits = ref([]);
+    const savings = ref([]);
+    const loans = ref([]);
+
+    const userInfo = ref(null);
     const token = ref(null);
+
+    const articles = ref([]);
+    const article = ref(null);
+
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    // axios - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+    // 예금 목록 조회
+    const getDeposits = function () {
+      axios({
+        method: "GET",
+        url: `${API_URL}/api/products/deposits/`,
+      })
+        .then((res) => {
+          // console.log(res.data);
+          deposits.value = res.data;
+        })
+        .then(() => {
+          getBankList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    // 회원가입시 사용할 은행 목록
+    const getBankList = function () {
+      const temp = new Set();
+      deposits.value.forEach((product) => temp.add(product.kor_co_nm));
+      bankList.value = Array.from(temp).sort();
+    };
+
+    // 적금 상품 조회
+    const getSavings = function () {
+      axios({
+        method: "GET",
+        url: `${API_URL}/api/products/savings/`,
+      })
+        .then((res) => {
+          // console.log(res)
+          savings.value = res.data;
+        })
+        .then(() => {
+          getBankList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    // 전세 대출 상품 조회
+    const getLoans = function () {
+      axios({
+        method: "GET",
+        url: `${API_URL}/api/products/loans/`,
+      })
+        .then((res) => {
+          // console.log(res)
+          loans.value = res.data;
+        })
+        .then(() => {
+          getBankList();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
 
     // 회원가입
     const signUp = function (payload) {
@@ -20,10 +93,13 @@ export const useAccountStore = defineStore(
         password1,
         password2,
         email,
+        mainbank,
+        location,
         age,
         wealth,
         salary,
       } = payload;
+
       axios({
         method: "POST",
         url: `${API_URL}/accounts/signup/`,
@@ -33,6 +109,8 @@ export const useAccountStore = defineStore(
           password1,
           password2,
           email,
+          mainbank,
+          location,
           age,
           wealth,
           salary,
@@ -64,8 +142,8 @@ export const useAccountStore = defineStore(
         .then((res) => {
           console.log(res.data);
           token.value = res.data.key;
-          logInUser.value = payload.username;
           alert("로그인 되었습니다.");
+          getAccountInfo();
           router.push({ name: "MainView" });
         })
         .catch(() => {
@@ -92,7 +170,7 @@ export const useAccountStore = defineStore(
       })
         .then((res) => {
           token.value = null;
-          logInUser.value = "";
+          logInUser.value = null;
           userInfo.value = null;
           alert("로그아웃 되었습니다.");
           router.push({ name: "MainView" });
@@ -121,13 +199,16 @@ export const useAccountStore = defineStore(
 
     // 회원정보 수정
     const updateAccountInfo = function (payload) {
-      const { nickname, email, age, wealth, salary } = payload;
+      const { nickname, email, mainbank, location, age, wealth, salary } =
+        payload;
       axios({
         method: "PUT",
         url: `${API_URL}/accounts/user_detail/`,
         data: {
           nickname,
           email,
+          mainbank,
+          location,
           age,
           wealth,
           salary,
@@ -188,8 +269,104 @@ export const useAccountStore = defineStore(
         });
     };
 
+    // 전체 게시글 조회
+    const getArticleList = function (token) {
+      axios({
+        method: "GET",
+        url: `${API_URL}/api/articles/`,
+        header: { Authorization: `Token ${token.value}` },
+      })
+        .then((res) => {
+          console.log(res.data);
+          articles.value = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    // 게시글 생성
+    const createArticles = function () {
+      axios({
+        method: "POST",
+        url: `${API_URL}/api/articles/`,
+      })
+        .then((res) => {
+          // console.log(res.data)
+          article.value = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    // 상품 가입
+    const subscribe = function (prdt_type, product_id) {
+      axios({
+        method: "POST",
+        url: `${API_URL}/api/products/subscribe/${prdt_type}/${product_id}/`,
+        headers: {
+          Authorization: `Token ${token.value}`,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          getAccountInfo();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    // 주거래 은행과 같은 은행의 상품 추천
+    const filterDeposits = ref(null);
+    const filterBank = function (selectedBank) {
+      filterDeposits.value = ref(null);
+      filterDeposits.value = deposits.value.find(
+        (deposit) => deposit.kor_co_nm == selectedBank
+      );
+    };
+
+    // 예금 상품 높은 금리순으로 정렬
+    const sortDepositsBy = ref(null);
+    const sortDeposits = function (save_trm) {
+      deposits.value = deposits.value.sort((a, b) => {
+        const intrRateA =
+          a.depositoptions_set.find((option) => option.save_trm == save_trm)
+            ?.intr_rate || null;
+        const intrRateB =
+          b.depositoptions_set.find((option) => option.save_trm == save_trm)
+            ?.intr_rate || null;
+        return intrRateB - intrRateA;
+      });
+      sortDepositsBy.value = save_trm;
+    };
+
+    // 적금 상품 높은 금리순으로 정렬
+    const sortSavingsBy = ref(null);
+    const sortSavings = function (save_trm) {
+      savings.value = savings.value.sort((a, b) => {
+        const intrRateA =
+          a.savingoptions_set.find((option) => option.save_trm == save_trm)
+            ?.intr_rate || null;
+        const intrRateB =
+          b.savingoptions_set.find((option) => option.save_trm == save_trm)
+            ?.intr_rate || null;
+        return intrRateB - intrRateA;
+      });
+      sortSavingsBy.value = save_trm;
+    };
+
+    // - - - - - - - - - -
     return {
       API_URL,
+      getDeposits,
+      getSavings,
+      getLoans,
+      bankList,
+      deposits,
+      savings,
+      loans,
       token,
       signUp,
       logIn,
@@ -199,8 +376,18 @@ export const useAccountStore = defineStore(
       updateAccountInfo,
       changePassword,
       deleteAccount,
-      logInUser,
       userInfo,
+      getArticleList,
+      articles,
+      createArticles,
+      article,
+      subscribe,
+      filterDeposits,
+      filterBank,
+      sortDepositsBy,
+      sortDeposits,
+      sortSavingsBy,
+      sortSavings,
     };
   },
   { persist: true }
