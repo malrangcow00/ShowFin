@@ -13,6 +13,7 @@ export const useAccountStore = defineStore(
     const deposits = ref([]);
     const savings = ref([]);
     const loans = ref([]);
+    const selectedBank = ref("전체");
 
     const userInfo = ref(null);
     const token = ref(null);

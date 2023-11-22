@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MainView from "@/views/MainView.vue";
 // Product
-// import ProductsView from "@/views/products/ProductsView.vue";
-import DepositList from "@/components/products/DepositList.vue";
-import SavingList from "@/components/products/SavingList.vue";
+import ProductsView from "@/views/products/ProductsView.vue";
+import DepositDetail from "@/components/products/DepositDetail.vue";
+// import Deposit from "@/components/products/Deposit.vue";
+// import Saving from "@/components/products/Saving.vue";
 // Article
 import ArticleView from "@/views/articles/ArticleView.vue";
 import ArticleDetail from "@/components/articles/ArticleDetail.vue";
@@ -30,15 +31,25 @@ const router = createRouter({
     },
     // Product
     {
-      path: "/products/deposits",
-      name: "DepositsView",
-      component: DepositList,
+      path: "/products",
+      name: "ProductsView",
+      component: ProductsView,
     },
+    // {
+    //   path: "/products/deposits",
+    //   name: "Deposit",
+    //   component: Deposit,
+    // },
     {
-      path: "/products/savings",
-      name: "SavingsView",
-      component: SavingList,
+      path: "/products/deposits/:fin_prdt_cd",
+      name: "DepositDetail",
+      component: DepositDetail,
     },
+    // {
+    //   path: "/products/savings",
+    //   name: "Saving",
+    //   component: Saving,
+    // },
     // Article
     {
       path: "/articles",
