@@ -1,26 +1,43 @@
 <template>
-  <div>
-    <h2>게시글 작성</h2>
-    <form @submit.prevent="createArticle">
-      <label for="title">제목 : </label>
-      <input type="text" id="title" v-model.trim="title" /><br />
-      <label for="content">내용 : </label>
-      <textarea
-        id="content"
-        cols="30"
-        rows="10"
-        v-model.trim="content"
-      ></textarea
-      ><br />
-      <label for="category">카테고리</label>
-      <select id="category" v-model.trim="category">
-        <option value="예금">예금</option>
-        <option value="적금">적금</option>
-        <option value="기타">기타</option></select
-      ><br />
-      <input type="submit" value="게시글 작성" />
-    </form>
-  </div>
+  <v-container>
+    <v-row justify="center">
+      <v-col cols="12" md="8">
+        <v-card class="pa-3">
+          <v-card-title class="article-create-header">게시글 작성</v-card-title>
+          <v-divider class="my-3"></v-divider>
+          <v-form @submit.prevent="createArticle" class="pa-3">
+            <v-card-text>
+              <v-text-field
+                v-model.trim="title"
+                label="제목"
+                required
+              ></v-text-field>
+
+              <v-textarea
+                v-model.trim="content"
+                label="내용"
+                required
+              ></v-textarea>
+
+              <v-select
+                v-model.trim="category"
+                label="카테고리"
+                :items="['예금', '적금', '기타']"
+                required
+              ></v-select>
+            </v-card-text>
+
+            <v-divider class="my-3"></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn type="submit" color="primary">게시글 작성</v-btn>
+            </v-card-actions>
+          </v-form>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script setup>
@@ -32,11 +49,11 @@ import { useRouter } from "vue-router";
 const store = useAccountStore();
 const router = useRouter();
 
-const title = ref(null);
-const content = ref(null);
-const category = ref(null);
+const title = ref("");
+const content = ref("");
+const category = ref("");
 
-const createArticle = function () {
+const createArticle = async () => {
   if (!title.value) {
     alert("제목을 입력해주세요");
     return;
@@ -44,29 +61,37 @@ const createArticle = function () {
     alert("내용을 입력해주세요");
     return;
   } else if (!category.value) {
-    alert("카테고리를 지정해주세요");
+    alert("카테고리를 선택해주세요");
+    return;
   }
 
-  axios({
-    method: "POST",
-    url: `${store.API_URL}/api/articles/`,
-    data: {
-      title: title.value,
-      content: content.value,
-      category: category.value,
-    },
-    headers: {
-      Authorization: `Token ${store.token}`,
-    },
-  })
-    .then((res) => {
-      console.log(res.data);
-      router.push({ name: "ArticleView" });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const response = await axios.post(
+      `${store.API_URL}/api/articles/`,
+      {
+        title: title.value,
+        content: content.value,
+        category: category.value,
+      },
+      {
+        headers: {
+          Authorization: `Token ${store.token}`,
+        },
+      }
+    );
+
+    console.log(response.data);
+    router.push({ name: "ArticleView" });
+  } catch (error) {
+    console.error(error);
+  }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.article-create-header {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+}
+</style>

@@ -3,7 +3,7 @@
     <h3>게시글 목록</h3>
 
     <v-row>
-      <v-col v-for="article in store.articles" :key="article.id" cols="12">
+      <v-col v-for="article in store.articles" :key="article.id" cols="4">
         <ArticleListItem :article="article" />
       </v-col>
     </v-row>
@@ -16,6 +16,4 @@ import ArticleListItem from "@/components/articles/ArticleListItem.vue";
 const store = useArticleStore();
 </script>
 
-<style scoped>
-/* Add your styles here if needed */
-</style>
+<style scoped></style>

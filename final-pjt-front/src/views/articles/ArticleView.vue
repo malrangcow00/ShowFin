@@ -2,10 +2,12 @@
   <v-container>
     <v-row align="center" justify="space-between">
       <v-col-3>
-        <v-heading class="text-h4">커뮤니티 게시판</v-heading>
+        <v-heading class="article-heading">커뮤니티 게시판</v-heading>
       </v-col-3>
       <v-col-2>
-        <v-btn :to="{ name: 'ArticleCreate' }">게시글 생성</v-btn>
+        <v-btn :to="{ name: 'ArticleCreate' }" color="green-darken-1"
+          >게시글 생성</v-btn
+        >
       </v-col-2>
     </v-row>
   </v-container>
@@ -33,5 +35,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Add your styles here if needed */
+.article-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 1rem;
+}
 </style>

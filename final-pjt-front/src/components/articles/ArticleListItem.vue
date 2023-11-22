@@ -1,12 +1,7 @@
 <template>
   <v-card class="mx-auto my-8" max-width="500" elevation="4" outlined>
-    <v-card-title>
-      <RouterLink
-        :to="{ name: 'ArticleDetail', params: { id: props.article.id } }"
-        class="text-h5 title-style"
-      >
-        {{ props.article.title }}
-      </RouterLink>
+    <v-card-title class="title-style">
+      {{ props.article.title }}
     </v-card-title>
 
     <v-card-subtitle>
@@ -47,5 +42,7 @@ const props = defineProps({
 <style scoped>
 .title-style {
   text-decoration: none;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 1.5rem;
 }
 </style>

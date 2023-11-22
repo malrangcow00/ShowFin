@@ -67,7 +67,7 @@
           </v-col>
         </v-row>
         <v-row v-else>
-          <form @submit.prevent="updateComment">
+          <v-form class="w-100" @submit.prevent="updateComment">
             <v-col>
               <v-text-field
                 v-model="props.comment.username"
@@ -80,7 +80,7 @@
               ></v-textarea>
               <v-btn type="submit" color="primary">수정 완료</v-btn>
             </v-col>
-          </form>
+          </v-form>
         </v-row>
       </v-col>
     </v-row>
