@@ -30,8 +30,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 API_KEY = env('API_KEY')
 BASE_URL = env('BASE_URL')
 DEPOSIT = env('DEPOSIT')
-SAVINGS = env('SAVINGS')
+SAVING = env('SAVING')
+LOAN = env('LOAN')
 BANK_TYPE = env('BANK_TYPE')
+LOAN_TYPE = env('LOAN_TYPE')
 PAGE_NO = env('PAGE_NO')
 COMPANY = env('COMPANY')
 EXCHANGE_BASE_URL = env('EXCHANGE_BASE_URL')
@@ -135,7 +137,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Add the account middleware:
-    "allauth.account.middleware.AccountMiddleware",
+    # "allauth.account.middleware.AccountMiddleware", # 0.56+ 버전에서만 사용
 ]
 
 CORS_ALLOWED_ORIGINS = [

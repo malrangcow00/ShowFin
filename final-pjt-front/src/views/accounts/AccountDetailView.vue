@@ -4,10 +4,11 @@
     <p>회원 ID : {{ username }}</p>
     <p>닉네임 : {{ nickname }}</p>
     <p>이메일 : {{ email }}</p>
+    <p>주거래 은행 : {{}}</p>
     <p>나이 : {{ age }}</p>
     <p>재산 : {{ wealth }}</p>
     <p>월급 : {{ salary }}</p>
-    <p>가입상품 : {{ financial_products }}</p>
+
     <button @click.prevent="goUpdatePage">회원정보수정</button>
   </div>
 </template>
@@ -19,8 +20,7 @@ import { useRouter } from "vue-router";
 const store = useAccountStore();
 const router = useRouter();
 
-const { username, nickname, email, age, wealth, salary, financial_products } =
-  store.userInfo;
+const { username, nickname, email, age, wealth, salary } = store.userInfo;
 
 const goUpdatePage = function () {
   router.push({ name: "AccountUpdateView" });

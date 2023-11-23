@@ -2,7 +2,6 @@ from rest_framework import serializers
 from allauth.account import app_settings as allauth_settings
 from allauth.utils import get_username_max_length
 from allauth.account.adapter import get_adapter
-from .models import User
 from dj_rest_auth.registration.serializers import RegisterSerializer
 from dj_rest_auth.serializers import LoginSerializer,UserDetailsSerializer
 # from django.conf import settings
@@ -13,8 +12,10 @@ from django.contrib.auth import get_user_model
 class CustomRegisterSerializer(RegisterSerializer):
     # 추가할 필드들을 정의합니다.
     # username = serializers.CharField(max_length=30)
-    password1 = serializers.CharField(write_only=True, style={'input_type': 'password'})
-    password2 = serializers.CharField(write_only=True, style={'input_type': 'password'})
+    # password1 = serializers.CharField(write_only=True, style={'input_type': 'password'})
+    # password2 = serializers.CharField(write_only=True, style={'input_type': 'password'})
+    password1 = serializers.CharField(write_only=True)
+    password2 = serializers.CharField(write_only=True)
     nickname = serializers.CharField(
         required=False,
         allow_blank=True,
@@ -24,7 +25,17 @@ class CustomRegisterSerializer(RegisterSerializer):
     age = serializers.IntegerField(required=False)
     wealth = serializers.IntegerField(required=False)
     salary = serializers.IntegerField(required=False)
-    financial_products = serializers.ListField(child=serializers.IntegerField(), required=False)
+    # financial_products = serializers.ListField(child=serializers.IntegerField(), required=False)
+    mainbank = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        max_length=100
+    )
+    location = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        max_length=100
+    )
     # is_active = serializers.BooleanField(default=True)
     # is_staff = serializers.BooleanField(default=False)
     # is_superuser = serializers.BooleanField(default=False)
@@ -37,7 +48,9 @@ class CustomRegisterSerializer(RegisterSerializer):
             'age': self.validated_data.get('age', ''),
             'wealth': self.validated_data.get('wealth', ''),
             'salary': self.validated_data.get('salary', ''),
-            'financial_products': self.validated_data.get('financial_products', ''),
+            # 'financial_products': self.validated_data.get('financial_products', ''),
+            'mainbank': self.validated_data.get('mainbank', ''),
+            'location': self.validated_data.get('location', ''),
         }
     
     def save(self, request):
@@ -59,7 +72,8 @@ class CustomLoginSerializer(LoginSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('pk','username', 'nickname', 'email', 'age', 'wealth', 'salary', 'financial_products', )
+        # fields = ('pk','username', 'nickname', 'email', 'age', 'wealth', 'salary', 'financial_products', )
+        fields = ('pk','username', 'nickname', 'email', 'age', 'wealth', 'salary', 'mainbank', 'location', )
 
 
 # 유저 디테일 시리얼라이저
@@ -72,23 +86,35 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
     )
     salary = serializers.IntegerField(required=False)
     wealth = serializers.IntegerField(required=False)
-    financial_products = serializers.ListField(child=serializers.IntegerField(), required=False)
+    # financial_products = serializers.ListField(child=serializers.IntegerField(), required=False)
+    mainbank = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        max_length=100
+    )
+    location = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        max_length=100
+    )
     
     class Meta(UserDetailsSerializer.Meta):
         # 기본적으로 pk, username, email, first_name, last_name 출력함
-        fields = UserDetailsSerializer.Meta.fields + ('age', 'nickname', 'salary', 'wealth', 'financial_products')
+        # fields = UserDetailsSerializer.Meta.fields + ('age', 'nickname', 'salary', 'wealth', 'financial_products')
+        fields = UserDetailsSerializer.Meta.fields + ('age', 'nickname', 'salary', 'wealth', 'mainbank', 'location')
         read_only_fields = ('username', )
 
 
     def get_cleaned_data(self):
-        data_obj = {}
-        # data_obj = super().get_cleaned_data()
+        data_obj = super().get_cleaned_data()
         data_obj['username'] = self.validated_data.get('username', '')
         data_obj['age'] = self.validated_data.get('age', '')
         data_obj['nickname'] = self.validated_data.get('nickname', '')
         data_obj['salary'] = self.validated_data.get('salary', '')
         data_obj['wealth'] = self.validated_data.get('wealth', '')
-        data_obj['financial_products'] = self.validated_data.get('financial_products', '')
+        # data_obj['financial_products'] = self.validated_data.get('financial_products', '')
+        data_obj['mainbank'] = self.validated_data.get('mainbank', '')
+        data_obj['location'] = self.validated_data.get('location', '')
         return data_obj
     
 
@@ -99,18 +125,21 @@ class CustomUserDetailsSerializer(UserDetailsSerializer):
         instance.nickname = validated_data.get('nickname', '')
         instance.salary = validated_data.get('salary', '')
         instance.wealth = validated_data.get('wealth', '')
-        instance.financial_products = validated_data.get('financial_products', '')
+        # instance.financial_products = validated_data.get('financial_products', '')
+        instance.mainbank = validated_data.get('mainbank', '')
+        instance.location = validated_data.get('location', '')
         instance.save()
         return instance
     
 
     def save(self):
-        # self.validated_data.pop('username', None)
         user = super().save()
         user.age = self.validated_data.get('age', '')
         user.nickname = self.validated_data.get('nickname', '')
         user.salary = self.validated_data.get('salary', '')
         user.wealth = self.validated_data.get('wealth', '')
-        user.financial_products = self.validated_data.get('financial_products', '')
+        # user.financial_products = self.validated_data.get('financial_products', '')
+        user.mainbank = self.validated_data.get('mainbank', '')
+        user.location = self.validated_data.get('location', '')
         user.save()
         return user

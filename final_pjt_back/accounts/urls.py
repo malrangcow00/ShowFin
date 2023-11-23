@@ -14,5 +14,5 @@ urlpatterns = [
     # path('signup/', CustomRegisterView.as_view(), name="rest_register"),
     path('user_delete/', views.user_delete, name='user_delete'),
     path('change_password/', views.change_password),
-    path('find/', views.find_password),
+    # path('find/', views.find_password),
 ]

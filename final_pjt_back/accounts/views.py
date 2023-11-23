@@ -86,11 +86,11 @@ def change_password(request):
 
 
 # 비밀번호 찾기 구현 TEST
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def find_password(request):
-    user = request.user
-    password = User.objects.get(username=request.user).password
-    print(user)
-    print(password)
-    return Response(status=status.HTTP_204_NO_CONTENT)
+# @api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+# def find_password(request):
+#     user = request.user
+#     password = User.objects.get(username=request.user).password
+#     print(user)
+#     print(password)
+#     return Response(status=status.HTTP_204_NO_CONTENT)
