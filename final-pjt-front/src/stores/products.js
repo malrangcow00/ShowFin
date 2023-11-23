@@ -8,10 +8,7 @@ export const useProductStore = defineStore(
     () => {
         const deposits = ref([]);
         const savings = ref([]);
-        const depositOptions = ref({});
-        const savingOptions = ref([]);
         const API_URL = import.meta.env.VITE_API_URL;
-        const router = useRouter();
         const getDepositList = function () {
             axios({
                 method: "GET",
@@ -40,49 +37,13 @@ export const useProductStore = defineStore(
                     console.log(error);
                 });
         };
-        const getDepositOptions = function (fin_prdt_cd) {
-            axios({
-                method: "GET",
-                url: `${API_URL}/api/products/deposit_products/${fin_prdt_cd}/`,
-                // header: { Authorization: `Token ${token.value}` },
-            })
-                .then((response) => {
-                    // console.log(response.data);
-                    // depositOptions.value = response.data;
-                    for (let i = 0; i < response.data.length; i++) {
-                        depositOptions[i] = response.data[i];
-                    }
-                    console.log(depositOptions);
-                    return depositOptions;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-        const getSavingOptions = function (fin_prdt_cd) {
-            axios({
-                method: "GET",
-                url: `${API_URL}/api/products/savings_products/${fin_prdt_cd}/`,
-                // header: { Authorization: `Token ${token.value}` },
-            })
-                .then((response) => {
-                    console.log(response.data);
-                    savingOptions.value = response.data;
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
+
         return {
             API_URL,
             deposits,
             savings,
             getDepositList,
             getSavingList,
-            depositOptions,
-            savingOptions,
-            getDepositOptions,
-            getSavingOptions,
         };
     },
     { persist: true }

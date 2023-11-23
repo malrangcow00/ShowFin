@@ -5,32 +5,20 @@
             <RouterLink :to="{ name: 'DepositsView' }">예금 상품</RouterLink> |
             <RouterLink :to="{ name: 'SavingsView' }">적금 상품</RouterLink>
         </div>
-        <div>
-            <vue-good-table :columns="columns" :rows="store.savings" />
-        </div>
+        <SavingListItem
+            v-for="saving in store.savings"
+            :key="saving.id"
+            :saving="saving"
+        />
     </div>
 </template>
 
 <script setup>
 import {RouterLink, RouterView} from "vue-router";
 import { useProductStore } from "@/stores/products";
-
-
-import 'vue-good-table-next/dist/vue-good-table-next.css'
-import { VueGoodTable } from 'vue-good-table-next';
-
-const columns = [
-    { label: '금융 상품 코드', field: 'dcls_month' },
-    { label: '금융회사명', field: 'kor_co_nm' },
-    { label: '상품명', field: 'fin_prdt_nm' },
-    { label: '가입 방법', field: 'join_way' },
-    { label: '내용', field: 'etc_note' },
-    { label: '우대 조건', field: 'spcl_cnd' },
-    // { label: '6개월', field: 'name' },
-    // { label: '12개월', field: 'name' },
-    // { label: '24개월', field: 'name' },
-    // { label: '36개월', field: 'name' },
-];
+import SavingListItem from "@/components/products/SavingListItem.vue";
+// saving.id에 해당하는 options에서 intr_rate와 intr_rate2를 가져오도록 ...
+// http://127.0.0.1:8000/api/products/deposit_product_options/'금융상품 코드'/
 
 
 const store = useProductStore();
