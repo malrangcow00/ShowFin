@@ -18,7 +18,11 @@ class User(AbstractUser):
     salary = models.IntegerField(blank=True, null=True)
     # financial_products
     # 리스트 데이터 저장을 위해 Text 형태로 저장
-    financial_products = models.TextField(blank=True, null=True)
+    # financial_products = models.TextField(blank=True, null=True)
+    # 주거래 은행
+    mainbank = models.CharField(max_length=100, blank=True, null=True)
+    # 주거지역
+    location = models.CharField(max_length=100, blank=True, null=True)
 
     # superuser fields
     is_active = models.BooleanField(default=True)
@@ -47,7 +51,9 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         age = data.get("age")
         wealth = data.get("wealth")
         salary = data.get("salary")
-        financial_product = data.get("financial_products")
+        # financial_product = data.get("financial_products")
+        mainbank = data.get("mainbank")
+        location = data.get("location")
         
         user_email(user, email)
         user_username(user, username)
@@ -63,12 +69,16 @@ class CustomAccountAdapter(DefaultAccountAdapter):
             user.wealth = wealth
         if salary:
             user.salary = salary 
-        if financial_product:
-            financial_products = user.financial_products.split(',')
-            financial_products.append(financial_product)
-            if len(financial_products) > 1:
-                financial_products = ','.join(financial_products)
-                user_field(user, "financial_products", financial_products)
+        # if financial_product:
+        #     financial_products = user.financial_products.split(',')
+        #     financial_products.append(financial_product)
+        #     if len(financial_products) > 1:
+        #         financial_products = ','.join(financial_products)
+        #         user_field(user, "financial_products", financial_products)
+        if mainbank:
+            user.mainbank = mainbank
+        if location:
+            user.location = location
         if "password1" in data:
             user.set_password(data["password1"])
         else:

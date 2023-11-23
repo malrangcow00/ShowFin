@@ -3,12 +3,10 @@ from . import views
 
 app_name = 'products'
 urlpatterns = [
-    path('save_products/', views.save_products, name='save_products'),
-    path('deposit_products/', views.deposit_products, name='deposit_products'),
-    path('saving_products/', views.saving_products, name='saving_products'),
-    path('deposit_products/<str:fin_prdt_cd>/', views.deposit_options, name='deposit_options'),
-    path('saving_products/<str:fin_prdt_cd>/', views.saving_options, name='saving_options'),
-    path('deposit_products/top_rate/', views.deposit_top_rate, name='deposit_top_rate'),
-    path('saving_products/top_rate/', views.saving_top_rate, name='saving_top_rate'),
-    path('get_banks/', views.get_banks, name='get_banks'),
+    path('save_products/', views.save_products, name='save_products'),                      # 상품 저장
+    path('deposits/', views.deposits, name='deposits'),                                     # 예금 상품 리스트 조회
+    path('savings/', views.savings, name='savings'),                                        # 적금 상품 리스트 조회
+    path('loans/', views.loans, name='loans'),                                           # 전세자금대출 상품 리스트 조회
+    path('subscribe/<str:prdt_type>/<int:product_id>/', views.subscribe, name='subscribe'),  # 상품 구독
+    path('get_banks/', views.get_banks, name='get_banks'),                                  # 은행 리스트 조회
 ]
