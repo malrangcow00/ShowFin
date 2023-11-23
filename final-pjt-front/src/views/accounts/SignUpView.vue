@@ -82,8 +82,8 @@
                   clearable
                   :rules="[rules.required]"
                   hide-details="auto"
-                  label="거주지"
-                  hint="현재 거주지(도시)를 입력해주세요."
+                  label="활동지역 (거주지)"
+                  hint="현재 활동 지역(도시)를 입력해주세요."
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
@@ -92,7 +92,7 @@
                   :rules="[rules.required]"
                   :items="ageList"
                   label="나이"
-                  hint="나이대를 선택해주세요 (선택사항)"
+                  hint="나이대를 선택해주세요"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="6">
@@ -101,7 +101,7 @@
                   :rules="[rules.required]"
                   :items="options"
                   label="재산"
-                  hint="재산 범위를 선택해주세요 (선택사항)"
+                  hint="재산 범위를 선택해주세요"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="6">
@@ -110,7 +110,7 @@
                   :rules="[rules.required]"
                   :items="options"
                   label="연봉"
-                  hint="연봉 범위를 선택해주세요. (선택사항)"
+                  hint="연봉 범위를 선택해주세요."
                 ></v-select>
               </v-col>
             </v-row>
