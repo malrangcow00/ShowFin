@@ -5,13 +5,31 @@
             <h1>상품 비교</h1>
             <div>
                 <h2 class="d-inline-block mr-3">
-                    <RouterLink :to="{ name: 'ProductsView' }" :class="{ 'nav-link-router-active': $route.name === 'ProductsView' }">예금</RouterLink>
+                    <RouterLink
+                        :to="{ name: 'ProductsView' }"
+                        :class="{ 'nav-link-router-active': $route.name === 'ProductsView' }"
+                        style="text-decoration: none;"
+                    >
+                        예금
+                    </RouterLink>
                 </h2>
                 <h2 class="d-inline-block mr-3">
-                    <RouterLink :to="{ name: 'SavingList' }" :class="{ 'nav-link-router-active': $route.name === 'SavingList' }">적금</RouterLink>
+                    <RouterLink
+                        :to="{ name: 'SavingList' }"
+                        :class="{ 'nav-link-router-active': $route.name === 'SavingList' }"
+                        style="text-decoration: none;"
+                    >
+                        적금
+                    </RouterLink>
                 </h2>
                 <h2 class="d-inline-block">
-                    <RouterLink :to="{ name: 'LoanList' }" :class="{ 'nav-link-router-active': $route.name === 'LoanList' }">전세자금대출</RouterLink>
+                    <RouterLink
+                        :to="{ name: 'LoanList' }"
+                        :class="{ 'nav-link-router-active': $route.name === 'LoanList' }"
+                        style="text-decoration: none;"
+                    >
+                        전세자금대출
+                    </RouterLink>
                 </h2>
             </div>
         </header>
