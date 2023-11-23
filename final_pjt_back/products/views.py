@@ -492,5 +492,3 @@ def get_banks(request):
 
     print(JsonResponse(data))
     return JsonResponse(data)
-    print(JsonResponse(data))
-    return JsonResponse(data)
