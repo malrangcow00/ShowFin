@@ -43,6 +43,17 @@ export const useExchangeStore = defineStore(
 
             return rate1 / rate2
         }
+        const addCommas = (value) => {
+            const [integerPart, decimalPart] = value.toString().split('.');
+            const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+            if (decimalPart) {
+                return `${formattedIntegerPart}.${decimalPart}`;
+            } else {
+                return formattedIntegerPart;
+            }
+        }
+
         const changeSelected1 = () => {
             const calculatedValue = Number(money1.value.replace(/,/g, '')) * calculateExchangeRate();
             money2.value = addCommas(calculatedValue.toFixed(2));
@@ -63,9 +74,7 @@ export const useExchangeStore = defineStore(
             money1.value = addCommas(calculatedValue.toFixed(2));
         }
 
-        const addCommas = (value) => {
-            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        }
+
 
         return {
             exchange_data,
