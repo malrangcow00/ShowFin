@@ -4,7 +4,10 @@ import MainView from "@/views/MainView.vue";
 import ProductsView from "@/views/products/ProductsView.vue";
 import DepositDetail from "@/components/products/DepositDetail.vue";
 // import Deposit from "@/components/products/Deposit.vue";
-// import Saving from "@/components/products/Saving.vue";
+import SavingList from "@/components/products/SavingList.vue";
+import SavingDetail from "@/components/products/SavingDetail.vue";
+import LoanList from "@/components/products/LoanList.vue";
+import LoanDetail from "@/components/products/LoanDetail.vue";
 // Article
 import ArticleView from "@/views/articles/ArticleView.vue";
 import ArticleDetail from "@/components/articles/ArticleDetail.vue";
@@ -45,11 +48,27 @@ const router = createRouter({
       name: "DepositDetail",
       component: DepositDetail,
     },
-    // {
-    //   path: "/products/savings",
-    //   name: "Saving",
-    //   component: Saving,
-    // },
+    {
+      path: "/products/savings",
+      name: "SavingList",
+      component: SavingList,
+    },
+    {
+      path: "/products/savings/:id",
+      name: "SavingDetail",
+      component: SavingDetail,
+    },
+    {
+      path: "/products/loans",
+      name: "LoanList",
+      component: LoanList,
+    },
+    {
+      path: "/products/loans/:id",
+      name: "LoanDetail",
+      component: LoanDetail,
+    },
+
     // Article
     {
       path: "/articles",

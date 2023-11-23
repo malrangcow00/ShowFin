@@ -20,7 +20,7 @@ class DepositProducts(models.Model):
     fin_co_subm_day = models.TextField()            # 금융회사 제출일 [YYYYMMDDHH24MI]
 
     subscribers = models.ManyToManyField(           # 가입자
-        settings.AUTH_USER_MODEL, related_name='subscribed_time_deposits', blank=True
+        settings.AUTH_USER_MODEL, related_name='subscribed_deposit', blank=True
     )
 
 
@@ -92,7 +92,7 @@ class JeonseLoanProducts(models.Model):
     fin_co_subm_day = models.TextField()            # 금융회사 제출일 [YYYYMMDDHH24MI]
     
     subscribers = models.ManyToManyField(           # 가입자
-        settings.AUTH_USER_MODEL, related_name='subscribed_mortgage_loan', blank=True
+        settings.AUTH_USER_MODEL, related_name='subscribed_jeonse_loan', blank=True
     )
     
     

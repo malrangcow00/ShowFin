@@ -30,13 +30,12 @@
               <th scope="col">#</th>
               <th scope="col">금융 회사명</th>
               <th scope="col">금융 상품명</th>
+              <th scope="col">적립 유형</th>
               <th
                 scope="col"
                 class="text-center"
-                @click="sortDeposits(6)"
-                :class="{
-                  'bg-success text-white': store.sortDepositsBy === 6,
-                }"
+                @click="sortSavings(6)"
+                :class="{ 'bg-success text-white': store.sortSavingsBy === 6 }"
                 style="cursor: pointer"
               >
                 6개월 <i class="fa-solid fa-caret-down"></i>
@@ -44,10 +43,8 @@
               <th
                 scope="col"
                 class="text-center"
-                @click="sortDeposits(12)"
-                :class="{
-                  'bg-success text-white': store.sortDepositsBy === 12,
-                }"
+                @click="sortSavings(12)"
+                :class="{ 'bg-success text-white': store.sortSavingsBy === 12 }"
                 style="cursor: pointer"
               >
                 12개월 <i class="fa-solid fa-caret-down"></i>
@@ -55,10 +52,8 @@
               <th
                 scope="col"
                 class="text-center"
-                @click="sortDeposits(24)"
-                :class="{
-                  'bg-success text-white': store.sortDepositsBy === 24,
-                }"
+                @click="sortSavings(24)"
+                :class="{ 'bg-success text-white': store.sortSavingsBy === 24 }"
                 style="cursor: pointer"
               >
                 24개월 <i class="fa-solid fa-caret-down"></i>
@@ -66,10 +61,8 @@
               <th
                 scope="col"
                 class="text-center"
-                @click="sortDeposits(36)"
-                :class="{
-                  'bg-success text-white': store.sortDepositsBy === 36,
-                }"
+                @click="sortSavings(36)"
+                :class="{ 'bg-success text-white': store.sortSavingsBy === 36 }"
                 style="cursor: pointer"
               >
                 36개월 <i class="fa-solid fa-caret-down"></i>
@@ -78,11 +71,11 @@
             </tr>
           </thead>
           <tbody class="accordion accordion-flush" id="accordionFlushExample">
-            <DepositListItem
-              v-for="deposit in store.deposits"
-              :key="deposit"
-              :deposit="deposit"
-              @click="goToDetail(deposit.fin_prdt_cd)"
+            <SavingListItem
+              v-for="saving in store.savings"
+              :key="saving.id"
+              :saving="saving"
+              @click="goToDetail(saving.id)"
               style="cursor: pointer"
             />
           </tbody>
@@ -93,25 +86,25 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
 import { useRouter, RouterLink, onBeforeRouteLeave } from "vue-router";
 import { useAccountStore } from "@/stores/accounts.js";
-import DepositListItem from "@/components/products/DepositListItem.vue";
+import SavingListItem from "@/components/products/SavingListItem.vue";
 
 const router = useRouter();
 const store = useAccountStore();
 
 onMounted(() => {
-  store.getDeposits();
-  store.sortDepositsBy = null;
+  store.getSavings();
+  store.sortSavingsBy = null;
 });
 
-const goToDetail = function (fin_prdt_cd) {
-  router.push({ name: "DepositDetail", params: { fin_prdt_cd } });
+const goToDetail = function (id) {
+  router.push({ name: "SavingDetail", params: { id } });
 };
 
-const sortDeposits = function (save_trm) {
-  store.sortDeposits(save_trm);
+const sortSavings = function (save_trm) {
+  store.sortSavings(save_trm);
 };
 
 onBeforeRouteLeave(() => {
