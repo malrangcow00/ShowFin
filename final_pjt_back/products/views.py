@@ -14,7 +14,7 @@ from .serializers import DepositProductsSerializer, DepositOptionsSerializer, Sa
 API_KEY = settings.API_KEY
 BASE_URL = settings.BASE_URL
 DEPOSIT = settings.DEPOSIT
-SAVINGS = settings.SAVINGS
+SAVING = settings.SAVING
 LOAN = settings.LOAN
 COMPANY = settings.COMPANY
 BANK_TYPE = settings.BANK_TYPE
@@ -83,7 +83,7 @@ def save_products(request):
     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
     # 적금 상품 저장 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    URL = BASE_URL + SAVINGS
+    URL = BASE_URL + SAVING
     response = requests.get(URL, params=params).json()
 
     for product in response.get('result').get('baseList'):
@@ -215,8 +215,8 @@ def save_products(request):
 
     # 저장완료 메세지
     # return JsonResponse({ 'message' : 'GOOD'})
-    return Response({ 'message' : 'OKAY'})
 
+    return Response({ 'message' : 'OKAY'})
 
 @api_view(['GET'])
 def deposits(request):
@@ -383,29 +383,114 @@ def subscribe(request, prdt_type, product_pk):
 
 #     return Response(data)
 
+# @api_view(['GET', 'POST'])
+# def savings_products(request):
+#     if request.method == 'GET':
+#         products = SavingProducts.objects.all()
+#         serializer = SavingProductsSerializer(products, many=True)
+#         return Response(serializer.data)
+#     elif request.method == 'POST':
+#         serializer = SavingProductsSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         data = {
+#             'message': f'이미 있는 데이터이거나, 데이터가 잘못 입력되었습니다.',
+#         }
+#         return Response(data, status=status.HTTP_400_BAD_REQUEST)
+
 
 # @api_view(['GET'])
-# def get_banks(request):
-#     URL = BASE_URL + COMPANY
-#     params = {
-#         'auth': API_KEY,
-#         'topFinGrpNo': BANK_TYPE,
-#         'pageNo': PAGE_NO,
-#     }
+# def deposit_product_options(request, fin_prdt_cd):
+#     options = DepositOptions.objects.filter(fin_prdt_cd=fin_prdt_cd)
+#     serializer = DepositOptionsSerializer(options, many=True)
+#     return Response(serializer.data)
 
-#     # response = requests.get(URL, params=params).encoding = 'utf-8'
-#     response = requests.get(URL, params=params).json()
-#     # response = response.json()
 
+# @api_view(['GET'])
+# def savings_product_options(request, fin_prdt_cd):
+#     options = SavingOptions.objects.filter(fin_prdt_cd=fin_prdt_cd)
+#     serializer = SavingOptionsSerializer(options, many=True)
+#     return Response(serializer.data)
+
+
+# @api_view(['GET'])
+# def deposit_top_rate(request):
+#     rate = 0
+#     options = DepositOptions.objects.all()
+#     for option in options:
+#         if option.intr_rate2 >= rate:
+#             rate = option.intr_rate2
+
+#     filter_options = DepositOptions.objects.filter(intr_rate2=rate)
+#     # print(filter_options)
 #     data = {
-#         'company_name': [],
+#         "deposit_product": [],
+#         "options": []
 #     }
+#     for filter_option in filter_options:
+#         filter_product = filter_option.product
 
-#     for company_info in response.get("result").get("baseList"):
-#         company_name = company_info.get('kor_co_nm')
-#         if company_name in data['company_name']:
-#             continue
-#         data['company_name'].append(company_name)
+#         product_serializer = DepositProductsSerializer(filter_product)
+#         option_serializer = DepositOptionsSerializer(filter_option)
 
-#     print(JsonResponse(data))
-#     return JsonResponse(data)
+#         data["deposit_product"].append(product_serializer.data)
+#         data["options"].append(option_serializer.data)
+
+#     return Response(data)
+
+
+
+# @api_view(['GET'])
+# def savings_top_rate(request):
+#     rate = 0
+#     options = SavingOptions.objects.all()
+#     for option in options:
+#         if option.intr_rate2 >= rate:
+#             rate = option.intr_rate2
+
+#     filter_options = SavingOptions.objects.filter(intr_rate2=rate)
+#     # print(filter_options)
+#     data = {
+#         "savings_product": [],
+#         "options": []
+#     }
+#     for filter_option in filter_options:
+#         filter_product = filter_option.product
+
+#         product_serializer = SavingProductsSerializer(filter_product)
+#         option_serializer = SavingOptionsSerializer(filter_option)
+
+#         data["savings_product"].append(product_serializer.data)
+#         data["options"].append(option_serializer.data)
+
+#     return Response(data)
+
+
+@api_view(['GET'])
+def get_banks(request):
+    URL = BASE_URL + COMPANY
+    params = {
+        'auth': API_KEY,
+        'topFinGrpNo': BANK_TYPE,
+        'pageNo': PAGE_NO,
+    }
+
+    # response = requests.get(URL, params=params).encoding = 'utf-8'
+    response = requests.get(URL, params=params).json()
+    # response = response.json()
+
+    data = {
+        'company_name': [],
+    }
+
+    for company_info in response.get("result").get("baseList"):
+        company_name = company_info.get('kor_co_nm')
+        if company_name in data['company_name']:
+            continue
+        data['company_name'].append(company_name)
+
+    print(JsonResponse(data))
+    return JsonResponse(data)
+    print(JsonResponse(data))
+    return JsonResponse(data)

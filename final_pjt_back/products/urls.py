@@ -7,5 +7,6 @@ urlpatterns = [
     path('deposits/', views.deposits, name='deposits'),                                     # 예금 상품 리스트 조회
     path('savings/', views.savings, name='savings'),                                        # 적금 상품 리스트 조회
     path('loans/', views.loans, name='loans'),                                           # 전세자금대출 상품 리스트 조회
-    path('subscribe/<str:prdt_type>/<int:product_id>/', views.subscribe, name='subscribe')  # 상품 구독
+    path('subscribe/<str:prdt_type>/<int:product_id>/', views.subscribe, name='subscribe'),  # 상품 구독
+    path('get_banks/', views.get_banks, name='get_banks'),                                  # 은행 리스트 조회
 ]
