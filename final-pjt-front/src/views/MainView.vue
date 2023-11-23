@@ -2,7 +2,7 @@
   <div class="carousel">
       <v-carousel
           cycle
-          :height="500"
+          :height="680"
           hide-delimiter-background
           :show-arrows="false"
           class="carousel-inner"
@@ -76,7 +76,7 @@ a {
     position: absolute;
     top: 5%;
     left: -15%;
-    //z-index: -1;
+    z-index: 1;
 }
 .choonsik {
     position: absolute;

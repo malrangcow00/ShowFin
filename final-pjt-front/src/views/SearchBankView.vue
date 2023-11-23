@@ -16,7 +16,7 @@
                 <option value="" selected disabled hidden>우리은행</option>
             </select><span>　</span>
         </label>
-        <button @click="searchBanks">Search</button>
+        <button @click="searchBanks" class="search-btn">검색</button>
     </div>
     <br>
     <div id="map"></div>
@@ -224,21 +224,42 @@ onMounted(initMap);
 <style scoped>
 #map {
     width: 800px;
-    height: 600px;
+    height: 800px;
+    border-radius: 1000px;
 }
 select {
-    text-align: right;
+    //text-align: right;
 }
 #city {
-    width: 120px;
+    //width: 120px;
+    border: black solid 1px;
+    padding: 9px;
+    border-radius: 5px;
 }
 #district {
-    width: 75px;
+    //width: 75px;
+    border: black solid 1px;
+    padding: 9px;
+    border-radius: 5px;
 }
 #bank {
-    width: 80px;
+    //width: 80px;
+    border: black solid 1px;
+    padding: 9px;
+    border-radius: 5px;
 }
 span {
     font-size: 5px;
+}
+.search-btn {
+    background-color: #ff7f00;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
 }
 </style>

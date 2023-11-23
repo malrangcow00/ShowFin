@@ -249,7 +249,7 @@ export const useAccountStore = defineStore(
         });
     };
 
-    // 회원탈퇴
+    // 회원탈퇴store.exchange_data.USD.deal_bas_r
     const deleteAccount = function (payload) {
       const { password } = payload;
       axios({
