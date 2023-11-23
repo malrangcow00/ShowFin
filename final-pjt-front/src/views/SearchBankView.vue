@@ -1,4 +1,5 @@
 <template>
+    <div class="body-map">
   <div>
     <h1>Search Bank</h1>
     <label class="select">
@@ -20,6 +21,7 @@
   </div>
   <br />
   <div id="map"></div>
+    </div>
 </template>
 
 <script setup>
@@ -245,28 +247,26 @@ onMounted(initMap);
 </script>
 
 <style scoped>
+.body-map {
+  //background-color: yellow;
+}
+
 #map {
   width: 800px;
   height: 800px;
   border-radius: 1000px;
 }
-select {
-  /* text-align: right; */
-}
 #city {
-  /* width: 120px; */
   border: black solid 1px;
   padding: 9px;
   border-radius: 5px;
 }
 #district {
-  /* width: 75px; */
   border: black solid 1px;
   padding: 9px;
   border-radius: 5px;
 }
 #bank {
-  /* width: 80px; */
   border: black solid 1px;
   padding: 9px;
   border-radius: 5px;

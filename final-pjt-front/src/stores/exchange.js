@@ -24,7 +24,7 @@ export const useExchangeStore = defineStore(
                             deal_bas_r: Number(dealBasR),
                         }
                     }
-                    console.log(exchange_data.value)
+                    // console.log(exchange_data.value)
                     money2.value = exchange_data.value.USD.deal_bas_r
                     // selectedCurrency1.value = 'USD'
                     // selectedCurrency2.value = 'KRW'
@@ -32,21 +32,39 @@ export const useExchangeStore = defineStore(
                 .catch(error => console.log(error))
         };
         const calculateExchangeRate = () => {
+
             const rate1 = exchange_data.value[selectedCurrency1.value]?.deal_bas_r || 1;
             const rate2 = exchange_data.value[selectedCurrency2.value]?.deal_bas_r || 1;
-            return (rate1 / rate2).toFixed(2);
+
+            if (rate2 === 0) {
+                // rate2가 0일 때, 다른 처리를 해줄 수 있도록 원하는 로직 추가
+                return 0; // 혹은 다른 기본값으로...
+            }
+
+            return rate1 / rate2
         }
         const changeSelected1 = () => {
-            money2.value = money1.value * calculateExchangeRate()
+            const calculatedValue = Number(money1.value.replace(/,/g, '')) * calculateExchangeRate();
+            money2.value = addCommas(calculatedValue.toFixed(2));
         }
+
         const changeSelected2 = () => {
-            money2.value = money1.value / calculateExchangeRate()
+            const calculatedValue = Number(money1.value.replace(/,/g, '')) / calculateExchangeRate();
+            money2.value = addCommas(calculatedValue.toFixed(2));
         }
+
         const inputMoney1 = () => {
-            money2.value = money1.value * calculateExchangeRate()
+            const calculatedValue = Number(money1.value.replace(/,/g, '')) * calculateExchangeRate();
+            money2.value = addCommas(calculatedValue.toFixed(2));
         }
+
         const inputMoney2 = () => {
-            money1.value = money2.value / calculateExchangeRate()
+            const calculatedValue = Number(money2.value.replace(/,/g, '')) / calculateExchangeRate();
+            money1.value = addCommas(calculatedValue.toFixed(2));
+        }
+
+        const addCommas = (value) => {
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
 
         return {

@@ -7,26 +7,27 @@
           :show-arrows="false"
           class="carousel-inner"
       >
-          <a href="http://localhost:5173/products">
+          <RouterLink :to="{ name: 'ProductsView' }">
           <v-carousel-item
               src="../assets/main/comparing.png"
               class="carousel-item"
           ></v-carousel-item>
-          </a>
+          </RouterLink>
 
-          <a href="http://localhost:5173/products">
+          <!-- 알고리즘 추천 서비스 활성화시 RouterLink 수정 -->
+          <RouterLink :to="{ name: 'SavingList' }">
           <v-carousel-item
               src="../assets/main/algo.jpg"
               class="carousel-item"
           ></v-carousel-item>
-          </a>
+          </RouterLink>
 
-          <a href="http://localhost:5173/articles">
+          <RouterLink :to="{ name: 'ArticleView' }">
           <v-carousel-item
               src="../assets/main/event.jpg"
               class="carousel-item"
           ></v-carousel-item>
-          </a>
+          </RouterLink>
       </v-carousel>
   </div>
     <div class="bg-img">
@@ -50,6 +51,7 @@
 
 <script setup>
 
+import {RouterLink} from "vue-router";
 </script>
 
 <style scoped>

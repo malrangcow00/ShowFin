@@ -12,12 +12,12 @@
           required
         >
           <!--<option value="" selected disabled hidden>USD</option>-->
-          <option v-for="currency in store.exchange_data" value="{{ currency.cur_unit }}">{{ currency.cur_unit }}</option>
+          <option v-for="currency in store.exchange_data" :key="currency.cur_unit">{{ currency.cur_unit }}</option>
 
         </select><span>　</span>
       </label>
 
-      <input type="number" @input="store.inputMoney1" v-model="store.money1" />
+      <input type="text" @keyup="store.inputMoney1" v-model="store.money1" />
     </div>
 
     <div>
@@ -35,21 +35,42 @@
         </select><span>　</span>
       </label>
 
-      <input type="number" @input="store.inputMoney2" v-model="store.money2" />
+      <input type="text" @keyup="store.inputMoney2" v-model="store.money2" />
     </div>
   </div>
 </template>
 
 <script setup>
-import axios from "axios";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import { useExchangeStore } from "@/stores/exchange";
+
 
 const store = useExchangeStore();
 
+const money1 = ref(store.money1);
+const money2 = ref(store.money2);
+const selectedCurrency1 = ref(store.selectedCurrency1);
+const selectedCurrency2 = ref(store.selectedCurrency2);
+
 onMounted(() => {
-    const store = useExchangeStore();
     store.getExchange();
+});
+
+// 입력 값과 선택된 화폐를 감시하고 변경될 때마다 업데이트
+watch(money1, () => {
+    store.inputMoney1();
+});
+
+watch(money2, () => {
+    store.inputMoney2();
+});
+
+watch(selectedCurrency1, () => {
+    store.changeSelected1();
+});
+
+watch(selectedCurrency2, () => {
+    store.changeSelected2();
 });
 </script>
 
@@ -66,7 +87,7 @@ select {
     margin: 10px 0px;
 }
 input {
-    width: 200px;
+    width: 500px;
     text-align: right;
     border: 1px solid black;
     padding: 9px;
