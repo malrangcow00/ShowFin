@@ -9,16 +9,15 @@
     <p>나이 : {{ age }}</p>
     <p>재산 : {{ wealth }}</p>
     <p>월급 : {{ salary }}</p>
-    <!-- <UserProduct /> -->
 
+    <button @click.prevent="goUserDeposit">가입한 상품</button>
     <button @click.prevent="goUpdatePage">회원정보수정</button>
   </div>
 </template>
 
 <script setup>
 import { useAccountStore } from "@/stores/accounts.js";
-import { useRouter } from "vue-router";
-import UserProduct from "@/components/accounts/UserProduct.vue";
+import { useRouter, RouterLink } from "vue-router";
 
 const store = useAccountStore();
 const router = useRouter();
@@ -28,6 +27,10 @@ const { username, nickname, email, age, wealth, salary, mainbank, location } =
 
 const goUpdatePage = function () {
   router.push({ name: "AccountUpdateView" });
+};
+
+const goUserDeposit = function () {
+  router.push({ name: "UserDeposit" });
 };
 </script>
 

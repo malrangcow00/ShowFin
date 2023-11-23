@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import DepositProducts, DepositOptions, SavingProducts, SavingOptions, JeonseLoanProducts, JeonseLoanOptions
+# from accounts.serializers import UserSerializer
 from django.contrib.auth import get_user_model
 
 # 예금
@@ -68,8 +69,8 @@ class JeonseLoanSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 
-class SubscribeSerializer(serializers.ModelSerializer):
-    subscribed_deposits = DepositSerializer(many=True, read_only=True)
+class UserSerializer(serializers.ModelSerializer):
+    subscribed_deposit = DepositSerializer(many=True, read_only=True)
     subscribed_savings = SavingSerializer(many=True, read_only=True)
     subscribed_jeonse_loan = JeonseLoanSerializer(many=True, read_only=True)
     

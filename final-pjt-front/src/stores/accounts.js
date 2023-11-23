@@ -185,7 +185,23 @@ export const useAccountStore = defineStore(
     const getAccountInfo = function () {
       axios({
         method: "GET",
-        url: `${API_URL}/accounts/user_detail/`,
+        url: `${API_URL}/api/products/userinfo/`,
+        headers: { Authorization: `Token ${token.value}` },
+      })
+        .then((res) => {
+          console.log(res.data);
+          userInfo.value = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    // 회원정보 페이지
+    const AccountInfo = function () {
+      axios({
+        method: "GET",
+        url: `${API_URL}/api/products/userinfo/`,
         headers: { Authorization: `Token ${token.value}` },
       })
         .then((res) => {
@@ -258,7 +274,7 @@ export const useAccountStore = defineStore(
         .then((res) => {
           console.log(res.data);
           alert(res.data.message);
-          router.push({ name: "AccountDetailView" });
+          logOut();
         })
         .catch((err) => {
           alert(err.data.message);
@@ -374,6 +390,11 @@ export const useAccountStore = defineStore(
       sortSavingsBy.value = save_trm;
     };
 
+    // 대출 상품 정렬
+    const sortLoansBy = ref(null);
+
+    const sortLoans = function () {};
+
     // - - - - - - - - - -
     return {
       API_URL,
@@ -407,6 +428,8 @@ export const useAccountStore = defineStore(
       sortDeposits,
       sortSavingsBy,
       sortSavings,
+      sortLoansBy,
+      sortLoans,
     };
   },
   { persist: true }

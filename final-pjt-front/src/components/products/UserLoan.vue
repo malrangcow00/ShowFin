@@ -38,20 +38,19 @@
               <th scope="col">#</th>
               <th scope="col">금융 회사명</th>
               <th scope="col">금융 상품명</th>
-              <th scope="col">적립 유형</th>
-              <th scope="col" class="text-center">6개월</th>
-              <th scope="col" class="text-center">12개월</th>
-              <th scope="col" class="text-center">24개월</th>
-              <th scope="col" class="text-center">36개월</th>
+              <th scope="col">대출 유형</th>
+              <th scope="col" class="text-center">최저 이율</th>
+              <th scope="col" class="text-center">최고 이율</th>
+              <th scope="col" class="text-center">평균 이율</th>
               <th scope="col" class="text-center">가입 여부</th>
             </tr>
           </thead>
           <tbody class="accordion accordion-flush" id="accordionFlushExample">
-            <SavingListItem
-              v-for="saving in store.userInfo?.subscribed_savings"
-              :key="saving.id"
-              :saving="saving"
-              @click="goToDetail(saving.id)"
+            <LoanListItem
+              v-for="loan in store.userInfo?.subscribed_jeonse_loan"
+              :key="loan.id"
+              :loan="loan"
+              @click="goToDetail(loan.id)"
               style="cursor: pointer"
             />
           </tbody>
@@ -59,6 +58,7 @@
       </div>
     </div>
   </div>
+
   <div style="width: 2000px; height: 400px">
     <canvas canvas id="myChart"></canvas>
   </div>
@@ -67,27 +67,29 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
-import SavingListItem from "@/components/products/SavingListItem.vue";
+import LoanListItem from "@/components/products/LoanListItem.vue";
 import { useAccountStore } from "@/stores/accounts.js";
+// import Chart from 'chart.js'
 
 const store = useAccountStore();
 const router = useRouter();
 
 onMounted(() => {
-  store.getSavings();
-  store.sortSavingsBy = null;
+  store.getLoans();
+  store.sortLoansBy = null;
   renderChart();
 });
 
 const goToDetail = function (id) {
-  router.push({ name: "savingDetail", params: { id } });
+  router.push({ name: "LoanDetail", params: { id } });
 };
-
 const chartData = ref([]);
-store.userInfo.subscribed_savings.forEach((element) => {
+store.userInfo.subscribed_jeonse_loan.forEach((element) => {
   chartData.value.push({
     fin_prdt_nm: element.fin_prdt_nm,
-    intr_rate: element.savingoptions_set[0].intr_rate,
+    intr_rate:
+      element.jeonseloanoptions_set[element.jeonseloanoptions_set.length - 1]
+        .lend_rate_min,
   });
 });
 
