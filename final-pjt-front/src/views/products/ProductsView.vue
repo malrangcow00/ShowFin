@@ -2,12 +2,34 @@
   <div>
     <div class="row">
       <header class="d-flex">
-        <h1>상품 비교</h1>
-        <nav>
-          <RouterLink :to="{ name: 'ProductsView' }">예금</RouterLink> |
-          <RouterLink :to="{ name: 'SavingList' }">적금</RouterLink> |
-          <RouterLink :to="{ name: 'LoanList' }">전세자금대출</RouterLink>
-        </nav>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <a class="navbar-brand">
+                  <h1>상품 비교</h1>
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                      <li class="nav-item active">
+                          <a class="nav-link">
+                              <RouterLink :to="{ name: 'ProductsView' }">예금</RouterLink>
+                              <span class="sr-only">(current)</span>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link">
+                              <RouterLink :to="{ name: 'SavingList' }">적금</RouterLink>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link">
+                              <RouterLink :to="{ name: 'LoanList' }">전세자금대출</RouterLink>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+          </nav>
       </header>
 
       <div class="col-2 mt-5">
@@ -15,7 +37,7 @@
         <hr />
 
         <label for="bank-select" class="mb-2">은행을 선택하세요</label>
-        <select id="bank-select" v-model="store.selectedBank">
+        <select id="bank-select" v-model="store.selectedBank" class="product-selector">
           <option selected>전체</option>
           <option v-for="bank in store.bankList" :key="bank.id">
             {{ bank }}
@@ -119,4 +141,22 @@ onBeforeRouteLeave(() => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.product-selector {
+    font-size: 25px;
+    font-family: Georgia, "Malgun Gothic", serif;
+    border-bottom: 1px solid #ced4da;
+    //text-align: right;
+    -webkit-appearance:none; /* for chrome */
+
+    appearance:none;
+}
+.product-selector::-ms-expand{
+
+    display:none;/*for IE10,11*/
+
+}
+.product-selector {
+    background:url('../../../assets/bank_img/filterarrow.png') no-repeat 97% 50%/15px auto;
+}
+</style>
