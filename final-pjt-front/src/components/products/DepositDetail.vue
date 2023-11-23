@@ -7,11 +7,7 @@
         style="cursor: pointer"
       ></i>
       <h1 class="d-inline">{{ product.fin_prdt_nm }}</h1>
-      <button
-        v-if="isSubscribed"
-        @click="subscribe"
-        class="btn btn-outline-success"
-      >
+      <button v-if="isSubscribed" @click="subscribe" class="btn btn-outline">
         탈퇴하기
       </button>
       <button v-else @click="subscribe" class="btn btn-success">

@@ -1,94 +1,97 @@
 <template>
-  <div>
-    <nav>
-      <!-- <button
-        @click="router.push({ name: 'RecommandLoan' })"
-        class="btn btn-success border border-success border-opacity-50 rounded-pill me-2"
-      >
-        전세대출
-      </button>
-      <button
-        @click="router.push({ name: 'RecommandDeposit' })"
-        class="btn btn-outline-success border border-success border-opacity-50 rounded-pill me-2"
-      >
-        예금
-      </button>
-      <button
-        @click="router.push({ name: 'RecommandSaving' })"
-        class="btn btn-outline-success border border-success border-opacity-50 rounded-pill me-2"
-      >
-        적금
-      </button> -->
-    </nav>
-    <hr />
-    <h1 class="mb-3">
-      금융
-      <i class="fa-solid fa-question fa-shake" style="color: #ff0000"></i>
-      몰라도 전세대출 가능해 👍
-    </h1>
-    <v-divider></v-divider>
-    <form @submit.prevent="recommandLoan">
-      <div class="input-group mb-3" style="width: 250px">
-        <span class="input-group-text"
-          ><i class="fa-solid fa-won-sign fa-bounce" style="color: #ff00d0"></i
-        ></span>
-        <input
-          type="number"
-          class="form-control"
-          v-model="jeonsePrice"
-          placeholder="집값을 입력해주세요."
-        />
-      </div>
-      <div class="mb-3">
-        <button class="btn btn-primary text-white w-25">
-          도와줘 ShowFin 🧚‍♂️
-        </button>
-      </div>
-    </form>
-    <hr />
+  <v-container>
+    <v-row
+      ><i
+        @click="router.go(-1)"
+        class="fa-solid fa-arrow-right-to-bracket fa-rotate-180 h3 me-4 d-flex justify-content-end"
+        style="cursor: pointer"
+      ></i
+    ></v-row>
+    <v-card class="mx-auto pa-5" style="width: 60%">
+      <v-card-title>
+        <h1 class="mb-3">
+          금융
+          <i class="fa-solid fa-question fa-shake" style="color: #ff0000"></i>
+          몰라도 전세대출 가능해 👍
+        </h1>
+      </v-card-title>
+      <v-divider></v-divider>
+      <v-card-text>
+        <form @submit.prevent="recommandLoan">
+          <v-row align="center">
+            <v-col cols="12" class="w-100">
+              <v-text-field
+                v-model="jeonsePrice"
+                label="전세금액을 입력해 주세요"
+                placeholder="숫자만 입력해주세요"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col justify="end" class="w-50">
+              <v-btn class="btn-primary text-success" @click="recommandLoan">
+                도와줘 ShowFin 🧚‍♂️
+              </v-btn>
+            </v-col>
+          </v-row>
+        </form>
 
-    <!-- 대출 정보를 순회하면서 출력 -->
+        <v-divider></v-divider>
 
-    <div v-if="sortLoans.length > 0" @click="goToDetail(sortLoans[0].id)">
-      <h2>
-        {{ sortLoans[0].kor_co_nm }} -
-        {{ sortLoans[0].fin_prdt_nm }}
-      </h2>
-      <p v-if="extractMaxLTV(sortLoans[0].loan_lmt) > 0">
-        최대 LTV: {{ extractMaxLTV(sortLoans[0].loan_lmt) }}%
-      </p>
-      <p>
-        최대 대출금액:
-        {{
-          (
-            (extractMaxLTV(sortLoans[0].loan_lmt) * jeonsePrice) /
-            100
-          ).toLocaleString("ko-KR")
-        }}원
-      </p>
-      <p>
-        월 최저 상환금액:
-        {{
-          (
-            (((extractMaxLTV(sortLoans[0].loan_lmt) * jeonsePrice) / 100 / 12) *
-              sortLoans[0].jeonseloanoptions_set[0].lend_rate_min) /
-            100
-          ).toLocaleString("ko-KR")
-        }}원
-      </p>
-      <p>
-        월 최대 상환금액:
-        {{
-          (
-            (((extractMaxLTV(sortLoans[0].loan_lmt) * jeonsePrice) / 100 / 12) *
-              sortLoans[0].jeonseloanoptions_set[0].lend_rate_max) /
-            100
-          ).toLocaleString("ko-KR")
-        }}원
-      </p>
-      <!-- 다른 대출 정보 출력 로직 추가 -->
-    </div>
-  </div>
+        <v-card
+          v-if="sortLoans.length > 0"
+          @click="goToDetail(sortLoans[0].id)"
+          class="pa-5"
+        >
+          <v-card-title>
+            <h2>
+              {{ sortLoans[0].kor_co_nm }} - {{ sortLoans[0].fin_prdt_nm }}
+            </h2>
+          </v-card-title>
+          <v-divider></v-divider>
+          <v-card-text>
+            <p v-if="extractMaxLTV(sortLoans[0].loan_lmt) > 0">
+              최대 LTV: {{ extractMaxLTV(sortLoans[0].loan_lmt) }}%
+            </p>
+            <p>
+              최대 대출금액:
+              {{
+                (
+                  (extractMaxLTV(sortLoans[0].loan_lmt) * jeonsePrice) /
+                  100
+                ).toLocaleString("ko-KR")
+              }}원
+            </p>
+            <p>
+              월 최저 상환금액:
+              {{
+                (
+                  (((extractMaxLTV(sortLoans[0].loan_lmt) * jeonsePrice) /
+                    100 /
+                    12) *
+                    sortLoans[0].jeonseloanoptions_set[0].lend_rate_min) /
+                  100
+                ).toLocaleString("ko-KR")
+              }}원
+            </p>
+            <p>
+              월 최대 상환금액:
+              {{
+                (
+                  (((extractMaxLTV(sortLoans[0].loan_lmt) * jeonsePrice) /
+                    100 /
+                    12) *
+                    sortLoans[0].jeonseloanoptions_set[0].lend_rate_max) /
+                  100
+                ).toLocaleString("ko-KR")
+              }}원
+            </p>
+            <!-- 다른 대출 정보 출력 로직 추가 -->
+          </v-card-text>
+        </v-card>
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script setup>
@@ -102,6 +105,13 @@ const jeonsePrice = ref(null);
 const sortLoans = ref([]);
 
 const recommandLoan = () => {
+  if (!jeonsePrice.value) {
+    alert("전세금액을 입력해주세요.");
+    return;
+  } else if (isNaN(jeonsePrice.value)) {
+    alert("전세금액은 숫자만 입력 가능합니다.");
+    return;
+  }
   sortLoans.value = [...store.loans].sort((a, b) => {
     const maxLoanAmountA =
       (extractMaxLTV(a.loan_lmt) * jeonsePrice.value) / 100; // loan_lmt : 대출 한도

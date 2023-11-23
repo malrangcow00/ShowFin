@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <i
+      @click="router.go(-1)"
+      class="fa-solid fa-arrow-right-to-bracket fa-rotate-180 h3 me-4 d-flex justify-content-end"
+      style="cursor: pointer"
+    ></i>
+    <v-col></v-col>
     <v-row align="center" justify="space-between">
       <v-col-3>
         <v-heading class="article-heading">커뮤니티 게시판</v-heading>

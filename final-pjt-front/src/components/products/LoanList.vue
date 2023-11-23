@@ -1,19 +1,18 @@
 <template>
   <div>
     <div class="row">
+      <i
+        @click="router.go(-1)"
+        class="fa-solid fa-arrow-right-to-bracket fa-rotate-180 h3 me-4 d-flex justify-content-end"
+        style="cursor: pointer"
+      ></i>
       <header class="d-flex">
-        <h1>상품 비교</h1>
-        <nav>
-          <RouterLink :to="{ name: 'ProductsView' }">예금</RouterLink> |
-          <RouterLink :to="{ name: 'SavingList' }">적금</RouterLink> |
-          <RouterLink :to="{ name: 'LoanList' }">전세자금대출</RouterLink>
-        </nav>
+        <h1>⚖️ 상품 비교</h1>
       </header>
 
       <div class="col-2 mt-5">
         <h4>검색하기</h4>
         <hr />
-
         <label for="bank-select" class="mb-2">은행을 선택하세요</label>
         <select
           class="form-select"
@@ -28,6 +27,28 @@
       </div>
 
       <div class="col-10">
+        <nav class="d-flex justify-content-end">
+          <button
+            @click="router.push({ name: 'ProductsView' })"
+            class="btn btn-outline-primary rounded-pill me-2"
+          >
+            예금
+          </button>
+          <button
+            @click="router.push({ name: 'SavingList' })"
+            class="btn btn-outline-primary rounded-pill me-2"
+          >
+            적금
+          </button>
+          <button
+            @click="router.push({ name: 'LoanList' })"
+            class="btn btn-outline-warning rounded-pill me-2"
+          >
+            전세자금대출
+          </button>
+        </nav>
+
+        <v-divider></v-divider>
         <table class="table table-hover table-striped">
           <thead>
             <tr>

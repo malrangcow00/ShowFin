@@ -1,43 +1,24 @@
 <template>
   <div>
     <div class="row">
+      <i
+        @click="router.go(-1)"
+        class="fa-solid fa-arrow-right-to-bracket fa-rotate-180 h3 me-4 d-flex justify-content-end"
+        style="cursor: pointer"
+      ></i>
       <header class="d-flex">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <a class="navbar-brand">
-                  <h1>상품 비교</h1>
-              </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav">
-                      <li class="nav-item active">
-                          <a class="nav-link">
-                              <RouterLink :to="{ name: 'ProductsView' }">예금</RouterLink>
-                              <span class="sr-only">(current)</span>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link">
-                              <RouterLink :to="{ name: 'SavingList' }">적금</RouterLink>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link">
-                              <RouterLink :to="{ name: 'LoanList' }">전세자금대출</RouterLink>
-                          </a>
-                      </li>
-                  </ul>
-              </div>
-          </nav>
+        <h1>⚖️ 상품 비교</h1>
       </header>
 
       <div class="col-2 mt-5">
         <h4>검색하기</h4>
         <hr />
-
         <label for="bank-select" class="mb-2">은행을 선택하세요</label>
-        <select id="bank-select" v-model="store.selectedBank" class="product-selector">
+        <select
+          class="form-select"
+          id="bank-select"
+          v-model="store.selectedBank"
+        >
           <option selected>전체</option>
           <option v-for="bank in store.bankList" :key="bank.id">
             {{ bank }}
@@ -46,6 +27,29 @@
       </div>
 
       <div class="col-10">
+        <nav class="d-flex justify-content-end">
+          <button
+            @click="router.push({ name: 'ProductsView' })"
+            class="btn btn-outline-primary rounded-pill me-2"
+          >
+            예금
+          </button>
+          <button
+            @click="router.push({ name: 'SavingList' })"
+            class="btn btn-outline-primary rounded-pill me-2"
+          >
+            적금
+          </button>
+          <button
+            @click="router.push({ name: 'LoanList' })"
+            class="btn btn-outline-warning rounded-pill me-2"
+          >
+            전세자금대출
+          </button>
+        </nav>
+
+        <v-divider></v-divider>
+
         <table class="table table-hover table-striped">
           <thead>
             <tr>
@@ -57,7 +61,7 @@
                 class="text-center"
                 @click="sortDeposits(6)"
                 :class="{
-                  'bg-success text-white': store.sortDepositsBy === 6,
+                  'bg-primary text-white': store.sortDepositsBy === 6,
                 }"
                 style="cursor: pointer"
               >
@@ -68,7 +72,7 @@
                 class="text-center"
                 @click="sortDeposits(12)"
                 :class="{
-                  'bg-success text-white': store.sortDepositsBy === 12,
+                  'bg-primary text-white': store.sortDepositsBy === 12,
                 }"
                 style="cursor: pointer"
               >
@@ -79,7 +83,7 @@
                 class="text-center"
                 @click="sortDeposits(24)"
                 :class="{
-                  'bg-success text-white': store.sortDepositsBy === 24,
+                  'bg-primary text-white': store.sortDepositsBy === 24,
                 }"
                 style="cursor: pointer"
               >
@@ -90,7 +94,7 @@
                 class="text-center"
                 @click="sortDeposits(36)"
                 :class="{
-                  'bg-success text-white': store.sortDepositsBy === 36,
+                  'bg-primary text-white': store.sortDepositsBy === 36,
                 }"
                 style="cursor: pointer"
               >
@@ -143,20 +147,19 @@ onBeforeRouteLeave(() => {
 
 <style scoped>
 .product-selector {
-    font-size: 25px;
-    font-family: Georgia, "Malgun Gothic", serif;
-    border-bottom: 1px solid #ced4da;
-    //text-align: right;
-    -webkit-appearance:none; /* for chrome */
+  font-size: 25px;
+  font-family: Georgia, "Malgun Gothic", serif;
+  border-bottom: 1px solid #ced4da;
+  //text-align: right;
+  -webkit-appearance: none; /* for chrome */
 
-    appearance:none;
+  appearance: none;
 }
-.product-selector::-ms-expand{
-
-    display:none;/*for IE10,11*/
-
+.product-selector::-ms-expand {
+  display: none; /*for IE10,11*/
 }
 .product-selector {
-    background:url('../../../assets/bank_img/filterarrow.png') no-repeat 97% 50%/15px auto;
+  background: url("../../../assets/bank_img/filterarrow.png") no-repeat 97% 50%/15px
+    auto;
 }
 </style>

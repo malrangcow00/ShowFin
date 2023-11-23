@@ -237,7 +237,7 @@ export const useAccountStore = defineStore(
           console.log(res.data);
           userInfo.value = res.data;
           alert("회원정보가 수정되었습니다.");
-          getAccountInfo();
+          AccountInfo();
         })
         .catch((err) => {
           console.log(err);
@@ -292,7 +292,6 @@ export const useAccountStore = defineStore(
       axios({
         method: "GET",
         url: `${API_URL}/api/articles/`,
-        header: { Authorization: `Token ${token.value}` },
       })
         .then((res) => {
           console.log(res.data);

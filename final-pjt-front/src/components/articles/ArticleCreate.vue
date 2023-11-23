@@ -1,5 +1,11 @@
 <template>
   <v-container>
+    <i
+      @click="router.go(-1)"
+      class="fa-solid fa-arrow-right-to-bracket fa-rotate-180 h3 me-4 d-flex justify-content-end"
+      style="cursor: pointer"
+    ></i>
+    <v-col></v-col>
     <v-row justify="center">
       <v-col cols="12" md="8">
         <v-card class="pa-3">

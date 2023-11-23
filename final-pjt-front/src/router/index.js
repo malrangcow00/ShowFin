@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAccountStore } from "@/stores/accounts.js";
 import MainView from "@/views/MainView.vue";
 // Product
 import ProductsView from "@/views/products/ProductsView.vue";
@@ -11,8 +12,8 @@ import LoanDetail from "@/components/products/LoanDetail.vue";
 import UserDeposit from "@/components/products/UserDeposit.vue";
 import UserSaving from "@/components/products/UserSaving.vue";
 import UserLoan from "@/components/products/UserLoan.vue";
-import RecommandDeposit from "@/components/products/RecommandDeposit.vue";
-import RecommandSaving from "@/components/products/RecommandSaving.vue";
+// import RecommandDeposit from "@/components/products/RecommandDeposit.vue";
+// import RecommandSaving from "@/components/products/RecommandSaving.vue";
 import RecommandLoan from "@/components/products/RecommandLoan.vue";
 // Article
 import ArticleView from "@/views/articles/ArticleView.vue";
@@ -43,6 +44,15 @@ const router = createRouter({
       path: "/products",
       name: "ProductsView",
       component: ProductsView,
+      beforeEnter: (to, from) => {
+        const store = useAccountStore();
+        if (!store.isLogIn) {
+          alert(
+            "상품 조회 기능은 로그인 이후에 가능합니다. 로그인 페이지로 이동합니다."
+          );
+          return { name: "LogInView" };
+        }
+      },
     },
     // {
     //   path: "/products/deposits",
@@ -100,11 +110,29 @@ const router = createRouter({
       path: "/articles/:id",
       name: "ArticleDetail",
       component: ArticleDetail,
+      beforeEnter: (to, from) => {
+        const store = useAccountStore();
+        if (!store.isLogIn) {
+          alert(
+            "상세 글 조회는 로그인 이후에 이용할 수 있습니다. 로그인 페이지로 이동합니다."
+          );
+          return { name: "LogInView" };
+        }
+      },
     },
     {
       path: "/articles/create",
       name: "ArticleCreate",
       component: ArticleCreate,
+      beforeEnter: (to, from) => {
+        const store = useAccountStore();
+        if (!store.isLogIn) {
+          alert(
+            "글 작성은 로그인 이후에 가능합니다. 로그인 페이지로 이동합니다."
+          );
+          return { name: "LogInView" };
+        }
+      },
     },
     // {
     //   path: "/articles/comments/create",
@@ -141,35 +169,57 @@ const router = createRouter({
       name: "AccountDeleteView",
       component: AccountDeleteView,
     },
-    {
-      path: "/products/deposits/recommend",
-      name: "RecommendDeposit",
-      component: RecommandDeposit,
-    },
-    {
-      path: "/products/savings/recommend",
-      name: "RecommendSaving",
-      component: RecommandSaving,
-    },
+    // {
+    //   path: "/products/deposits/recommend",
+    //   name: "RecommendDeposit",
+    //   component: RecommandDeposit,
+    //   },
+    // {
+    //   path: "/products/savings/recommend",
+    //   name: "RecommendSaving",
+    //   component: RecommandSaving,
+    // },
     {
       path: "/products/loans/recommend",
       name: "RecommendLoan",
       component: RecommandLoan,
+      beforeEnter: (to, from) => {
+        const store = useAccountStore();
+        if (!store.isLogIn) {
+          alert(
+            "상품 추천 기능은 로그인 이후에 가능합니다. 로그인 페이지로 이동합니다."
+          );
+          return { name: "LogInView" };
+        }
+      },
     },
     {
       path: "/exchange",
       name: "exchange",
       component: ExchangeView,
+      beforeEnter: (to, from) => {
+        const store = useAccountStore();
+        if (!store.isLogIn) {
+          alert(
+            "환율 계산 기능은 로그인 이후에 가능합니다. 로그인 페이지로 이동합니다."
+          );
+          return { name: "LogInView" };
+        }
+      },
     },
     {
       path: "/searchBank",
       name: "searchBank",
       component: SearchBankView,
-    },
-    {
-      path: "/exchange",
-      name: "exchange",
-      component: ExchangeView,
+      beforeEnter: (to, from) => {
+        const store = useAccountStore();
+        if (!store.isLogIn) {
+          alert(
+            "은행 지도 서비스는 로그인 이후에 이용할 수 있습니다. 로그인 페이지로 이동합니다."
+          );
+          return { name: "LogInView" };
+        }
+      },
     },
   ],
 });

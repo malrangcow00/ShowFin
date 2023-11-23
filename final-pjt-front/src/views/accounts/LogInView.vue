@@ -78,7 +78,7 @@
         color="blue"
         size="large"
         variant="tonal"
-        @click="logIn"
+        @click.prevent="logIn"
       >
         Log In
       </v-btn>
