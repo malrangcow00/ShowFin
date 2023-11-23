@@ -1,7 +1,7 @@
 <template>
-    <div class="body-map">
+    <div class="body-map d-flex justify-content-center align-items-center flex-column">
   <div>
-    <h1>Search Bank</h1>
+    <h1 class="page-title">Search Bank</h1>
     <label class="select">
       <select name="city" id="city" @change="selectDistrict" required>
         <option value="" selected disabled hidden>서울특별시</option></select
@@ -247,14 +247,17 @@ onMounted(initMap);
 </script>
 
 <style scoped>
+.page-title {
+    text-align: center;
+}
 .body-map {
   //background-color: yellow;
 }
 
 #map {
-  width: 800px;
+  width: 1000px;
   height: 800px;
-  border-radius: 1000px;
+  border-radius: 30px;
 }
 #city {
   border: black solid 1px;

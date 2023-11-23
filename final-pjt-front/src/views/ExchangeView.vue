@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="centered-container">
     <h1>환율 계산기</h1>
 
     <div>
@@ -75,8 +75,32 @@ watch(selectedCurrency2, () => {
 </script>
 
 <style scoped>
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    //height: 100vh;
+}
 select {
-  text-align: right;
+  text-align: center;
+  //font-size: 25px;
+  font-family: Georgia, "Malgun Gothic", serif;
+  border-bottom: 1px solid #ced4da;
+  //text-align: right;
+  -webkit-appearance:none; /* for chrome */
+
+  appearance:none;
+}
+.product-selector {
+}
+select::-ms-expand{
+
+    display:none;
+
+}
+select {
+    background:url('../../assets/bank_img/filterarrow.png') no-repeat 95% 50%/17px auto;
 }
 #currency1,
 #currency2 {

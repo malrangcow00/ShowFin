@@ -1,36 +1,20 @@
 <template>
   <div>
     <div class="row">
-      <header class="d-flex">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <a class="navbar-brand">
-                  <h1>상품 비교</h1>
-              </a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                  <ul class="navbar-nav">
-                      <li class="nav-item active">
-                          <a class="nav-link">
-                              <RouterLink :to="{ name: 'ProductsView' }">예금</RouterLink>
-                              <span class="sr-only">(current)</span>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link">
-                              <RouterLink :to="{ name: 'SavingList' }">적금</RouterLink>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link">
-                              <RouterLink :to="{ name: 'LoanList' }">전세자금대출</RouterLink>
-                          </a>
-                      </li>
-                  </ul>
-              </div>
-          </nav>
-      </header>
+        <header class="d-flex justify-content-between align-items-center">
+            <h1>상품 비교</h1>
+            <div>
+                <h2 class="d-inline-block mr-3">
+                    <RouterLink :to="{ name: 'ProductsView' }" :class="{ 'nav-link-router-active': $route.name === 'ProductsView' }">예금</RouterLink>
+                </h2>
+                <h2 class="d-inline-block mr-3">
+                    <RouterLink :to="{ name: 'SavingList' }" :class="{ 'nav-link-router-active': $route.name === 'SavingList' }">적금</RouterLink>
+                </h2>
+                <h2 class="d-inline-block">
+                    <RouterLink :to="{ name: 'LoanList' }" :class="{ 'nav-link-router-active': $route.name === 'LoanList' }">전세자금대출</RouterLink>
+                </h2>
+            </div>
+        </header>
 
       <div class="col-2 mt-5">
         <h4>검색하기</h4>
@@ -142,6 +126,10 @@ onBeforeRouteLeave(() => {
 </script>
 
 <style scoped>
+.nav-link-router-active {
+    text-decoration: underline; /* 밑줄 스타일 */
+    font-weight: bold; /* 강조를 위해 폰트 굵기 변경 */
+}
 .product-selector {
     font-size: 25px;
     font-family: Georgia, "Malgun Gothic", serif;
@@ -153,7 +141,7 @@ onBeforeRouteLeave(() => {
 }
 .product-selector::-ms-expand{
 
-    display:none;/*for IE10,11*/
+    display:none;
 
 }
 .product-selector {

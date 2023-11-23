@@ -52,7 +52,7 @@ export const useExchangeStore = defineStore(
             } else {
                 return formattedIntegerPart;
             }
-        }
+        };
 
         const changeSelected1 = () => {
             const calculatedValue = Number(money1.value.replace(/,/g, '')) * calculateExchangeRate();
@@ -67,11 +67,13 @@ export const useExchangeStore = defineStore(
         const inputMoney1 = () => {
             const calculatedValue = Number(money1.value.replace(/,/g, '')) * calculateExchangeRate();
             money2.value = addCommas(calculatedValue.toFixed(2));
+            money1.value = addCommas(money1.value.replace(/,/g, ''));
         }
 
         const inputMoney2 = () => {
             const calculatedValue = Number(money2.value.replace(/,/g, '')) / calculateExchangeRate();
             money1.value = addCommas(calculatedValue.toFixed(2));
+            money2.value = addCommas(money2.value.replace(/,/g, ''));
         }
 
 
