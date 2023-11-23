@@ -171,9 +171,10 @@ export const useAccountStore = defineStore(
       })
         .then((res) => {
           token.value = null;
-          logInUser.value = null;
           userInfo.value = null;
           alert("로그아웃 되었습니다.");
+        })
+        .then(() => {
           router.push({ name: "MainView" });
         })
         .catch((err) => {
@@ -207,6 +208,7 @@ export const useAccountStore = defineStore(
         .then((res) => {
           console.log(res.data);
           userInfo.value = res.data;
+          router.push({ name: "AccountDetailView" });
         })
         .catch((err) => {
           console.log(err);
@@ -264,7 +266,7 @@ export const useAccountStore = defineStore(
         });
     };
 
-    // 회원탈퇴store.exchange_data.USD.deal_bas_r
+    // 회원탈퇴
     const deleteAccount = function (payload) {
       const { password } = payload;
       axios({

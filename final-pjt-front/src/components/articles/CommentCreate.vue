@@ -60,6 +60,4 @@ const createComment = function () {
 };
 </script>
 
-<style scoped>
-/* Add any additional styling if needed */
-</style>
+<style scoped></style>

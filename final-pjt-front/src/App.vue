@@ -36,15 +36,19 @@
               @click="goMain"
             ></v-img>
           </v-col>
-          <v-col align="end" justify="end">
+          <v-col align="end" justify="end" v-if="store.isLogIn">
             <v-btn :to="{ name: 'MainView' }" text>HOME</v-btn>
-            <!-- <v-btn :to="{ name: 'DepositsView' }" text>Products</v-btn> -->
-            <v-btn :to="{ name: 'ProductsView' }" text>상품비교</v-btn>
+            <v-btn :to="{ name: 'RecommendLoan' }" text>상품추천</v-btn>
+            <v-btn :to="{ name: 'ProductsView' }" text>상품조회</v-btn>
+            <v-btn :to="{ name: 'ArticleView' }" text>게시판</v-btn>
+            <v-btn :to="{ name: 'searchBank' }" text>은행지도</v-btn>
+            <v-btn :to="{ name: 'exchange' }" text>환율계산</v-btn>
+          </v-col>
+          <v-col align="end" justify="end" v-else>
+            <v-btn :to="{ name: 'MainView' }" text>HOME</v-btn>
             <v-btn :to="{ name: 'ArticleView' }" text>게시판</v-btn>
             <v-btn :to="{ name: 'SignUpView' }" text>회원가입</v-btn>
             <v-btn :to="{ name: 'LogInView' }" text>로그인</v-btn>
-            <v-btn :to="{ name: 'searchBank' }" text>은행지도</v-btn>
-            <v-btn :to="{ name: 'exchange' }" text>환율계산</v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -82,14 +86,19 @@ const goMain = function () {
   font-family: "Noto Sans KR", sans-serif;
 }
 footer {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   background-color: #f0f0f0;
   color: black;
   text-align: center;
-  padding: 1em;
   position: relative;
   bottom: 0;
   width: 100%;
-  height: 30px;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 footer > p {
   line-height: 30px;

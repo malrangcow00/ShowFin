@@ -24,6 +24,14 @@
                           <p>좋아요 수: {{ props.comment.like_count }}</p>
                         </v-list-item-title>
                       </v-list-item>
+                      <v-divider></v-divider>
+                      <v-list-item>
+                        <v-list-item-title>
+                          <p>
+                            작성일: {{ props.comment.created_at.slice(0, 10) }}
+                          </p>
+                        </v-list-item-title>
+                      </v-list-item>
                     </v-list>
                   </v-col>
                 </v-row>

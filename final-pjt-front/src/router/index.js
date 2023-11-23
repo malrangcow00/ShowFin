@@ -11,6 +11,9 @@ import LoanDetail from "@/components/products/LoanDetail.vue";
 import UserDeposit from "@/components/products/UserDeposit.vue";
 import UserSaving from "@/components/products/UserSaving.vue";
 import UserLoan from "@/components/products/UserLoan.vue";
+import RecommandDeposit from "@/components/products/RecommandDeposit.vue";
+import RecommandSaving from "@/components/products/RecommandSaving.vue";
+import RecommandLoan from "@/components/products/RecommandLoan.vue";
 // Article
 import ArticleView from "@/views/articles/ArticleView.vue";
 import ArticleDetail from "@/components/articles/ArticleDetail.vue";
@@ -137,6 +140,21 @@ const router = createRouter({
       path: "/accounts/delete",
       name: "AccountDeleteView",
       component: AccountDeleteView,
+    },
+    {
+      path: "/products/deposits/recommend",
+      name: "RecommendDeposit",
+      component: RecommandDeposit,
+    },
+    {
+      path: "/products/savings/recommend",
+      name: "RecommendSaving",
+      component: RecommandSaving,
+    },
+    {
+      path: "/products/loans/recommend",
+      name: "RecommendLoan",
+      component: RecommandLoan,
     },
     {
       path: "/exchange",

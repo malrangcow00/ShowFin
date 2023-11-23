@@ -11,9 +11,9 @@
 </template>
 
 <script setup>
-import { useArticleStore } from "@/stores/articles.js";
+import { useAccountStore } from "@/stores/accounts.js";
 import ArticleListItem from "@/components/articles/ArticleListItem.vue";
-const store = useArticleStore();
+const store = useAccountStore();
 </script>
 
 <style scoped></style>

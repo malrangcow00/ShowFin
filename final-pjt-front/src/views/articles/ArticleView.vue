@@ -22,15 +22,12 @@
 
 <script setup>
 import { onMounted } from "vue";
-import { useArticleStore } from "@/stores/articles.js";
 import { useAccountStore } from "@/stores/accounts.js";
 import ArticleList from "@/components/articles/ArticleList.vue";
 
-const articleStore = useArticleStore();
-
 onMounted(() => {
-  const accountStore = useAccountStore();
-  articleStore.getArticleList(accountStore.token);
+  const store = useAccountStore();
+  store.getArticleList(store.token);
 });
 </script>
 

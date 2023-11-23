@@ -13,8 +13,8 @@
     <th class="text-center">{{ lend_rate_max }}</th>
     <th class="text-center">{{ lend_rate_avg }}</th>
     <th class="text-center">
-      <i v-if="isSubscribed" class="fa-solid fa-star text-warning"></i>
-      <i v-else class="fa-regular fa-star text-warning"></i>
+      <i v-if="isSubscribed" class="fa-solid fa-heart fa-beat text-danger"></i>
+      <i v-else class="fa-regular fa-heart text-warning"></i>
     </th>
   </tr>
 </template>
@@ -40,7 +40,7 @@ props.loan.jeonseloanoptions_set.forEach((option) => {
 });
 
 const isSubscribed = computed(() => {
-  if (store.isLogin) {
+  if (store.isLogIn) {
     return store.userInfo.subscribed_jeonse_loan.some(
       (product) => product.id === props.loan.id
     );

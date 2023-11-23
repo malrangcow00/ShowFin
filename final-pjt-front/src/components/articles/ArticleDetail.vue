@@ -66,6 +66,26 @@
                             >
                           </v-list-item-content>
                         </v-list-item>
+                        <v-list-item>
+                          <v-list-item-content>
+                            <v-list-item-title
+                              >작성일:
+                              {{
+                                article?.created_at.slice(0, 10)
+                              }}</v-list-item-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
+                        <v-list-item>
+                          <v-list-item-content>
+                            <v-list-item-title
+                              >수정일:
+                              {{
+                                article?.updated_at.slice(0, 10)
+                              }}</v-list-item-title
+                            >
+                          </v-list-item-content>
+                        </v-list-item>
                       </v-list>
                     </v-col>
                   </v-row>
@@ -82,8 +102,9 @@
                     {{ article?.liked_by_user ? "좋아요 취소" : "좋아요" }}
                   </v-btn>
                   <v-container>
+                    <v-divider></v-divider>
                     <v-row
-                      v-if="store.logInUser === article?.username"
+                      v-if="store.userInfo.username === article?.username"
                       justify="space-around"
                     >
                       <v-col cols="6" md="3">
@@ -207,6 +228,25 @@ const updateArticle = function () {
     .then((res) => {
       console.log(res);
       isUpdate.value = false;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// 게시글 삭제
+const deleteArticle = function () {
+  axios({
+    method: "DELETE",
+    url: `${store.API_URL}/api/articles/${route.params.id}/`,
+    headers: {
+      Authorization: `Token ${store.token}`,
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      alert("게시글이 삭제되었습니다.");
+      router.push({ name: "ArticleView" });
     })
     .catch((err) => {
       console.log(err);

@@ -11,31 +11,31 @@
     <th>{{ saving.rsrv_type === "S" ? "정액적립식" : "자유적립식" }}</th>
     <th
       class="text-center"
-      :class="{ 'bg-success bg-opacity-10': store.sortSavingsBy === 6 }"
+      :class="{ 'bg-info bg-opacity-10': store.sortSavingsBy === 6 }"
     >
       {{ intr_rate_6 }}
     </th>
     <th
       class="text-center"
-      :class="{ 'bg-success bg-opacity-10': store.sortSavingsBy === 12 }"
+      :class="{ 'bg-info bg-opacity-10': store.sortSavingsBy === 12 }"
     >
       {{ intr_rate_12 }}
     </th>
     <th
       class="text-center"
-      :class="{ 'bg-success bg-opacity-10': store.sortSavingsBy === 24 }"
+      :class="{ 'bg-info bg-opacity-10': store.sortSavingsBy === 24 }"
     >
       {{ intr_rate_24 }}
     </th>
     <th
       class="text-center"
-      :class="{ 'bg-success bg-opacity-10': store.sortSavingsBy === 36 }"
+      :class="{ 'bg-info bg-opacity-10': store.sortSavingsBy === 36 }"
     >
       {{ intr_rate_36 }}
     </th>
     <th class="text-center">
-      <i v-if="isSubscribed" class="fa-solid fa-star text-warning"></i>
-      <i v-else class="fa-regular fa-star text-warning"></i>
+      <i v-if="isSubscribed" class="fa-solid fa-heart fa-beat text-danger"></i>
+      <i v-else class="fa-regular fa-heart text-warning"></i>
     </th>
   </tr>
 </template>
@@ -67,9 +67,9 @@ props.saving.savingoptions_set.forEach((option) => {
 });
 
 const isSubscribed = computed(() => {
-  if (store.isLogin) {
+  if (store.isLogIn) {
     return store.userInfo.subscribed_savings.some(
-      (product) => product.id === props.product.id
+      (product) => product.id === props.saving.id
     );
   } else {
     return false;

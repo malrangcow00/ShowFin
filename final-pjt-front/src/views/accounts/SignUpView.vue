@@ -4,7 +4,7 @@
       <v-col cols="12" md="8">
         <v-card class="pa-8" max-width="100%">
           <v-card-title>
-            <h1 class="sign-up-header mb-5">회원가입</h1>
+            <h1 class="sign-up-header mb-5">회원가입 🍀</h1>
             <hr class="my-3" />
           </v-card-title>
           <v-form @submit.prevent="signUp">
@@ -115,7 +115,7 @@
               </v-col>
             </v-row>
             <v-row justify="center">
-              <v-btn type="submit" color="primary">회원가입</v-btn>
+              <v-btn type="submit" color="primary" class="w-25">회원가입</v-btn>
             </v-row>
           </v-form>
         </v-card>
