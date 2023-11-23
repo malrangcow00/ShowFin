@@ -213,23 +213,6 @@ export const useAccountStore = defineStore(
         });
     };
 
-    // 회원정보 페이지
-    const AccountInfo = function () {
-      axios({
-        method: "GET",
-        url: `${API_URL}/accounts/user_detail/`,
-        headers: { Authorization: `Token ${token.value}` },
-      })
-        .then((res) => {
-          console.log(res.data);
-          userInfo.value = res.data;
-          router.push({ name: "AccountDetailView" });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
     // 회원정보 수정
     const updateAccountInfo = function (payload) {
       const { nickname, email, mainbank, location, age, wealth, salary } =
