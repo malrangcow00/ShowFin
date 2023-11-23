@@ -1,43 +1,79 @@
 <template>
-    <div>
-        <div>
-            공시 제출월 : {{ deposit.dcls_month  }}
-        </div>
-        <div>
-            금융상품 코드 : {{ deposit.fin_prdt_cd }}
-        </div>
-        <div>
-            금융회사 명 : {{ deposit.kor_co_nm }}
-        </div>
-        <div>
-            금융상품 명 : {{ deposit.fin_prdt_nm }}
-        </div>
-        <div>
-            기타 유의사항 : {{ deposit.etc_note }}
-        </div>
-        <div>
-            <p>가입제한 : {{ deposit.join_deny }}</p>
-            <p>(1: 제한없음, 2:서민전용, 3:일부제한)</p>
-        </div>
-        <div>
-            가입대상 : {{ deposit.join_member }}
-        </div>
-        <div>
-            가입 방법 : {{ deposit.join_way }}
-        </div>
-        <div>
-            우대조건 : {{ deposit.spcl_cnd }}
-        </div>
-    </div>
-    <hr>
+  <tr
+    v-if="
+      store.selectedBank === '전체' || store.selectedBank === deposit.kor_co_nm
+    "
+    class="accordion-item"
+  >
+    <th>{{ deposit.id }}</th>
+    <th>{{ deposit.kor_co_nm }}</th>
+    <th>{{ deposit.fin_prdt_nm }}</th>
+    <th
+      class="text-center"
+      :class="{ 'bg-success bg-opacity-10': store.sortDepositsBy === 6 }"
+    >
+      {{ intr_rate_6 }}
+    </th>
+    <th
+      class="text-center"
+      :class="{ 'bg-success bg-opacity-10': store.sortDepositsBy === 12 }"
+    >
+      {{ intr_rate_12 }}
+    </th>
+    <th
+      class="text-center"
+      :class="{ 'bg-success bg-opacity-10': store.sortDepositsBy === 24 }"
+    >
+      {{ intr_rate_24 }}
+    </th>
+    <th
+      class="text-center"
+      :class="{ 'bg-success bg-opacity-10': store.sortDepositsBy === 36 }"
+    >
+      {{ intr_rate_36 }}
+    </th>
+    <th class="text-center">
+      <i v-if="isSubscribed" class="fa-solid fa-star text-warning"></i>
+      <i v-else class="fa-regular fa-star text-warning"></i>
+    </th>
+  </tr>
 </template>
 
 <script setup>
-defineProps({
-    deposit: Object,
+import { ref, computed } from "vue";
+import { useAccountStore } from "@/stores/accounts.js";
+
+const store = useAccountStore();
+const props = defineProps({
+  deposit: Object,
+});
+const intr_rate_6 = ref("-");
+const intr_rate_12 = ref("-");
+const intr_rate_24 = ref("-");
+const intr_rate_36 = ref("-");
+
+props.deposit.depositoptions_set.forEach((option) => {
+  const save_trm = option.save_trm;
+  if (save_trm === 6) {
+    intr_rate_6.value = option.intr_rate;
+  } else if (save_trm === 12) {
+    intr_rate_12.value = option.intr_rate;
+  } else if (save_trm === 24) {
+    intr_rate_24.value = option.intr_rate;
+  } else if (save_trm === 36) {
+    intr_rate_36.value = option.intr_rate;
+  }
+});
+
+const isSubscribed = computed(() => {
+  if (store.isLogin) {
+    return store.userInfo.subscribed_deposits.some(
+      (deposit) => deposit.fin_prdt_cd === props.deposit.fin_prdt_cd
+    );
+  } else {
+    return false;
+  }
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

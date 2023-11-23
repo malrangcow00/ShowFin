@@ -1,35 +1,80 @@
 <template>
-    <div>
-        <!--금융상품 번호 : {{ saving.id }}-->
-        <div>
-            금융회사 명 : {{ saving.kor_co_nm }}
-        </div>
-        <div>
-            금융상품 명 : {{ saving.fin_prdt_nm }}
-        </div>
-        <div>
-            기타 유의사항 : {{ saving.etc_note }}
-        </div>
-        <div>
-            <p>가입제한 : {{ saving.join_deny }}</p>
-            <p>(1: 제한없음, 2:서민전용, 3:일부제한)</p>
-        </div>
-        <div>
-            가입대상 : {{ saving.join_member }}
-        </div>
-        <div>
-            우대조건 : {{ saving.spcl_cnd }}
-        </div>
-    </div>
-    <hr>
+  <tr
+    v-if="
+      store.selectedBank === '전체' || store.selectedBank === saving.kor_co_nm
+    "
+    class="accordion-item"
+  >
+    <th>{{ saving.id }}</th>
+    <th>{{ saving.kor_co_nm }}</th>
+    <th>{{ saving.fin_prdt_nm }}</th>
+    <th>{{ saving.rsrv_type === "S" ? "정액적립식" : "자유적립식" }}</th>
+    <th
+      class="text-center"
+      :class="{ 'bg-success bg-opacity-10': store.sortSavingsBy === 6 }"
+    >
+      {{ intr_rate_6 }}
+    </th>
+    <th
+      class="text-center"
+      :class="{ 'bg-success bg-opacity-10': store.sortSavingsBy === 12 }"
+    >
+      {{ intr_rate_12 }}
+    </th>
+    <th
+      class="text-center"
+      :class="{ 'bg-success bg-opacity-10': store.sortSavingsBy === 24 }"
+    >
+      {{ intr_rate_24 }}
+    </th>
+    <th
+      class="text-center"
+      :class="{ 'bg-success bg-opacity-10': store.sortSavingsBy === 36 }"
+    >
+      {{ intr_rate_36 }}
+    </th>
+    <th class="text-center">
+      <i v-if="isSubscribed" class="fa-solid fa-star text-warning"></i>
+      <i v-else class="fa-regular fa-star text-warning"></i>
+    </th>
+  </tr>
 </template>
 
 <script setup>
-defineProps({
-    saving: Object,
+import { ref, computed } from "vue";
+import { useAccountStore } from "@/stores/accounts.js";
+
+const store = useAccountStore();
+const props = defineProps({
+  saving: Object,
+});
+const intr_rate_6 = ref("-");
+const intr_rate_12 = ref("-");
+const intr_rate_24 = ref("-");
+const intr_rate_36 = ref("-");
+
+props.saving.savingoptions_set.forEach((option) => {
+  const save_trm = option.save_trm;
+  if (save_trm === 6) {
+    intr_rate_6.value = option.intr_rate;
+  } else if (save_trm === 12) {
+    intr_rate_12.value = option.intr_rate;
+  } else if (save_trm === 24) {
+    intr_rate_24.value = option.intr_rate;
+  } else if (save_trm === 36) {
+    intr_rate_36.value = option.intr_rate;
+  }
+});
+
+const isSubscribed = computed(() => {
+  if (store.isLogin) {
+    return store.userInfo.subscribed_savings.some(
+      (product) => product.id === props.product.id
+    );
+  } else {
+    return false;
+  }
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

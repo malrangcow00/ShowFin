@@ -383,6 +383,7 @@ export const useAccountStore = defineStore(
       createArticles,
       article,
       subscribe,
+      selectedBank,
       filterDeposits,
       filterBank,
       sortDepositsBy,

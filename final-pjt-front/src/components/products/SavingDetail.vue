@@ -6,7 +6,12 @@
         class="fa-solid fa-chevron-left h3 me-4"
         style="cursor: pointer"
       ></i>
-      <h1 class="d-inline">{{ product.fin_prdt_nm }}</h1>
+      <div class="text-center">
+        <h1 class="d-inline">{{ product.fin_prdt_nm }}</h1>
+        <h5 class="mt-2">
+          {{ product.rsrv_type === "S" ? "(정액적립식)" : "(자유적립식)" }}
+        </h5>
+      </div>
       <button
         v-if="isSubscribed"
         @click="subscribe"
@@ -76,6 +81,10 @@
           <td>{{ product.spcl_cnd }}</td>
         </tr>
         <tr>
+          <th scope="row" class="text-nowrap">가입 대상</th>
+          <td>{{ product.join_member }}</td>
+        </tr>
+        <tr>
           <th scope="row" class="text-nowrap">가입 방법</th>
           <td>{{ product.join_way }}</td>
         </tr>
@@ -84,8 +93,13 @@
           <td>{{ product.etc_note }}</td>
         </tr>
         <tr>
+          <th scope="row" class="text-nowrap">최저한도</th>
+          <td>{{ product.min_limit }}원</td>
+        </tr>
+        <tr>
           <th scope="row" class="text-nowrap">최고한도</th>
-          <td>{{ product.max_limit }}</td>
+          <td v-if="product.max_limit === null">한도 없음</td>
+          <td v-else>{{ product.max_limit }}원</td>
         </tr>
       </tbody>
     </table>
@@ -101,19 +115,15 @@ const route = useRoute();
 const router = useRouter();
 const store = useAccountStore();
 const product = ref(
-  store.deposits.find(
-    (product) => product.fin_prdt_cd === route.params.fin_prdt_cd
-  )
+  store.savings.find((product) => product.id == route.params.id)
 );
-
-// console.log(product.value);
 
 const term_6 = ref(null);
 const term_12 = ref(null);
 const term_24 = ref(null);
 const term_36 = ref(null);
 
-product.value.depositoptions_set.forEach((option) => {
+product.value.savingoptions_set.forEach((option) => {
   const save_trm = option.save_trm;
   if (save_trm === 6) {
     term_6.value = option;
@@ -128,7 +138,7 @@ product.value.depositoptions_set.forEach((option) => {
 
 const subscribe = function () {
   if (store.isLogin) {
-    store.subscribe("deposit", product.value.id);
+    store.subscribe("savings", route.params.id);
   } else {
     window.alert("로그인 후 가입 가능합니다. 로그인 페이지로 이동합니다.");
     router.push({ name: "LogInView" });
@@ -137,8 +147,8 @@ const subscribe = function () {
 
 const isSubscribed = computed(() => {
   if (store.isLogin) {
-    return store.userInfo.subscribed_deposit.some(
-      (product) => product.fin_prdt_cd === route.params.fin_prdt_cd
+    return store.userInfo.subscribed_savings.some(
+      (product) => product.id == route.params.id
     );
   } else {
     return false;
