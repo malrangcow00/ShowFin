@@ -14,10 +14,7 @@
               >
             </v-col>
             <v-col cols="2" align="center">
-              <v-btn
-                @click.prevent="store.getAccountInfo"
-                outlined
-                color="black"
+              <v-btn @click.prevent="store.AccountInfo" outlined color="black"
                 >회원 정보 조회</v-btn
               >
             </v-col>

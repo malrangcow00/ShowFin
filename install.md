@@ -1,7 +1,6 @@
 ### front
 - npm install
 - npm install axios
-- npm install --save vue-good-table-next
 
 
 - npm run dev

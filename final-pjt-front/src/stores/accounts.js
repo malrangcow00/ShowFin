@@ -191,6 +191,22 @@ export const useAccountStore = defineStore(
         .then((res) => {
           console.log(res.data);
           userInfo.value = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    // 회원정보 페이지
+    const AccountInfo = function () {
+      axios({
+        method: "GET",
+        url: `${API_URL}/accounts/user_detail/`,
+        headers: { Authorization: `Token ${token.value}` },
+      })
+        .then((res) => {
+          console.log(res.data);
+          userInfo.value = res.data;
           router.push({ name: "AccountDetailView" });
         })
         .catch((err) => {
@@ -374,6 +390,7 @@ export const useAccountStore = defineStore(
       isLogIn,
       logOut,
       getAccountInfo,
+      AccountInfo,
       updateAccountInfo,
       changePassword,
       deleteAccount,
