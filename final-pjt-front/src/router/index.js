@@ -8,6 +8,9 @@ import SavingList from "@/components/products/SavingList.vue";
 import SavingDetail from "@/components/products/SavingDetail.vue";
 import LoanList from "@/components/products/LoanList.vue";
 import LoanDetail from "@/components/products/LoanDetail.vue";
+import UserDeposit from "@/components/products/UserDeposit.vue";
+import UserSaving from "@/components/products/UserSaving.vue";
+import UserLoan from "@/components/products/UserLoan.vue";
 // Article
 import ArticleView from "@/views/articles/ArticleView.vue";
 import ArticleDetail from "@/components/articles/ArticleDetail.vue";
@@ -67,6 +70,21 @@ const router = createRouter({
       path: "/products/loans/:id",
       name: "LoanDetail",
       component: LoanDetail,
+    },
+    {
+      path: "/user/deposit",
+      name: "UserDeposit",
+      component: UserDeposit,
+    },
+    {
+      path: "/user/saving",
+      name: "UserSaving",
+      component: UserSaving,
+    },
+    {
+      path: "/user/loan",
+      name: "UserLoan",
+      component: UserLoan,
     },
 
     // Article

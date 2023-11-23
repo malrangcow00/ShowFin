@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import requests
 from .models import DepositProducts, DepositOptions, SavingProducts, SavingOptions, JeonseLoanProducts, JeonseLoanOptions
-from .serializers import DepositProductsSerializer, DepositOptionsSerializer, SavingProductsSerializer, SavingOptionsSerializer, JeonseLoanProductsSerializer, JeonseLoanOptionsSerializer, DepositSerializer, SavingSerializer, JeonseLoanSerializer, SubscribeSerializer
+from .serializers import DepositProductsSerializer, DepositOptionsSerializer, SavingProductsSerializer, SavingOptionsSerializer, JeonseLoanProductsSerializer, JeonseLoanOptionsSerializer, DepositSerializer, SavingSerializer, JeonseLoanSerializer, UserSerializer
 
 # Create your views here.
 
@@ -242,10 +242,10 @@ def loans(request):
 @api_view(['GET', 'PUT'])
 def subscribe_info(request):
     if request.method == 'GET':
-        serializer = SubscribeSerializer(request.user)
+        serializer = UserSerializer(request.user)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = SubscribeSerializer(request.user, data=request.data, partial=True)
+        serializer = UserSerializer(request.user, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)

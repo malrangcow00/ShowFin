@@ -137,7 +137,7 @@ product.value.savingoptions_set.forEach((option) => {
 });
 
 const subscribe = function () {
-  if (store.isLogin) {
+  if (store.isLogIn) {
     store.subscribe("savings", route.params.id);
   } else {
     window.alert("로그인 후 가입 가능합니다. 로그인 페이지로 이동합니다.");
@@ -146,7 +146,7 @@ const subscribe = function () {
 };
 
 const isSubscribed = computed(() => {
-  if (store.isLogin) {
+  if (store.isLogIn) {
     return store.userInfo.subscribed_savings.some(
       (product) => product.id == route.params.id
     );

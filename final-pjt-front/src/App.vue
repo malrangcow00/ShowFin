@@ -5,7 +5,7 @@
         <div v-if="store.isLogIn">
           <v-row justify="start">
             <v-col cols="4" align="center" class="font-weight-bold ma-1">
-              🎉 {{ store.userInfo.nickname }}님 환영합니다
+              🎉 {{ store.userInfo?.nickname }}님 환영합니다
             </v-col>
             <v-col></v-col>
             <v-col cols="2" align="center">
@@ -14,10 +14,7 @@
               >
             </v-col>
             <v-col cols="2" align="center">
-              <v-btn
-                @click.prevent="store.getAccountInfo"
-                outlined
-                color="black"
+              <v-btn @click.prevent="store.AccountInfo" outlined color="black"
                 >회원 정보 조회</v-btn
               >
             </v-col>
