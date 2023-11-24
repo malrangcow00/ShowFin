@@ -15,7 +15,7 @@
           </RouterLink>
 
           <!-- 알고리즘 추천 서비스 활성화시 RouterLink 수정 -->
-          <RouterLink :to="{ name: 'SavingList' }">
+          <RouterLink :to="{ name: 'RecommendLoan' }">
           <v-carousel-item
               src="../assets/main/algo.jpg"
               class="carousel-item"

@@ -1,0 +1,13 @@
+API_KEY=f5e5273d3415b407b8b70072028c8174
+BASE_URL=http://finlife.fss.or.kr/finlifeapi/
+DEPOSIT=depositProductsSearch.json
+SAVING=savingProductsSearch.json
+LOAN=rentHouseLoanProductsSearch.json?
+BANK_TYPE=020000
+LOAN_TYPE=020000
+PAGE_NO=1
+COMPANY=companySearch.json
+EXCHANGE_BASE_URL=https://www.koreaexim.go.kr/site/program/financial/
+EXCHANGE=exchangeJSON?
+EXCHANGE_API_KEY=9tvmZZArSdQ9sEmu0hZG0wnAU40eZthD
+EXCHANGE_DATA=AP01
