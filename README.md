@@ -2,11 +2,15 @@
 
 - 진행기간 : 2023.11.16(목) ~ 2023.11.24(금)
 - 주제 : 금융을 **"모르는"** 젊은이를 위한 예적금 비교 및 대출 추천
+- 프로젝트명 : **_Show Fin_**
 - 팀명 : Finance Road (피난길)
 - 구성원 :
-  - 팀장 : 이재평 [Github](https://github.com/malrangcow00)
-  - 팀원 : 김태용 [Github](https://github.com/GATBAWI)
-- 프로젝트명 : **_Show Fin_**
+
+|팀장|팀원|
+|:-:|:-:|
+|<a href="https://github.com/malrangcow00"><img src="https://avatars.githubusercontent.com/u/115908997?v=4" width="200" height="200"></a>|<a href="https://github.com/GATBAWI"><img src="https://avatars.githubusercontent.com/u/139419000?v=4" width="200" height="200"></a>|
+|[MalrangCow](https://github.com/malrangcow00)|[GATBAWI](https://github.com/GATBAWI)|
+
 
 ## 💁‍♂️ 서비스 소개
 
